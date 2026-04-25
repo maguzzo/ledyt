@@ -1,0 +1,487 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// =============================================================================
+// PROYECTOS — Estado real (Abril 2026)
+// =============================================================================
+// CHALÚ-X    : Aprobado (PDTS UNSJ). Subsistema de comunicaciones de CHAZE-Agro.
+// CHAZE-Agro : Presentado, en evaluación AIC. Misión satelital cooperativa.
+// SAT-PAE    : Presentado, en evaluación. Sistema de Alerta Temprana Río Jáchal.
+// HERON      : Aprobado por ERC. Convenios en gestión, firma 2026.
+//              El Dr. Guzzo es Site Manager argentino. LED&T como sitio futuro.
+// =============================================================================
+
+const proyectosDestacados = [
+  {
+    slug: 'chalu-x',
+    nombre: 'CHALÚ-X',
+    categoria: 'CUBESAT · COMUNICACIONES',
+    socios: 'PDTS UNSJ + IAR',
+    descripcion: 'Módem satelital dual-band (S/UHF) para CubeSats. DVB-S2 Short Frame compliant sobre Zynq + AD9364, con TTC independiente en MSP430. Subsistema de comunicaciones de CHAZE-Agro.',
+    estado: 'activo',
+    estadoLabel: 'Activo',
+    imagen: '/images/projects/chalu-x/arquero-huarpe.webp',
+    imagenAlt: 'Ilustración del arquero Huarpe del proyecto CHALÚ-X',
+    href: '/proyectos/chalu-x'
+  },
+  {
+    slug: 'chaze-agro',
+    nombre: 'CHAZE-Agro',
+    categoria: 'SATÉLITE · AGRICULTURA',
+    socios: 'UNSJ + INTA + CONAE',
+    descripcion: 'Misión satelital cooperativa con sensor hiperespectral Sony IMX454 (41 bandas) sobre FPGA Zynq-7020. Subsistemas con nombres en lengua Huarpe: YOTO, NEU, CHALÚ-X, HIERNEN.',
+    estado: 'evaluacion',
+    estadoLabel: 'En evaluación',
+    imagen: '/images/projects/rio-san-juan/instalacion-campo.webp', // Placeholder evocativo
+    imagenAlt: 'CHAZE-Agro: agricultura de precisión satelital',
+    href: '/proyectos/chaze-agro',
+    placeholder: true
+  },
+  {
+    slug: 'sat-pae-jachal',
+    nombre: 'SAT-PAE Jáchal',
+    categoria: 'MONITOREO HÍDRICO',
+    socios: 'UNSJ + UCC + CJyP + Gobierno SJ',
+    descripcion: '20 estaciones de alerta temprana para la Cuenca del Río Jáchal. Sondas YSI EXO2, biosensores bbe, telemetría Starlink/Iridium, SCADA propio. USD 11.94M.',
+    estado: 'evaluacion',
+    estadoLabel: 'En evaluación',
+    imagen: '/images/projects/rio-san-juan/gabinete-estacion.webp',
+    imagenAlt: 'Estación de monitoreo hídrico en campo',
+    href: '/proyectos/sat-pae-jachal'
+  },
+  {
+    slug: 'cart',
+    nombre: 'Backend del CART',
+    categoria: 'RADIOASTRONOMÍA',
+    socios: 'UNSJ + IAR',
+    descripcion: 'Procesamiento digital de señales para el Radiotelescopio Argentino-Chino en San Juan. Procesamiento en FPGA RFSoC para observación radioastronómica. Finalizado con éxito.',
+    estado: 'finalizado',
+    estadoLabel: 'Finalizado · 2024',
+    imagen: '/images/capabilities/rfsoc-dual-placas.webp',
+    imagenAlt: 'Placas RFSoC para procesamiento radioastronómico',
+    href: '/proyectos/cart'
+  }
+];
+
+const capacidades = [
+  { icon: '⚡', titulo: 'FPGA & RFSoC', detalle: 'Zynq · UltraScale+' },
+  { icon: '📡', titulo: 'SDR', detalle: 'ADALM-Pluto · USRP' },
+  { icon: '🛰', titulo: 'Comunicaciones satelitales', detalle: 'DVB-S2 · CSP' },
+  { icon: '🌐', titulo: 'IoT', detalle: 'LoRa · ZigBee · WiFi' },
+  { icon: '🔬', titulo: 'Mediciones RFI', detalle: 'Aaronia · Espectro' },
+  { icon: '🔌', titulo: 'Sistemas embebidos', detalle: 'C/C++ · Python · Linux' },
+  { icon: '🛠', titulo: 'Prototipado PCBs', detalle: 'Altium · Flux.ai' },
+  { icon: '💎', titulo: 'Fibra óptica', detalle: 'Diplomatura · I+D' },
+];
+
+const oportunidades = [
+  { icon: '🎓', titulo: 'Proyectos Integradores', descripcion: 'Para alumnos cursando PI 1, 2 o 3.', href: '/oportunidades/proyectos-integradores' },
+  { icon: '📋', titulo: 'Adscripciones', descripcion: 'Sumá experiencia profesional al CV.', href: '/oportunidades/adscripciones', destacado: true },
+  { icon: '💰', titulo: 'Becas pagas', descripcion: 'Williams, CIN, EVC y más.', href: '/oportunidades/becas' },
+  { icon: '🔬', titulo: 'Tesis y trabajos finales', descripcion: 'Para investigación profunda.', href: '/oportunidades/tesis' },
+];
+
+const partners = ['UNSJ', 'FI-UNSJ', 'DEA', 'CONICET', 'CONAE', 'INTA', 'IAR', 'Fundación Williams'];
+
+// Estilos por estado de proyecto
+function badgeClass(estado: string) {
+  switch (estado) {
+    case 'activo': return 'bg-emerald-100 text-emerald-800 border-emerald-300';
+    case 'evaluacion': return 'bg-amber-100 text-amber-800 border-amber-300';
+    case 'proximamente': return 'bg-blue-100 text-blue-800 border-blue-300';
+    case 'finalizado': return 'bg-slate-200 text-slate-700 border-slate-300';
+    default: return 'bg-slate-100 text-slate-700 border-slate-300';
+  }
+}
+---
+
+<Layout title="LED&T - Laboratorio de Electrónica Digital y Telecomunicaciones | UNSJ">
+
+  <!-- ========================================================================== -->
+  <!-- HEADER STICKY                                                                -->
+  <!-- ========================================================================== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/images/logos/logo-main.png" alt="LED&T" class="h-10 sm:h-12 w-auto" />
+        <div class="hidden sm:block">
+          <div class="text-xs text-slate-500 leading-tight">Laboratorio de Electrónica Digital</div>
+          <div class="text-xs text-slate-500 leading-tight">y Telecomunicaciones · UNSJ</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="/proyectos" class="text-slate-700 hover:text-blue-700 transition-colors">Proyectos</a>
+        <a href="/#capacidades" class="text-slate-700 hover:text-blue-700 transition-colors">Capacidades</a>
+        <a href="/oportunidades" class="text-slate-700 hover:text-blue-700 transition-colors">Oportunidades</a>
+        <a href="/#contacto" class="text-slate-700 hover:text-blue-700 transition-colors">Contacto</a>
+        <a href="/en/" class="text-xs px-3 py-1.5 border border-slate-300 rounded-md hover:bg-slate-50 transition-colors">EN</a>
+      </nav>
+      <button class="md:hidden text-slate-700" aria-label="Abrir menú">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================== -->
+  <!-- HERO con ilustración del arquero                                            -->
+  <!-- ========================================================================== -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-cyan-50/40">
+    <!-- Decoración de fondo -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-100/30 rounded-full blur-3xl -z-0"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-100/30 rounded-full blur-3xl -z-0"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Columna texto -->
+        <div class="lg:col-span-7 order-2 lg:order-1">
+          <p class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-700 mb-5 tracking-wide">
+            <span class="w-8 h-px bg-cyan-600"></span>
+            UNIVERSIDAD NACIONAL DE SAN JUAN · DESDE 1973
+          </p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] mb-6">
+            Del FPGA al satélite:<br/>
+            <span class="text-blue-700">53 años</span> de ingeniería en Cuyo
+          </h1>
+          <p class="text-lg text-slate-600 mb-8 max-w-2xl leading-relaxed">
+            Laboratorio de Electrónica Digital y Telecomunicaciones. Investigación, desarrollo y servicios en sistemas digitales reconfigurables, radioastronomía, satélites y telecomunicaciones avanzadas.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="/proyectos" class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-md">
+              Ver proyectos
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </a>
+            <a href="/servicios" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-blue-700 text-blue-700 font-semibold rounded-lg hover:bg-blue-700 hover:text-white transition-colors">
+              Servicios a industria
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna imagen del arquero -->
+        <div class="lg:col-span-5 order-1 lg:order-2 flex justify-center">
+          <div class="relative max-w-sm lg:max-w-md">
+            <picture>
+              <source srcset="/images/projects/chalu-x/arquero-huarpe-mobile.webp" media="(max-width: 640px)" type="image/webp" />
+              <source srcset="/images/projects/chalu-x/arquero-huarpe-tablet.webp" type="image/webp" />
+              <img
+                src="/images/projects/chalu-x/arquero-huarpe.png"
+                alt="Arquero Huarpe del proyecto CHALÚ-X. Ilustración del Dr. Martín Guzzo, 2025."
+                class="w-full h-auto drop-shadow-2xl rounded-lg"
+                loading="eager"
+              />
+            </picture>
+            <p class="text-xs text-slate-500 italic text-center mt-3 px-2 leading-relaxed">
+              <strong class="text-slate-700">Chalú</strong>: «flecha» en alentiac, lengua del pueblo Huarpe que habitó San Juan.
+              <br/><span class="text-slate-400">Ilustración: Dr. Martín Guzzo, 2025.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- FRANJA HERON (sobria, una sola línea destacada)                              -->
+  <!-- ========================================================================== -->
+  <section class="bg-slate-900 text-white py-6 border-y-4 border-cyan-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+        <div class="flex items-center gap-4 flex-shrink-0">
+          <img src="/images/projects/heron/heron-logo.png" alt="HERON" class="h-12 w-auto" />
+          <div>
+            <p class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Próximamente</p>
+            <p class="text-lg font-bold leading-tight">HERON</p>
+          </div>
+        </div>
+        <div class="flex-1 text-sm md:text-base text-slate-200 leading-relaxed text-center md:text-left">
+          <strong class="text-white">Hybrid Elevated Radio Observatory for Neutrinos.</strong>
+          Observatorio internacional de neutrinos cósmicos financiado por el ERC. El Dr. Martín A. Guzzo (Director LED&T) fue seleccionado como Site Manager argentino del proyecto. Convenios en gestión, firma 2026.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- QUIÉNES SOMOS                                                                -->
+  <!-- ========================================================================== -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Quiénes somos</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+            Pioneros en sistemas digitales y telecomunicaciones
+          </h3>
+          <div class="space-y-4 text-slate-600 leading-relaxed">
+            <p>
+              El LED&T es un centro de excelencia perteneciente al <strong class="text-slate-900">Departamento de Electrónica y Automática (DEA)</strong> de la Facultad de Ingeniería de la UNSJ. Desde 1973, somos pioneros en investigación y desarrollo en sistemas digitales y telecomunicaciones.
+            </p>
+            <p>
+              Nuestro equipo multidisciplinario de docentes investigadores se especializa en sistemas digitales reconfigurables, Internet de las Cosas (IoT) y tecnologías de telecomunicaciones avanzadas. Trabajamos con CONAE, CONICET, INTA, IAR y empresas privadas.
+            </p>
+          </div>
+          <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+            <div class="p-4 bg-slate-50 rounded-lg">
+              <div class="text-3xl font-bold text-blue-700">53</div>
+              <div class="text-xs text-slate-600 mt-1">años de trayectoria</div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg">
+              <div class="text-3xl font-bold text-blue-700">+10</div>
+              <div class="text-xs text-slate-600 mt-1">proyectos activos</div>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg">
+              <div class="text-3xl font-bold text-blue-700">8</div>
+              <div class="text-xs text-slate-600 mt-1">áreas técnicas</div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <picture>
+            <source srcset="/images/lab/curso-fibra-optica.webp" type="image/webp" />
+            <img
+              src="/images/lab/curso-fibra-optica.jpg"
+              alt="Curso de fibra óptica en el LED&T"
+              class="w-full h-auto rounded-2xl shadow-2xl"
+              loading="lazy"
+            />
+          </picture>
+          <div class="absolute -bottom-4 -left-4 bg-blue-700 text-white px-5 py-3 rounded-lg shadow-xl text-sm font-semibold hidden sm:block">
+            Curso de fibra óptica · LED&T
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- PROYECTOS DESTACADOS                                                         -->
+  <!-- ========================================================================== -->
+  <section id="proyectos" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Proyectos destacados</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          Investigación que impacta
+        </h3>
+        <p class="text-slate-600 leading-relaxed">
+          Desde radioastronomía hasta agricultura de precisión, llevamos tecnología argentina a la frontera del conocimiento.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {proyectosDestacados.map((proyecto) => (
+          <a href={proyecto.href} class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-slate-200 flex flex-col">
+            <div class="relative aspect-[4/3] overflow-hidden bg-slate-100">
+              <img
+                src={proyecto.imagen}
+                alt={proyecto.imagenAlt}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class={`inline-block px-3 py-1 text-xs font-bold rounded-full border ${badgeClass(proyecto.estado)}`}>
+                  {proyecto.estadoLabel}
+                </span>
+              </div>
+            </div>
+            <div class="p-5 flex-1 flex flex-col">
+              <p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-1">
+                {proyecto.categoria}
+              </p>
+              <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
+                {proyecto.nombre}
+              </h4>
+              <p class="text-xs text-slate-500 mb-3 font-medium">
+                {proyecto.socios}
+              </p>
+              <p class="text-sm text-slate-600 leading-relaxed flex-1">
+                {proyecto.descripcion}
+              </p>
+              <div class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 group-hover:gap-2 transition-all">
+                Ver proyecto
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="/proyectos" class="inline-flex items-center gap-2 text-blue-700 font-semibold hover:gap-3 transition-all">
+          Ver todos los proyectos (incluye trayectoria histórica)
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- CAPACIDADES TÉCNICAS                                                         -->
+  <!-- ========================================================================== -->
+  <section id="capacidades" class="py-20 bg-white relative overflow-hidden">
+    <!-- Imagen de fondo decorativa -->
+    <div class="absolute top-0 right-0 w-1/3 h-full opacity-5 hidden lg:block">
+      <img src="/images/capabilities/rfsoc-rtx-setup.jpg" alt="" class="w-full h-full object-cover" />
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Capacidades técnicas</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          De la idea al prototipo funcional
+        </h3>
+        <p class="text-slate-600 leading-relaxed">
+          Capacidades validadas en proyectos para CONAE, CONICET, INTA, IAR y empresas privadas. Servicios de I+D y consultoría disponibles.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {capacidades.map((cap) => (
+          <div class="p-6 bg-slate-50 hover:bg-blue-50 rounded-xl text-center transition-colors border border-slate-100 hover:border-blue-200">
+            <div class="text-4xl mb-3">{cap.icon}</div>
+            <h4 class="font-bold text-slate-900 mb-1">{cap.titulo}</h4>
+            <p class="text-xs text-slate-500">{cap.detalle}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- SUMATE AL EQUIPO                                                             -->
+  <!-- ========================================================================== -->
+  <section id="oportunidades" class="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-400 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-red-500 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-sm font-semibold text-cyan-300 uppercase tracking-wider mb-3">Sumate al equipo</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold mb-4">
+          Tu carrera empieza acá
+        </h3>
+        <p class="text-blue-100 leading-relaxed">
+          Cuatro caminos para ser parte del LED&T, según tu momento y tus objetivos.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {oportunidades.map((op) => (
+          <a href={op.href} class={`block p-6 rounded-xl transition-all hover:scale-105 ${op.destacado ? 'bg-red-600 hover:bg-red-700' : 'bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10'}`}>
+            <div class="text-4xl mb-3">{op.icon}</div>
+            <h4 class="font-bold text-lg mb-2">{op.titulo}</h4>
+            <p class="text-sm text-blue-100 leading-relaxed">{op.descripcion}</p>
+            {op.destacado && (
+              <span class="inline-block mt-3 text-xs font-bold uppercase tracking-wider bg-white/20 px-2 py-1 rounded">Activo</span>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- VÍNCULOS INSTITUCIONALES                                                     -->
+  <!-- ========================================================================== -->
+  <section class="py-12 bg-slate-100 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm font-semibold text-slate-500 uppercase tracking-wider mb-6">
+        Trabajamos con
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-slate-600 font-semibold text-sm md:text-base">
+        {partners.map((p) => (
+          <span class="hover:text-blue-700 transition-colors">{p}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- FOOTER con datos institucionales reales del DEA                              -->
+  <!-- ========================================================================== -->
+  <footer id="contacto" class="bg-slate-900 text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+
+        <!-- Columna 1: Identidad -->
+        <div class="lg:col-span-1">
+          <img src="/images/logos/logo-main-dark.png" alt="LED&T" class="h-12 w-auto mb-4" onerror="this.src='/images/logos/logo-main.png'" />
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Laboratorio de Electrónica Digital y Telecomunicaciones. Departamento de Electrónica y Automática, Facultad de Ingeniería, UNSJ.
+          </p>
+          <p class="text-xs text-cyan-400 mt-3 font-semibold">Desde 1973</p>
+        </div>
+
+        <!-- Columna 2: Contacto -->
+        <div>
+          <h3 class="font-bold mb-4 text-cyan-300">Contacto</h3>
+          <ul class="space-y-3 text-slate-300 text-sm">
+            <li>
+              <span class="text-slate-500 block mb-1 text-xs uppercase tracking-wider">Dirección</span>
+              Av. Lib. Gral. San Martín 1109 (O)<br/>
+              J5400ARL · San Juan, Argentina
+            </li>
+            <li>
+              <span class="text-slate-500 block mb-1 text-xs uppercase tracking-wider">Email institucional</span>
+              <a href="mailto:sec_dea@unsj.edu.ar" class="hover:text-cyan-300 transition-colors font-mono break-all">
+                sec_dea@unsj.edu.ar
+              </a>
+              <p class="text-slate-500 text-xs mt-1">Secretaría DEA</p>
+            </li>
+            <li>
+              <span class="text-slate-500 block mb-1 text-xs uppercase tracking-wider">Teléfono</span>
+              <a href="tel:+542644211700" class="hover:text-cyan-300 transition-colors font-mono">
+                +54 264 421-1700
+              </a>
+              <div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                <span class="text-slate-500">Int. 4380</span>
+                <span>Espacio común</span>
+                <span class="text-slate-500">Int. 4381</span>
+                <span>Oficina LED</span>
+                <span class="text-slate-500">Int. 4383</span>
+                <span>Dirección</span>
+                <span class="text-slate-500">Int. 4386</span>
+                <span>Telecomunicaciones</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Director -->
+        <div>
+          <h3 class="font-bold mb-4 text-cyan-300">Director</h3>
+          <p class="text-slate-200 font-semibold mb-1">Dr. Martín A. Guzzo</p>
+          <p class="text-slate-500 text-xs mb-3">Doctor en Ingeniería</p>
+          <a href="mailto:m.guzzo@unsj.edu.ar" class="hover:text-cyan-300 transition-colors font-mono text-sm break-all">
+            m.guzzo@unsj.edu.ar
+          </a>
+          <p class="text-slate-500 text-xs mt-3 leading-relaxed">
+            Para consultas sobre proyectos, becas y colaboraciones técnicas.
+          </p>
+        </div>
+
+        <!-- Columna 4: Enlaces -->
+        <div>
+          <h3 class="font-bold mb-4 text-cyan-300">Enlaces</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/sobre" class="text-slate-300 hover:text-cyan-300 transition-colors">Sobre el LED&T</a></li>
+            <li><a href="https://dea.unsj.edu.ar" target="_blank" rel="noopener" class="text-slate-300 hover:text-cyan-300 transition-colors">DEA</a></li>
+            <li><a href="https://www.fi.unsj.edu.ar" target="_blank" rel="noopener" class="text-slate-300 hover:text-cyan-300 transition-colors">FI-UNSJ</a></li>
+            <li><a href="https://www.unsj.edu.ar" target="_blank" rel="noopener" class="text-slate-300 hover:text-cyan-300 transition-colors">UNSJ</a></li>
+          </ul>
+
+          <h3 class="font-bold mt-6 mb-3 text-cyan-300 text-sm">Seguinos</h3>
+          <p class="text-xs text-slate-500 italic">Redes sociales próximamente disponibles</p>
+        </div>
+      </div>
+
+      <!-- Línea divisoria + copyright -->
+      <div class="pt-6 border-t border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+        <p>© 2026 LED&T · Universidad Nacional de San Juan. Todos los derechos reservados.</p>
+        <p>Sitio en construcción · v0.2</p>
+      </div>
+    </div>
+  </footer>
+
+</Layout>

@@ -1,0 +1,33 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const { slug = 'profile' } = Astro.params;
+const nameText = slug
+	.split('-')
+	.filter(Boolean)
+	.map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+	.join(' ');
+---
+
+<Layout title={`${nameText} | Under construction`}>
+	<main class="min-h-[65vh] bg-fondo">
+		<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Website under construction</p>
+			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">{nameText}</h1>
+			<p class="text-texto-suave text-lg leading-relaxed mb-3 max-w-3xl">
+				This profile page is not published yet.
+			</p>
+			<p class="text-texto-tenue font-mono text-sm mb-8">
+				current slug: /en/staff/{slug}
+			</p>
+			<div class="flex flex-wrap gap-3">
+				<a href="/en/staff" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border-2 border-primario text-primario font-semibold hover:bg-primario hover:text-white transition-colors">
+					Back to staff
+				</a>
+				<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
+					Go to English home
+				</a>
+			</div>
+		</section>
+	</main>
+</Layout>
