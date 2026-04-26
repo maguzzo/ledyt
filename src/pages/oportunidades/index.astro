@@ -1,19 +1,299 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const convocatoria = {
+	etiqueta: 'Convocatoria abierta',
+	programa: 'Beca Fundacion Williams - Programa Ciencia 2026 - Intercambio Labs',
+	titulo: 'Estadias de investigacion en SDR, SoC y comunicaciones satelitales',
+	proyecto: 'Proyecto CHALU-X - LED&T - Area Sistemas Digitales - DEA - Facultad de Ingenieria - UNSJ',
+	cierre: 'Lunes 11 de mayo de 2026, 17:00 hs',
+	cupos: '2 posiciones',
+	modalidad: 'Estadia de 2 a 4 meses en San Juan',
+	estipendio: '$3.600.000 mensuales + traslado + seguro',
+	publico: 'Doctorandos y posdoctorandos con perfil tecnico fuerte',
+	contacto: 'm.guzzo@unsj.edu.ar',
+	formulario: 'https://www.surveymonkey.com/r/becasparaestadias',
+	bases: 'https://fundacionwilliams.org.ar/becas-para-estadias-de-investigacion-en-el-pais-2026/',
+	pdf: '/docs/CHALUX-Convocatoria-Becarios-v3.pdf',
+};
+
+const posiciones = [
+	{
+		nombre: 'Posicion A - Logica programable (PL)',
+		resumen: 'Cadena DVB-S2 en FPGA con enfasis en codificacion de canal, modulacion e integracion AXI4.',
+		perfil: 'Ideal para perfiles FPGA/HDL, DSP y comunicaciones digitales.',
+		items: [
+			'Implementacion LDPC/BCH Short Frame (16.200 bits) en Vivado o Vitis HLS',
+			'Modulador QPSK/8PSK con interfaz LVDS al AD9364',
+			'Estimador de calidad de canal por N_iter',
+			'Verificacion BER vs Eb/N0 con ADALM-Pluto',
+			'Integracion AXI4 con el PS para control ACM',
+		],
+	},
+	{
+		nombre: 'Posicion B - Sistema de procesamiento (PS)',
+		resumen: 'Stack de software sobre ARM Linux para control del modem, protocolos y supervision del hardware.',
+		perfil: 'Ideal para perfiles de Linux embebido, C/C++ y protocolos de comunicacion.',
+		items: [
+			'PetaLinux o Yocto sobre ARM Cortex-A9',
+			'Stack CSP con libcsp sobre CAN y Ethernet GbE',
+			'Driver IIO para control del AD9364',
+			'Logica de decision ACM leyendo N_iter desde PL',
+			'Integracion con MSP430 via UART o CSP',
+		],
+	},
+];
+
+const equipo = [
+	{
+		nombre: 'Dr. Ing. Martin A. Guzzo',
+		rol: 'Director del proyecto',
+		expertise: 'Arquitecturas FPGA/SoC, sistemas digitales de alta velocidad, comunicaciones satelitales y estimacion de canal LDPC.',
+	},
+	{
+		nombre: 'Dr. Ing. Gabriel E. Canadas',
+		rol: 'Asesor - PCB y SoC',
+		expertise: 'Diseno de hardware, sistemas inalambricos, integracion de sensores y validacion de prototipos electronicos.',
+	},
+	{
+		nombre: 'Dr. Ing. Eugenio C. Orosco',
+		rol: 'Asesor - Firmware',
+		expertise: 'Sistemas embebidos, procesamiento de senales, firmware de microcontroladores y supervision de hardware.',
+	},
+];
+
+const herramientas = [
+	'AMD-Xilinx Vivado, Vitis y Vitis HLS con licencias universitarias',
+	'2 x AMD-Xilinx RFSoC 4x2 para procesamiento SDR de alto rendimiento',
+	'2 x ADALM-Pluto para prototipado rapido y banco de pruebas',
+	'GNU Radio 3.10, gr-dvbs2rx y gr-iio sobre Linux',
+	'PetaLinux, Yocto, libcsp y drivers IIO de Analog Devices',
+	'Instrumentacion RF Aaronia y OWON, medidores de ROE y antenas log-periodicas',
+	'Laboratorio SMD completo con soldadura BGA, microscopio-camara y osciloscopios',
+	'Repos privados en GitHub y documentacion ECSS-style',
+];
+
+const beneficios = [
+	'Trabajo sobre hardware de vuelo en un proyecto satelital real del LED&T.',
+	'Experiencia PS + PL completa sobre Zynq, una habilidad muy demandada en industria aeroespacial y telecomunicaciones.',
+	'Trabajo con estandares internacionales: DVB-S2, CSP y normativa ECSS.',
+	'Posible coautoria cientifica vinculada al estimador N_iter del proyecto.',
+	'Insercion en una red interinstitucional real: UNSJ, IAR/CONICET y CONAE.',
+	'Incorporacion formal al PDTS CHALU-X como becario externo en la UNSJ.',
+];
+
+const postulacion = [
+	{
+		paso: '1. Contacto previo con el laboratorio',
+		detalle: 'Antes del 5 de mayo, enviar CV academico de hasta 3 paginas y una nota de interes de 1 pagina indicando posicion preferida, periodo disponible y motivacion.',
+	},
+	{
+		paso: '2. Carta de invitacion',
+		detalle: 'Con esa informacion el LED&T coordina la carta de invitacion necesaria para la postulacion oficial.',
+	},
+	{
+		paso: '3. Postulacion oficial a Fundacion Williams',
+		detalle: 'Completar el formulario oficial con la carta emitida por el laboratorio antes del cierre del 11 de mayo de 2026 a las 17:00 hs.',
+	},
+];
 ---
 
-<Layout title="Oportunidades | En construccion">
-	<main class="min-h-[65vh] bg-fondo">
-		<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Sitio en construccion</p>
-			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">Oportunidades</h1>
-			<p class="text-texto-suave text-lg leading-relaxed mb-8 max-w-3xl">
-				Esta seccion esta en armado. En breve estaran disponibles todas las convocatorias,
-				programas y oportunidades para estudiantes e investigadores.
-			</p>
-			<a href="/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
-				Volver al inicio
-			</a>
+<Layout title="Oportunidades | LED&T - Convocatoria Williams 2026">
+	<main class="min-h-[65vh] bg-slate-50">
+		<section class="relative overflow-hidden bg-linear-to-br from-slate-50 via-white to-cyan-50/40 border-b border-slate-200">
+			<div class="absolute top-0 right-0 w-96 h-96 bg-cyan-100/30 rounded-full blur-3xl z-0"></div>
+			<div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-100/30 rounded-full blur-3xl z-0"></div>
+
+			<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+				<div class="grid lg:grid-cols-12 gap-10 items-center">
+					<div class="lg:col-span-7">
+						<p class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-700 mb-5 tracking-wide uppercase">
+							<span class="w-8 h-px bg-cyan-600"></span>
+							{convocatoria.etiqueta}
+						</p>
+						<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-6">
+							{convocatoria.titulo}
+						</h1>
+						<p class="text-lg text-slate-600 leading-relaxed max-w-3xl mb-6">
+							{convocatoria.programa}. Dos estadias de investigacion para sumarse al desarrollo de CHALU-X,
+							el modem satelital de alta tasa del LED&T para CubeSats.
+						</p>
+						<p class="text-sm sm:text-base text-slate-500 leading-relaxed max-w-3xl mb-8">
+							{convocatoria.proyecto}
+						</p>
+
+						<div class="flex flex-wrap gap-3 mb-8">
+							<a href={convocatoria.formulario} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors shadow-md">
+								Postularme ahora
+							</a>
+							<a href={convocatoria.pdf} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 border border-slate-300 text-slate-800 font-semibold rounded-lg hover:bg-slate-100 transition-colors">
+								Ver PDF completo
+							</a>
+						</div>
+
+						<div class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-600">
+							<span><strong class="text-slate-900">Cierre:</strong> {convocatoria.cierre}</span>
+							<span><strong class="text-slate-900">Duracion:</strong> {convocatoria.modalidad}</span>
+						</div>
+					</div>
+
+					<div class="lg:col-span-5">
+						<div class="bg-white rounded-2xl border border-slate-200 shadow-xl p-6 sm:p-8">
+							<p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-4">Resumen rapido</p>
+							<div class="grid grid-cols-2 gap-4 mb-6">
+								<div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+									<p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Cupos</p>
+									<p class="text-lg font-bold text-slate-900">{convocatoria.cupos}</p>
+								</div>
+								<div class="rounded-xl bg-slate-50 border border-slate-200 p-4">
+									<p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Publico</p>
+									<p class="text-sm font-semibold text-slate-900">{convocatoria.publico}</p>
+								</div>
+								<div class="rounded-xl bg-slate-50 border border-slate-200 p-4 col-span-2">
+									<p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Financiamiento</p>
+									<p class="text-lg font-bold text-emerald-700">{convocatoria.estipendio}</p>
+								</div>
+							</div>
+
+							<div class="space-y-4 text-sm text-slate-600">
+								<div>
+									<p class="font-semibold text-slate-900 mb-1">Contacto previo</p>
+									<a href={`mailto:${convocatoria.contacto}`} class="text-blue-700 hover:underline font-mono break-all">{convocatoria.contacto}</a>
+								</div>
+								<div>
+									<p class="font-semibold text-slate-900 mb-1">Bases oficiales</p>
+									<a href={convocatoria.bases} target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:underline break-all">Fundacion Williams 2026</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-16 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="max-w-3xl mb-10">
+					<p class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Que se busca</p>
+					<h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Dos posiciones tecnicas sobre el mismo hardware de vuelo</h2>
+					<p class="text-slate-600 leading-relaxed">
+						La convocatoria abre una posicion orientada a la logica programable del modem y otra al stack de software
+						sobre ARM Linux. Las dos trabajan integradas mediante AXI4 y comparten banco de ensayos, instrumentacion
+						y acompanamiento directo del equipo CHALU-X.
+					</p>
+				</div>
+
+				<div class="grid lg:grid-cols-2 gap-6">
+					{posiciones.map((posicion) => (
+						<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+							<p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-2">Perfil abierto</p>
+							<h3 class="text-2xl font-bold text-slate-900 mb-3">{posicion.nombre}</h3>
+							<p class="text-slate-600 leading-relaxed mb-4">{posicion.resumen}</p>
+							<p class="text-sm text-slate-800 font-medium mb-4">{posicion.perfil}</p>
+							<ul class="space-y-2 text-sm text-slate-600">
+								{posicion.items.map((item) => (
+									<li class="flex items-start gap-2">
+										<span class="mt-2 w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0"></span>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="py-16 bg-slate-50 border-y border-slate-200">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-8">
+				<div class="lg:col-span-7">
+					<p class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Infraestructura</p>
+					<h2 class="text-3xl font-bold text-slate-900 mb-5">Herramientas y entorno de trabajo</h2>
+					<div class="grid sm:grid-cols-2 gap-4">
+						{herramientas.map((herramienta) => (
+							<div class="bg-white border border-slate-200 rounded-xl p-4 text-sm text-slate-700 leading-relaxed">
+								{herramienta}
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="lg:col-span-5">
+					<div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm h-full">
+						<p class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Por que vale la pena</p>
+						<h2 class="text-2xl font-bold text-slate-900 mb-5">Lo que gana quien quede seleccionado</h2>
+						<ul class="space-y-3 text-sm text-slate-600">
+							{beneficios.map((beneficio) => (
+								<li class="flex items-start gap-3">
+									<span class="mt-1.5 w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+									<span>{beneficio}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-16 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-8">
+				<div class="lg:col-span-5">
+					<p class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Equipo anfitrion</p>
+					<h2 class="text-3xl font-bold text-slate-900 mb-4">Acompanamiento tecnico directo dentro del laboratorio</h2>
+					<p class="text-slate-600 leading-relaxed">
+						La estadia se desarrolla con acompanamiento cotidiano de tres docentes-investigadores del LED&T,
+						todos participantes directos de CHALU-X. La idea no es trabajar aislado, sino integrarse a una mesa
+						tecnica con capacidad real de destrabar firmware, HDL, hardware y validacion.
+					</p>
+				</div>
+
+				<div class="lg:col-span-7 grid md:grid-cols-3 gap-4">
+					{equipo.map((persona) => (
+						<article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+							<p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-2">{persona.rol}</p>
+							<h3 class="text-lg font-bold text-slate-900 mb-3">{persona.nombre}</h3>
+							<p class="text-sm text-slate-600 leading-relaxed">{persona.expertise}</p>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="py-16 bg-linear-to-br from-blue-900 via-blue-800 to-slate-900 text-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-8 items-start">
+				<div class="lg:col-span-7">
+					<p class="text-sm font-semibold text-cyan-300 uppercase tracking-wider mb-3">Como postularse</p>
+					<h2 class="text-3xl sm:text-4xl font-bold mb-5">Proceso de postulacion a la beca Williams</h2>
+					<div class="space-y-4">
+						{postulacion.map((item) => (
+							<div class="rounded-2xl border border-white/15 bg-white/5 backdrop-blur-sm p-5">
+								<h3 class="text-lg font-bold mb-2">{item.paso}</h3>
+								<p class="text-blue-100 leading-relaxed">{item.detalle}</p>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="lg:col-span-5">
+					<div class="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-sm p-6 shadow-xl">
+						<p class="text-xs font-semibold text-cyan-300 uppercase tracking-wider mb-3">Checklist minimo</p>
+						<ul class="space-y-3 text-sm text-blue-100 mb-6">
+							<li>CV academico de hasta 3 paginas con experiencia tecnica relevante.</li>
+							<li>Nota de interes de 1 pagina indicando PL o PS, disponibilidad y motivacion.</li>
+							<li>Contacto previo con el laboratorio antes del 5 de mayo.</li>
+							<li>Formulario oficial completo antes del cierre.</li>
+						</ul>
+						<div class="space-y-3">
+							<a href={convocatoria.formulario} target="_blank" rel="noopener noreferrer" class="w-full inline-flex justify-center items-center gap-2 px-5 py-3 bg-white text-blue-900 font-semibold rounded-lg hover:bg-slate-100 transition-colors">
+								Ir al formulario oficial
+							</a>
+							<a href={`mailto:${convocatoria.contacto}?subject=Consulta%20Beca%20Williams%202026%20-%20CHALU-X`} class="w-full inline-flex justify-center items-center gap-2 px-5 py-3 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
+								Escribir a Martin Guzzo
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 	</main>
 </Layout>

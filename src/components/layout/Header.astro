@@ -1,4 +1,6 @@
 ---
+import { proyectos } from '../../data/proyectos';
+
 const pathname = Astro.url.pathname;
 const isEnglish = pathname === '/en' || pathname.startsWith('/en/');
 
@@ -64,10 +66,12 @@ const dropdowns: NavDropdown[] = isEnglish
 			{
 				label: 'Investigacion',
 				items: [
-					{ label: 'Proyectos destacados', href: '/proyectos' },
-					{ label: '★ HERON', href: '/proyectos/heron', highlighted: true },
-					{ label: 'CHALU-X', href: '/proyectos/chalu-x' },
-					{ label: 'Radioastronomia CART', href: '/proyectos/cart' },
+					{ label: 'Todos los proyectos', href: '/proyectos' },
+					...proyectos.map((proyecto) => ({
+						label: proyecto.nombreCorto ?? proyecto.nombre,
+						href: proyecto.href,
+						highlighted: proyecto.destacado === true,
+					})),
 					{ label: 'Publicaciones', href: '/publicaciones' },
 				],
 			},

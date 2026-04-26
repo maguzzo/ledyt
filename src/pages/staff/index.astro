@@ -1,117 +1,41 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { staff, getCoordinador, getEquipoDocente } from '../../data/staff';
 
-// =============================================================================
-// STAFF DEL LED&T
-// =============================================================================
-// Estructura honesta sobre la naturaleza institucional actual del laboratorio:
-// grupo de docentes-investigadores con cátedras radicadas en el LED&T,
-// dentro del DEA-FI-UNSJ. En proceso de formalización institucional.
-// =============================================================================
+const currentPath = Astro.url.pathname;
+const isEn = currentPath.startsWith('/en/');
+const idioma = isEn ? 'en' : 'es';
 
-// Coordinación (1 persona, card destacada)
+const coordinador = getCoordinador() ?? staff[0];
+const equipoDocenteData = getEquipoDocente();
+
 const coordinacion = {
-  slug: 'martin-guzzo',
-  nombre: 'Dr. Martín A. Guzzo',
-  rol: 'Coordinación del LED&T',
-  cargoFormal: 'Profesor Titular',
-  catedras: ['Sistemas Digitales A (Plan 2023)', 'Electrónica Digital I y II (Plan 2006)'],
-  especialidades: ['Telecomunicaciones', 'FPGA', 'VHDL'],
-  oficina: 'Oficina 3',
-  email: 'm.guzzo@unsj.edu.ar',
-  bio: 'Doctor en Ingeniería. Lleva adelante los proyectos estratégicos del laboratorio: director técnico de CHALÚ-X (módem satelital dual-band), supervisor del Área Electrónica y Electromecánica del SAT-PAE Jáchal, y Site Manager argentino del proyecto HERON (Hybrid Elevated Radio Observatory for Neutrinos, financiado por el ERC, en gestión de convenios para 2026).',
-  foto: null, // futuro: '/images/people/guzzo.jpg'
+  slug: coordinador.slug,
+  nombre: coordinador.nombre,
+  rol: coordinador.rol?.[idioma] ?? '',
+  cargoFormal: coordinador.cargoFormal[idioma],
+  catedras: coordinador.catedras[idioma],
+  especialidades: coordinador.especialidades[idioma],
+  oficina: coordinador.oficina,
+  email: coordinador.email,
+  bio: coordinador.bio?.[idioma] ?? '',
+  foto: coordinador.foto,
 };
 
-// Equipo docente — cátedras radicadas en el LED&T
-const equipoDocente = [
-  {
-    slug: 'gabriel-canadas',
-    nombre: 'Dr. Gabriel E. Cañadas',
-    cargoFormal: 'Investigador / Docente',
-    catedras: ['Sistemas Digitales C (Plan 2023)', 'Sistemas Digitales I (Bioingeniería)'],
-    especialidades: ['Bioingeniería', 'Adquisición de señales fisiológicas', 'Instrumentación inalámbrica'],
-    oficina: 'Oficina 1',
-    email: 'gcanadas@unsj.edu.ar',
-    foto: null,
-  },
-  {
-    slug: 'eugenio-orosco',
-    nombre: 'Dr. Eugenio Orosco',
-    cargoFormal: 'Investigador / Docente',
-    catedras: [
-      'Sistemas Digitales B (Plan 2023)',
-      'Sistemas Digitales II y III (Bioingeniería)',
-      'Microprocesadores · Electrónica Digital III (Plan 2006)'
-    ],
-    especialidades: ['Procesamiento de señales EMG', 'Robots de asistencia', 'Sistemas embebidos'],
-    oficina: 'Oficina 2',
-    email: 'eorosco@inaut.unsj.edu.ar',
-    foto: null,
-  },
-  {
-    slug: 'juan-sebastian',
-    nombre: 'Ing. Juan Ignacio Sebastián',
-    cargoFormal: 'Docente',
-    catedras: ['Sistemas Digitales A'],
-    especialidades: ['FPGAs', 'Mantenimiento industrial'],
-    oficina: 'Oficina 2',
-    email: 'jsebastian@unsj.edu.ar',
-    foto: null,
-  },
-  {
-    slug: 'juan-pablo-aguiar',
-    nombre: 'Ing. Juan Pablo Aguiar',
-    cargoFormal: 'Profesor Titular',
-    catedras: [
-      'Telecomunicaciones A y B (Plan 2023)',
-      'Telecomunicaciones I y II (Plan 2006)'
-    ],
-    especialidades: ['Telecomunicaciones', 'Sistemas de aplicación científica'],
-    oficina: 'Oficina 5',
-    email: 'jpaguiar@inpres.gob.ar',
-    rolParalelo: 'Especialista en INPRES (Instituto Nacional de Prevención Sísmica)',
-    foto: null,
-  },
-  {
-    slug: 'rodolfo-arroqui',
-    nombre: 'Ing. Rodolfo H. Arroqui',
-    cargoFormal: 'Profesor Titular',
-    catedras: [
-      'Propagación y Radiación (Planes 2006 y 2023)',
-      'Temas Específicos de Telecomunicaciones I (optativa)'
-    ],
-    especialidades: ['Propagación y radiación electromagnética', 'Telecomunicaciones aplicadas'],
-    oficina: 'Oficina 5',
-    email: 'rodolfo.arroqui@gmail.com',
-    rolParalelo: 'Experiencia en sector privado: telecomunicaciones, minería e infraestructura',
-    foto: null,
-  },
-  {
-    slug: 'alejandro-martin',
-    nombre: 'Ing. Alejandro D. Martín',
-    cargoFormal: 'Profesor Adjunto',
-    catedras: ['Propagación y Radiación (Planes 2006 y 2023)'],
-    especialidades: ['Propagación y radiación electromagnética'],
-    oficina: 'Oficina 5',
-    email: null, // sin email público por ahora
-    foto: null,
-  },
-  {
-    slug: 'raul-klenzi',
-    nombre: 'Mg. Raúl O. Klenzi',
-    cargoFormal: 'Profesor de Telecomunicaciones',
-    catedras: ['Telecomunicaciones I y II (Plan 2006, en cierre)'],
-    especialidades: ['Telecomunicaciones', 'Inteligencia Artificial', 'Teoría de la información'],
-    oficina: null, // no tiene oficina en el LED&T
-    email: 'rauloscarklenzi@gmail.com',
-    foto: null,
-  },
-];
+const equipoDocente = equipoDocenteData.map((persona) => ({
+  slug: persona.slug,
+  nombre: persona.nombre,
+  cargoFormal: persona.cargoFormal[idioma],
+  catedras: persona.catedras[idioma],
+  especialidades: persona.especialidades[idioma],
+  oficina: persona.oficina,
+  email: persona.email,
+  rolParalelo: persona.rolParalelo?.[idioma],
+  foto: persona.foto,
+}));
 
-// Helper para iniciales (placeholder de foto)
-function getIniciales(nombre: string) {
-  const palabras = nombre.replace('Dr. ', '').replace('Mg. ', '').replace('Ing. ', '').split(' ');
+function getIniciales(nombre: string): string {
+  const palabras = nombre.replace(/Dr\. |Mg\. |Ing\. /g, '').split(' ');
   return palabras.map(p => p[0]).join('').slice(0, 2).toUpperCase();
 }
 ---
@@ -145,19 +69,19 @@ function getIniciales(nombre: string) {
       <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-6">Coordinación</h2>
 
       <article id={coordinacion.slug} class="bg-linear-to-br from-blue-50 via-white to-cyan-50/30 border-2 border-blue-100 rounded-2xl overflow-hidden shadow-md">
-        <div class="grid md:grid-cols-3 gap-0">
+        <div class="grid md:grid-cols-[240px_1fr] gap-0">
           <!-- Columna foto/iniciales -->
-          <div class="bg-blue-700 p-8 flex items-center justify-center md:min-h-70">
+          <div class="bg-blue-700 p-4 flex items-center justify-center">
             {coordinacion.foto ? (
-              <img src={coordinacion.foto} alt={coordinacion.nombre} class="w-16 h-16 rounded-full object-cover border-4 border-white shadow-xl" />
+              <img src={coordinacion.foto} alt={coordinacion.nombre} class="w-56 h-56 rounded-full object-cover border-4 border-white shadow-xl" />
             ) : (
-              <div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-2xl font-bold text-white">
+              <div class="w-56 h-56 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-7xl font-bold text-white">
                 {getIniciales(coordinacion.nombre)}
               </div>
             )}
           </div>
           <!-- Columna info -->
-          <div class="md:col-span-2 p-8">
+          <div class="p-8">
             <p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-2">{coordinacion.rol}</p>
             <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">{coordinacion.nombre}</h3>
             <p class="text-slate-600 font-medium mb-4">{coordinacion.cargoFormal}</p>

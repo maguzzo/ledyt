@@ -6,7 +6,12 @@ export function getStaticPaths() {
 		{ params: { slug: 'chalu-x' } },
 		{ params: { slug: 'chaze-agro' } },
 		{ params: { slug: 'sat-pae-jachal' } },
+		{ params: { slug: 'bodega-40' } },
+		{ params: { slug: 'monitoreo-rio-san-juan' } },
 		{ params: { slug: 'cart' } },
+		{ params: { slug: 'backend-digital-cart' } },
+		{ params: { slug: 'heron' } },
+		{ params: { slug: 'rfims-cart' } },
 	];
 }
 
@@ -60,6 +65,7 @@ type Proyecto = {
 	caracteristicas: Caracteristica[];
 	hitos: Hito[];
 	socios: Socio[];
+	imagen?: string;
 };
 
 // Datos de proyectos
@@ -371,12 +377,870 @@ const proyectos: Record<string, Proyecto> = {
 				aporte: 'Contraparte en especie USD 10.000: asesoría agronómica, insumos para parcelas testigo y asesoramiento técnico en fertilización diferencial'
 			}
 		]
+		},
+		'sat-pae-jachal': {
+			titulo: 'SAT-PAE Jáchal',
+			subtitulo: 'Sistema de Alerta Temprana para la Cuenca del Río Jáchal',
+			estado: 'En evaluación',
+			vigencia: {
+				inicio: null,
+				duracion: '36 meses (estimado)',
+				fin: null
+			},
+			descripcion: 'SAT-PAE Jáchal es una propuesta integral de alerta temprana ambiental e hídrica para la Cuenca del Río Jáchal, con 20 estaciones automáticas de monitoreo continuo. El sistema integra sondas multiparamétricas YSI EXO2, biosensores bbe para detección de contaminantes, telemetría satelital Starlink/Iridium, y una plataforma SCADA propia para visualización, alarmas y trazabilidad de datos en tiempo real. El proyecto es impulsado por un consorcio UNSJ-UCC-Arzobispado-Gobierno de San Juan y contempla una inversión de referencia de USD 11,94 millones.',
+			objetivo: 'Desplegar y validar un Sistema de Alerta Temprana (SAT) de escala de cuenca que permita detectar eventos críticos de calidad de agua y cantidad hídrica en forma anticipada, con evidencia técnica auditable para la toma de decisiones de organismos públicos, actores productivos y comunidades locales.',
+			desafiosTecnologicos: [
+				{
+					titulo: 'Red de 20 estaciones multiparamétricas',
+					descripcion: 'Diseñar e instalar una red distribuida de estaciones de monitoreo con sensado continuo de variables fisicoquímicas y biológicas, garantizando cobertura representativa en puntos críticos de la cuenca.'
+				},
+				{
+					titulo: 'Integración de sensores YSI EXO2 + bbe',
+					descripcion: 'Integrar sensores industriales de referencia (YSI EXO2 y biosensores bbe) en una arquitectura robusta, con protocolos de calibración periódica, mantenimiento y validación metrológica.'
+				},
+				{
+					titulo: 'Telemetría híbrida satelital Starlink/Iridium',
+					descripcion: 'Implementar un esquema de comunicaciones redundante para asegurar continuidad de datos en zonas remotas o de difícil acceso, con tolerancia a fallas y priorización de eventos críticos.'
+				},
+				{
+					titulo: 'Plataforma SCADA de desarrollo propio',
+					descripcion: 'Desarrollar una plataforma SCADA con adquisición, historización, georreferenciación y reglas de alarma para eventos de contaminación o desvíos hidrológicos, con paneles para distintos perfiles de usuario.'
+				},
+				{
+					titulo: 'Modelos de umbrales y alertas tempranas',
+					descripcion: 'Definir umbrales operativos y modelos de decisión basados en series temporales y criterios regulatorios, minimizando falsos positivos y asegurando alertas accionables.'
+				},
+				{
+					titulo: 'Gobernanza interinstitucional y sostenibilidad',
+					descripcion: 'Coordinar operación, mantenimiento y uso de datos entre universidades, gobierno y organizaciones territoriales para sostener el sistema a largo plazo.'
+				}
+			],
+			equipoTrabajo: [
+				{
+					nombre: 'Dr. Ing. Martín Alejandro Guzzo',
+					rol: 'Director Técnico',
+					unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+					dedicacion: 'Dirección y coordinación técnica'
+				},
+				{
+					nombre: 'Equipo LED&T – UNSJ',
+					rol: 'Ingeniería e Integración',
+					unidad: 'Facultad de Ingeniería, UNSJ',
+					dedicacion: 'Diseño electrónico, comunicaciones y SCADA'
+				},
+				{
+					nombre: 'Equipo UCC',
+					rol: 'Apoyo científico-técnico',
+					unidad: 'Universidad Católica de Cuyo',
+					dedicacion: 'Validación y articulación operativa'
+				},
+				{
+					nombre: 'Mesa interinstitucional provincial',
+					rol: 'Gobernanza y despliegue territorial',
+					unidad: 'Arzobispado + Gobierno de San Juan',
+					dedicacion: 'Acompañamiento institucional'
+				}
+			],
+			caracteristicas: [
+				{
+					aspecto: 'Cobertura',
+					valor: '20 estaciones automáticas distribuidas en la Cuenca del Río Jáchal'
+				},
+				{
+					aspecto: 'Sensores principales',
+					valor: 'YSI EXO2 multiparamétrica + biosensores bbe'
+				},
+				{
+					aspecto: 'Comunicaciones',
+					valor: 'Telemetría satelital híbrida Starlink/Iridium'
+				},
+				{
+					aspecto: 'Plataforma de control',
+					valor: 'SCADA propio con alarmas en tiempo real y trazabilidad histórica'
+				},
+				{
+					aspecto: 'Estado del proyecto',
+					valor: 'En evaluación'
+				},
+				{
+					aspecto: 'Inversión de referencia',
+					valor: 'USD 11,94 millones'
+				}
+			],
+			hitos: [
+				{
+					fase: 'Fase 1',
+					titulo: 'Ingeniería de sistema y diseño de red',
+					periodo: 'M1 - M6',
+					descripcion: 'Definición de arquitectura de monitoreo, selección de emplazamientos, ingeniería de comunicaciones y diseño funcional de la plataforma SCADA.'
+				},
+				{
+					fase: 'Fase 2',
+					titulo: 'Implementación piloto y calibración',
+					periodo: 'M7 - M14',
+					descripcion: 'Despliegue inicial de estaciones piloto, calibración de sensores, ajuste de telemetría y validación de captura continua en condiciones de campo.'
+				},
+				{
+					fase: 'Fase 3',
+					titulo: 'Despliegue ampliado y reglas de alerta',
+					periodo: 'M15 - M26',
+					descripcion: 'Escalado de la red hasta cobertura objetivo, consolidación de tableros SCADA y puesta en marcha de umbrales de alerta temprana por variable crítica.'
+				},
+				{
+					fase: 'Fase 4',
+					titulo: 'Validación operativa y transferencia',
+					periodo: 'M27 - M36',
+					descripcion: 'Validación integral del sistema en operación, protocolos de mantenimiento, capacitación de operadores y transferencia institucional para sostenibilidad.'
+				}
+			],
+			socios: [
+				{
+					nombre: 'UNSJ',
+					rol: 'Institución ejecutora principal',
+					aporte: 'Diseño tecnológico del sistema, integración de hardware/software y coordinación técnica del despliegue.'
+				},
+				{
+					nombre: 'UCC',
+					rol: 'Co-ejecutor',
+					aporte: 'Aporte técnico-científico para validación operativa y articulación académica.'
+				},
+				{
+					nombre: 'Arzobispado de San Juan',
+					rol: 'Socio institucional',
+					aporte: 'Articulación territorial y acompañamiento comunitario en la gobernanza del proyecto.'
+				},
+				{
+					nombre: 'Gobierno de San Juan',
+					rol: 'Socio gubernamental',
+					aporte: 'Coordinación interinstitucional, apoyo a despliegue territorial y uso operativo del sistema para gestión pública.'
+				}
+			]
+	},
+	'heron': {
+		titulo: 'HERON',
+		subtitulo: 'Hybrid Elevated Radio Observatory for Neutrinos',
+		estado: 'En gestión institucional · Firma ERC abril 2026',
+		vigencia: {
+			inicio: null,
+			duracion: '6 años (post firma ERC)',
+			fin: null
+		},
+		descripcion: 'HERON es un observatorio internacional de neutrinos de ultra-alta energía que será instalado en la alta cordillera sanjuanina. Financiado íntegramente por el European Research Council (ERC) con una ERC Synergy Grant de 14 millones de euros, su objetivo científico es la detección de ráfagas de neutrinos asociadas a fenómenos astrofísicos violentos —fusiones de estrellas de neutrones y núcleos activos de galaxias— con un potencial de impacto científico equivalente al nivel de un Premio Nobel. El proyecto es liderado por un consorcio de cuatro investigadores principales de España, Francia, Estados Unidos y Argentina, siendo la CNEA/ITeDA la contraparte ejecutora local. El LED&T–UNSJ participa como socio institucional, con el Dr. Ing. Martín A. Guzzo ejerciendo el rol de Site Manager San Juan desde el 11 de marzo de 2026.',
+		objetivo: 'Detectar neutrinos de ultra-alta energía (> 10¹⁷ eV) mediante una red de antenas de radio instalada en la alta cordillera sanjuanina, aprovechando las condiciones excepcionales de bajo ruido electromagnético del sitio. El observatorio aportará datos únicos sobre los mecanismos de aceleración de partículas en los eventos astrofísicos más violentos del universo —fusiones de estrellas de neutrones y núcleos activos de galaxias— en colaboración con una red científica de cuatro países financiada por la Unión Europea con 14 millones de euros.',
+		desafiosTecnologicos: [
+			{
+				titulo: 'Detección de Neutrinos por Radio (Efecto Askaryan)',
+				descripcion: 'Desarrollo e implementación de detectores de radio para capturar la señal coherente de Cherenkov (efecto Askaryan) emitida por cascadas electromagnéticas inducidas por neutrinos de ultra-alta energía al interactuar con el medio rocoso. La técnica es sensible a energías > 10¹⁷ eV, inaccesibles a otros tipos de detectores, y requiere antenas de alta sensibilidad desplegadas en alta cordillera.'
+			},
+			{
+				titulo: 'Monitoreo y Protección contra RFI',
+				descripcion: 'La detección de señales de neutrinos exige un ambiente electromagnéticamente silencioso. La UNSJ–DEA asumirá el monitoreo continuo del espectro de radiofrecuencia (RFI) en el sitio del observatorio, una contribución técnica crítica para garantizar la calidad de los datos científicos durante los 6 años de operación. Se gestionará una Radio Quiet Zone (RQZ) mediante decreto provincial.'
+			},
+			{
+				titulo: 'Ingeniería de Sitio en Alta Cordillera',
+				descripcion: 'El observatorio se instalará en tierras fiscales de alta montaña en San Juan. Los desafíos incluyen accesos viales en condiciones extremas, provisión de energía eléctrica (solar o línea dedicada), gestión ambiental bajo la Ley de Glaciares N° 26.639 y protocolos de seguridad para el personal. Se requiere licitación internacional (> 140.000 €) para equipos y obra civil publicada en el Diario Oficial de la UE (OJEU).'
+			},
+			{
+				titulo: 'Estructuración Financiera bajo Normas ERC (Horizonte Europa)',
+				descripcion: 'El régimen de compras y rendición bajo una ERC Synergy Grant exige trazabilidad total de cada euro gastado. Los fondos son gestionados exclusivamente por las Host Institutions europeas (USC/IGFAE y CNRS/Sorbonne); ninguna institución argentina puede recibirlos directamente. La CNEA actúa como Third Party y cada gasto en Argentina debe estar presupuestado, aprobado por el consorcio y rendido ante la institución europea correspondiente.'
+			},
+			{
+				titulo: 'Coordinación Institucional Multipartita',
+				descripcion: 'El proyecto articula cuatro niveles institucionales: ERC (financiador), Host Institutions europeas, CNEA/ITeDA (Third Party ejecutor), y UNSJ + Gobierno de San Juan. La hoja de ruta incluye la firma del convenio tripartito CNEA–UNSJ–Gobierno (mayo–junio 2026) tomando como modelo los convenios de Auger (Mendoza) y QUBIC (Salta), que habilitan acuerdos específicos posteriores sin renegociar términos generales.'
+			},
+			{
+				titulo: 'Formación de Recursos Humanos de Alto Nivel',
+				descripcion: 'El proyecto habilitará la incorporación de becarios, tesistas de grado y doctorandos de la UNSJ en electrónica de detección (DEA–Ingeniería), telecomunicaciones, análisis de datos astrofísicos (OAFA–Ciencias Exactas) y física de astropartículas. El modelo Auger–Malargüe demostró que el impacto territorial es sostenido y creciente cuando las instituciones locales aportan capacidades técnicas reales.'
+			}
+		],
+		equipoTrabajo: [
+			{
+				nombre: 'Dr. Federico Sánchez',
+				rol: 'Investigador Principal (PI)',
+				unidad: 'IGFAE / Universidad de Santiago de Compostela (España)',
+				dedicacion: 'Co-director Científico'
+			},
+			{
+				nombre: 'Dr. Ingo Allekotte',
+				rol: 'Investigador Principal (PI) – Argentina',
+				unidad: 'CNEA / ITeDA',
+				dedicacion: 'Co-director Científico · Ex-Gerente Pierre Auger'
+			},
+			{
+				nombre: 'PIs IAP-CNRS y Penn State',
+				rol: 'Investigadores Principales (PIs)',
+				unidad: 'IAP-CNRS / Sorbonne (Francia) y Penn State (EE.UU.)',
+				dedicacion: 'Co-dirección Científica'
+			},
+			{
+				nombre: 'Dr. Ing. Martín Alejandro Guzzo',
+				rol: 'Site Manager San Juan (UNSJ)',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Ad honorem desde 11/03/2026'
+			}
+		],
+		caracteristicas: [
+			{
+				aspecto: 'Financiamiento Total',
+				valor: '14 millones de euros – ERC Synergy Grant (100% ERC / Horizonte Europa)'
+			},
+			{
+				aspecto: 'Componente base',
+				valor: '10 M€ – personal, equipamiento estándar, viajes y overhead institucional (6 años)'
+			},
+			{
+				aspecto: 'Suplemento instalación extraUE',
+				valor: '4 M€ – equipamiento de gran escala y obra civil en San Juan'
+			},
+			{
+				aspecto: 'Técnica de detección',
+				valor: 'Radio coherente (efecto Askaryan/Cherenkov) para neutrinos UHE > 10¹⁷ eV'
+			},
+			{
+				aspecto: 'Sitio',
+				valor: 'Alta cordillera sanjuanina – condiciones óptimas de silencio electromagnético'
+			},
+			{
+				aspecto: 'Firma del contrato ERC',
+				valor: 'Prevista para fines de abril de 2026'
+			}
+		],
+		hitos: [
+			{
+				fase: 'Fase 0',
+				titulo: 'Campañas de Medición de Sitio',
+				periodo: 'Marzo 2026',
+				descripcion: 'Los PIs Federico Sánchez e Ingo Allekotte realizan campañas de medición RFI y caracterización del sitio en la cordillera sanjuanina. El DEA–UNSJ colabora con equipamiento (analizadores de espectro). El Dr. Guzzo ejerce el rol de Site Manager ad honorem desde el 11/03/2026.'
+			},
+			{
+				fase: 'Fase 1',
+				titulo: 'Firma del Contrato ERC y Formalización del Consorcio',
+				periodo: 'Fines de abril 2026',
+				descripcion: 'Firma del Grant Agreement entre el ERC y las Host Institutions europeas (USC/IGFAE y CNRS/Sorbonne). Designación formal del Project Manager. Cierre de la estructura legal del consorcio internacional y definición de los mecanismos de rendición para la CNEA/ITeDA como Third Party.'
+			},
+			{
+				fase: 'Fase 2',
+				titulo: 'Convenio Tripartito CNEA–UNSJ–Gobierno',
+				periodo: 'Mayo–junio 2026',
+				descripcion: 'Firma del convenio marco multipartito entre CNEA/ITeDA, UNSJ y el Gobierno de la Provincia de San Juan. El instrumento formaliza el rol del Site Manager, establece la cesión de tierras fiscales para el sitio, y define los mecanismos de protección RFI incluyendo la Radio Quiet Zone (RQZ) mediante decreto provincial.'
+			},
+			{
+				fase: 'Fase 3',
+				titulo: 'Ingeniería del Sitio y Obra Civil',
+				periodo: '2026–2027',
+				descripcion: 'Ingeniería de detalle del observatorio, licitación internacional de equipos de detección (> 140.000€ vía OJEU), obra civil en el sitio cordillerano (accesos, albergue, laboratorio de campo). Incorporación de los primeros becarios y tesistas de la UNSJ en monitoreo RFI y telecomunicaciones.'
+			},
+			{
+				fase: 'Fase 4',
+				titulo: 'Instalación y Comisionamiento',
+				periodo: '2027–2028',
+				descripcion: 'Instalación física de los detectores de radio en alta cordillera, comisionamiento del sistema de adquisición de datos, calibración y primeros datos científicos. La UNSJ–DEA asume el monitoreo permanente del espectro de RFI como contribución técnica al consorcio.'
+			},
+			{
+				fase: 'Fase 5',
+				titulo: 'Operación Científica',
+				periodo: '2028–2032',
+				descripcion: 'Operación completa del observatorio durante los 6 años del proyecto ERC. Análisis de datos astrofísicos con los cuatro PIs internacionales. Publicaciones científicas con autoría argentina. Formación continua de RRHH. Evaluación de continuidad post-ERC y herencia tecnológica para San Juan.'
+			}
+		],
+		socios: [
+			{
+				nombre: 'ERC – European Research Council',
+				rol: 'Financiador del Proyecto',
+				aporte: '14 M€ (100% del proyecto) mediante ERC Synergy Grant – Horizonte Europa. Programa de mayor escala del ERC, diseñado para grupos de 2 a 4 PIs.'
+			},
+			{
+				nombre: 'USC/IGFAE (España) y CNRS/Sorbonne (Francia)',
+				rol: 'Host Institutions (Beneficiarios ERC)',
+				aporte: 'Firma del Grant Agreement, gestión y desembolso de fondos ERC. Responsables legales ante la Comisión Europea por la correcta utilización del dinero.'
+			},
+			{
+				nombre: 'Penn State (EE.UU.)',
+				rol: 'PI Institucional del Consorcio',
+				aporte: 'Co-dirección científica del proyecto e integración en la red internacional de física de astropartículas.'
+			},
+			{
+				nombre: 'CNEA / ITeDA (Argentina)',
+				rol: 'Contraparte Ejecutora Local (Third Party)',
+				aporte: 'Contacto principal entre el ERC y el Consorcio internacional. Ejecución de actividades en Argentina, coordinación científica local, importación de equipos.'
+			},
+			{
+				nombre: 'Gobierno de la Provincia de San Juan',
+				rol: 'Socio Territorial',
+				aporte: 'Gestión y cesión del sitio (tierras fiscales), decreto de Radio Quiet Zone (RQZ), mantenimiento de accesos viales en alta cordillera, suministro eléctrico, gestión ambiental (Ley de Glaciares N° 26.639) y protocolos de seguridad.'
+			},
+			{
+				nombre: 'UNSJ – Facultad de Ingeniería y FCEFyN',
+				rol: 'Socio Universitario Local',
+				aporte: 'Rol de Site Manager (Dr. Guzzo), monitoreo RFI permanente (DEA–Ingeniería), análisis de datos astrofísicos (OAFA–Cs. Exactas), formación de RRHH (becas doctorales, tesistas de grado), transferencia tecnológica al sector productivo provincial.'
+			}
+		]
+	},
+	'backend-digital-cart': {
+		titulo: 'Backend Digital del CART',
+		subtitulo: 'Plataforma SDR/FPGA para digitalización y procesamiento en bandas S/X del Radiotelescopio Argentino-Chino',
+		estado: 'Finalizado · 2024',
+		vigencia: {
+			inicio: '2022',
+			duracion: '24 meses',
+			fin: '2024'
+		},
+		descripcion: 'Proyecto de desarrollo de un backend digital para el Radiotelescopio Argentino-Chino (CART), basado en arquitectura de Radio Definido por Software (SDR) y procesamiento reconfigurable en FPGA RFSoC. La solución permite digitalización directa de señales en bandas S/X, preprocesamiento en tiempo real, y almacenamiento estructurado para flujos científicos de radioastronomía. El proyecto fue ejecutado por LED&T con financiamiento PIPE de la Municipalidad de Calingasta.',
+		objetivo: 'Diseñar, implementar y validar un backend digital de alto desempeño para el CART que permita adquisición y procesamiento confiable de señales radioastronómicas, reduciendo dependencia de soluciones importadas y fortaleciendo capacidades nacionales en instrumentación científica avanzada.',
+		desafiosTecnologicos: [
+			{
+				titulo: 'Digitalización directa en bandas S/X',
+				descripcion: 'Implementar una cadena de adquisición compatible con señales de radioastronomía en bandas S/X, con alta estabilidad temporal y bajo ruido, minimizando etapas analógicas intermedias.'
+			},
+			{
+				titulo: 'Procesamiento en FPGA RFSoC',
+				descripcion: 'Desarrollar bloques de procesamiento digital sobre FPGA RFSoC para filtrado, canalización y reducción de datos en tiempo real, con enfoque en desempeño determinístico.'
+			},
+			{
+				titulo: 'Arquitectura SDR flexible',
+				descripcion: 'Definir una arquitectura modular SDR que permita evolución futura de algoritmos sin rediseñar el hardware base del sistema.'
+			},
+			{
+				titulo: 'Integración con infraestructura del CART',
+				descripcion: 'Asegurar compatibilidad operativa con flujos de observación del CART, sincronización, captura continua y trazabilidad de datos para etapas científicas posteriores.'
+			},
+			{
+				titulo: 'Confiabilidad para operación de campo',
+				descripcion: 'Garantizar robustez eléctrica y térmica para operación prolongada en entorno de altura, incluyendo estrategias de diagnóstico y recuperación ante fallas.'
+			},
+			{
+				titulo: 'Transferencia tecnológica local',
+				descripcion: 'Documentar y transferir capacidades a equipos locales para mantenimiento, evolución de firmware y operación sostenida del backend digital.'
+			}
+		],
+		equipoTrabajo: [
+			{
+				nombre: 'Dr. Ing. Martín Alejandro Guzzo',
+				rol: 'Director del Proyecto',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Director'
+			},
+			{
+				nombre: 'Dr. Ing. Marcelo J. Segura',
+				rol: 'Co-investigador',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Co-Investigador'
+			},
+			{
+				nombre: 'Mauro Diamantino',
+				rol: 'Becario de Investigación',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Becario'
+			}
+		],
+		caracteristicas: [
+			{
+				aspecto: 'Tecnología Base',
+				valor: 'SDR + FPGA RFSoC para adquisición y procesamiento digital'
+			},
+			{
+				aspecto: 'Bandas Objetivo',
+				valor: 'Bandas S/X para aplicaciones radioastronómicas del CART'
+			},
+			{
+				aspecto: 'Modalidad de Procesamiento',
+				valor: 'Pipeline en tiempo real con bloques reconfigurables'
+			},
+			{
+				aspecto: 'Estado de Madurez',
+				valor: 'Proyecto finalizado con validación funcional y transferencia'
+			},
+			{
+				aspecto: 'Financiamiento',
+				valor: 'PIPE – Municipalidad de Calingasta'
+			},
+			{
+				aspecto: 'Aplicación',
+				valor: 'Instrumentación científica para radioastronomía'
+			}
+		],
+		hitos: [
+			{
+				fase: 'Etapa I',
+				titulo: 'Arquitectura del Backend',
+				periodo: '2022',
+				descripcion: 'Definición de arquitectura, requerimientos de adquisición y estrategia de procesamiento digital para el backend del CART.'
+			},
+			{
+				fase: 'Etapa II',
+				titulo: 'Desarrollo SDR/FPGA',
+				periodo: '2022–2023',
+				descripcion: 'Implementación de bloques de procesamiento, integración de cadena digital y pruebas de laboratorio sobre plataforma RFSoC.'
+			},
+			{
+				fase: 'Etapa III',
+				titulo: 'Validación Integrada',
+				periodo: '2023–2024',
+				descripcion: 'Pruebas de desempeño, estabilidad y confiabilidad de la solución backend en escenarios representativos de operación.'
+			},
+			{
+				fase: 'Etapa IV',
+				titulo: 'Cierre y Transferencia',
+				periodo: '2024',
+				descripcion: 'Documentación técnica, transferencia de capacidades y cierre del proyecto con resultados funcionales.'
+			}
+		],
+		socios: [
+			{
+				nombre: 'UNSJ',
+				rol: 'Institución Ejecutora',
+				aporte: 'Desarrollo tecnológico, recursos humanos y validación de la plataforma backend digital.'
+			},
+			{
+				nombre: 'CART',
+				rol: 'Destino científico de la solución',
+				aporte: 'Contexto de aplicación, requerimientos instrumentales y validación funcional orientada a radioastronomía.'
+			},
+			{
+				nombre: 'Municipalidad de Calingasta',
+				rol: 'Financiador',
+				aporte: 'Financiamiento a través del programa PIPE para desarrollo y consolidación de capacidades locales.'
+			}
+		]
+	},
+	'bodega-40': {
+		titulo: 'Bodega 4.0',
+		subtitulo: 'Sistema inteligente de monitoreo vitivinícola y desarrollo de sensor de nivel por radar',
+		estado: 'Finalizado · 2022',
+		vigencia: {
+			inicio: '2020',
+			duracion: '24 meses',
+			fin: '2022'
+		},
+		descripcion: 'Bodega 4.0 es un proyecto de transformación digital para bodegas vitivinícolas orientado al monitoreo inteligente de procesos críticos de fermentación y añejamiento. La solución integra sensores IoT de campo, conectividad de datos, plataforma en la nube y modelos de analítica/IA para detección temprana de riesgos operativos y variaciones de calidad. Como resultado técnico asociado, en 2023 se desarrolló el trabajo final de Jorge David Guerra sobre una PCB integrada para sensor de nivel por radar, con antecedentes directos en el proyecto PDTS Bodega 4.0.',
+		objetivo: 'Diseñar e implementar un sistema integral de monitoreo inteligente para bodegas que permita mejorar trazabilidad, reducir pérdidas de proceso y asistir decisiones en tiempo real mediante analítica de datos e inteligencia artificial.',
+		desafiosTecnologicos: [
+			{
+				titulo: 'Integración de sensado IoT y radar de nivel',
+				descripcion: 'Combinar monitoreo IoT de proceso con medición de nivel por radar para tanques de bodega, integrando instrumentación de campo en una arquitectura unificada.'
+			},
+			{
+				titulo: 'Diseño de PCB única para sensor radar',
+				descripcion: 'Diseñar una PCB compacta que unifique los módulos previamente distribuidos, incluyendo microcontrolador, interfaz de sensor y electrónica de comunicación industrial.'
+			},
+			{
+				titulo: 'Plataforma cloud para supervisión',
+				descripcion: 'Implementar una plataforma de visualización y alertas con tableros operativos, históricos y umbrales configurables para personal técnico y de gestión.'
+			},
+			{
+				titulo: 'Modelos de IA para detección de riesgo',
+				descripcion: 'Desarrollar algoritmos de aprendizaje automático para detección temprana de anomalías y eventos que puedan comprometer calidad o rendimiento de producción.'
+			},
+			{
+				titulo: 'Interoperabilidad industrial RS485/Modbus RTU',
+				descripcion: 'Implementar comunicación robusta mediante RS485 y protocolo Modbus RTU para facilitar integración con control industrial y supervisión en planta.'
+			},
+			{
+				titulo: 'Validación funcional y calibración',
+				descripcion: 'Realizar verificación de hardware/software, depuración y calibración del sensor para obtener una solución funcional, compacta y de menor costo para adopción local.'
+			}
+		],
+		equipoTrabajo: [
+			{
+				nombre: 'Dr. Ing. Martín Alejandro Guzzo',
+				rol: 'Director del Proyecto',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Dirección técnica'
+			},
+			{
+				nombre: 'Jorge David Guerra',
+				rol: 'Autor de Trabajo Final (Ingeniería Electrónica)',
+				unidad: 'Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Diseño y validación de PCB para sensor de nivel por radar (2023)'
+			},
+			{
+				nombre: 'Dr. Ing. Eugenio Conrado Orosco',
+				rol: 'Asesor Técnico',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Asesoría técnica en diseño e implementación'
+			},
+			{
+				nombre: 'Dr. Ing. Gabriel Eduardo Cañadas Fragapane',
+				rol: 'Asesor Técnico',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Asesoría técnica en diseño e implementación'
+			},
+			{
+				nombre: 'Equipo LED&T',
+				rol: 'Ingeniería IoT y Analítica',
+				unidad: 'Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Desarrollo e integración'
+			},
+			{
+				nombre: 'Roberto Asencio',
+				rol: 'Becario de Investigación',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Becario'
+			},
+			{
+				nombre: 'Guillermo Trigo',
+				rol: 'Becario de Investigación',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Becario'
+			}
+		],
+		caracteristicas: [
+			{
+				aspecto: 'Dominio de aplicación',
+				valor: 'Procesos vitivinícolas (fermentación y añejamiento)'
+			},
+			{
+				aspecto: 'Tecnologías clave',
+				valor: 'IoT, radar de nivel, PCB, RS485/Modbus RTU, analítica de datos y Machine Learning'
+			},
+			{
+				aspecto: 'Modalidad de monitoreo',
+				valor: 'Captura continua con visualización y alertas'
+			},
+			{
+				aspecto: 'Enfoque funcional',
+				valor: 'Detección temprana de riesgos de proceso y medición de nivel en tanques'
+			},
+			{
+				aspecto: 'Marco institucional',
+				valor: 'Proyecto PDTS UNSJ + Trabajo Final FI-UNSJ (2023)'
+			},
+			{
+				aspecto: 'Estado',
+				valor: 'Finalizado · 2022'
+			}
+		],
+		hitos: [
+			{
+				fase: 'Etapa I',
+				titulo: 'Relevamiento y diseño de arquitectura',
+				periodo: 'M1 - M6',
+				descripcion: 'Relevamiento de procesos en bodega, definición de variables críticas, arquitectura de sensado y modelo de datos para seguimiento operacional.'
+			},
+			{
+				fase: 'Etapa II',
+				titulo: 'Integración de sensado y comunicaciones',
+				periodo: 'M7 - M14',
+				descripcion: 'Instalación de nodos IoT, integración de comunicaciones y despliegue inicial de tableros de control con trazabilidad histórica. En paralelo, se consolidó la línea de sensor de nivel radar con comunicación RS485/Modbus RTU.'
+			},
+			{
+				fase: 'Etapa III',
+				titulo: 'Analítica avanzada y validación',
+				periodo: 'M15 - M22',
+				descripcion: 'Entrenamiento y ajuste de modelos de detección de anomalías, validación con datos reales de operación y ajustes de umbrales de alerta.'
+			},
+			{
+				fase: 'Etapa IV',
+				titulo: 'Transferencia, cierre y continuidad académica',
+				periodo: 'M23 - M24',
+				descripcion: 'Consolidación de resultados, documentación técnica y transferencia de capacidades para continuidad de uso en el sector vitivinícola. En 2023 se profundizó la línea con el informe final de Jorge Guerra sobre PCB integrada de sensor de nivel por radar.'
+			}
+		],
+		imagen: '/images/projects/bodega-40/pcb-sensor-radar.png',
+		socios: [
+			{
+				nombre: 'UNSJ',
+				rol: 'Institución ejecutora',
+				aporte: 'Desarrollo tecnológico, validación y formación de recursos humanos.'
+			},
+			{
+				nombre: 'Interalgarrobos S.A.',
+				rol: 'Socio industrial',
+				aporte: 'Contexto productivo, validación en entorno real y retroalimentación operativa.'
+			},
+			{
+				nombre: 'Dirección de Asuntos Vitivinícolas (Gobierno de San Juan)',
+				rol: 'Socio institucional',
+				aporte: 'Articulación sectorial y apoyo para transferencia territorial de resultados.'
+			}
+		]
+	},
+	'monitoreo-rio-san-juan': {
+		titulo: 'Monitoreo de la Calidad del Agua · Río San Juan',
+		subtitulo: 'Sistema de monitoreo fisicoquímico continuo con sensores RS-485 y software de calibración propio',
+		estado: 'Finalizado · 2019',
+		vigencia: {
+			inicio: '2016',
+			duracion: '36 meses',
+			fin: '2019'
+		},
+		descripcion: 'El proyecto desarrolló un sistema de monitoreo continuo de la calidad del agua del Río San Juan, midiendo cinco variables fisicoquímicas clave: pH, Turbidez, Oxígeno Disuelto, Temperatura y Conductividad. Los sensores multiparamétricos Nengshi, conectados por bus RS-485, fueron integrados con un software de lectura y calibración propio —presupuestado y desarrollado por el Dr. Guzzo— que permite la visualización en tiempo real, el registro en formato XLS y la calibración automática mediante ajuste de ecuación de dos puntos. El sistema operó como plataforma de referencia para el monitoreo ambiental en la cuenca del Río San Juan durante el período 2016–2019.',
+		objetivo: 'Implementar una red de monitoreo continuo de la calidad fisicoquímica del agua del Río San Juan, generando series de datos temporales confiables y calibradas que permitan la evaluación de tendencias ambientales y la detección temprana de eventos de contaminación en la cuenca.',
+		desafiosTecnologicos: [
+			{
+				titulo: 'Integración de sensores multiparamétricos RS-485',
+				descripcion: 'Vincular sensores Nengshi de pH, Turbidez, OD, Temperatura y Conductividad mediante protocolo RS-485 en una arquitectura de bus compartido, garantizando la integridad de la comunicación y la correcta identificación de cada sensor en la cadena.'
+			},
+			{
+				titulo: 'Software de lectura y calibración con interfaz gráfica',
+				descripcion: 'Desarrollo de una aplicación Windows con interfaz gráfica capaz de leer los cinco parámetros cada dos segundos, visualizarlos en tiempo real, configurar el puerto serie RS-485 y exportar el histórico de lecturas en formato XLS para análisis posterior.'
+			},
+			{
+				titulo: 'Calibración automática mediante ecuación de dos puntos',
+				descripcion: 'Implementación de un módulo de calibración que calcula automáticamente la ecuación de ajuste a partir de dos patrones (Valor Máximo / Valor Mínimo) por sensor, mostrando los valores actuales de calibración y permitiendo la re-calibración desde la interfaz en los sensores que lo soportan.'
+			},
+			{
+				titulo: 'Despliegue en entorno fluvial real',
+				descripcion: 'Instalación y mantenimiento del sistema en puntos de muestreo del Río San Juan, resolviendo los desafíos de alimentación, protección física de la electrónica, acceso periódico para calibración y continuidad de la adquisición en un entorno hídrico con variaciones estacionales marcadas.'
+			},
+			{
+				titulo: 'Generación de series temporales ambientales',
+				descripcion: 'Construcción de bases de datos de calidad del agua de largo plazo, estructurando los registros XLS para su procesamiento estadístico y su utilización como insumo en evaluaciones de impacto ambiental e informes técnicos para organismos provinciales.'
+			}
+		],
+		equipoTrabajo: [
+			{
+				nombre: 'Dr. Ing. Martín Alejandro Guzzo',
+				rol: 'Director del Proyecto',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Dirección técnica y desarrollo de software'
+			},
+			{
+				nombre: 'Dr. Ing. Marcelo J. Segura',
+				rol: 'Co-investigador',
+				unidad: 'LED&T – DEA, UNSJ / CONICET',
+				dedicacion: 'Co-investigador'
+			},
+			{
+				nombre: 'Ing. Gustavo Ensinck',
+				rol: 'Investigador LED&T',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ (jubilado)',
+				dedicacion: 'Investigador del grupo durante el proyecto'
+			},
+			{
+				nombre: 'Juan Miguel Doña',
+				rol: 'Becario de Investigación',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Becario'
+			},
+			{
+				nombre: 'Leonardo Nievas',
+				rol: 'Becario de Investigación',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Becario'
+			}
+		],
+		caracteristicas: [
+			{
+				aspecto: 'Variables monitoreadas',
+				valor: 'pH, Turbidez, Oxígeno Disuelto, Temperatura, Conductividad'
+			},
+			{
+				aspecto: 'Sensores',
+				valor: 'Nengshi (multiparamétrico) – protocolo RS-485'
+			},
+			{
+				aspecto: 'Frecuencia de muestreo',
+				valor: 'Lectura cada 2 segundos'
+			},
+			{
+				aspecto: 'Software',
+				valor: 'Aplicación Windows con interfaz gráfica, calibración automática y exportación XLS'
+			},
+			{
+				aspecto: 'Ámbito de aplicación',
+				valor: 'Río San Juan – Monitoreo ambiental de cuenca'
+			},
+			{
+				aspecto: 'Estado',
+				valor: 'Finalizado · 2019'
+			}
+		],
+		hitos: [
+			{
+				fase: 'Etapa I',
+				titulo: 'Diseño del sistema y selección de instrumentación',
+				periodo: '2016',
+				descripcion: 'Definición de variables a monitorear, selección de sensores Nengshi RS-485, diseño de la arquitectura de bus y especificación funcional del software de adquisición y calibración.'
+			},
+			{
+				fase: 'Etapa II',
+				titulo: 'Desarrollo del software de lectura y calibración',
+				periodo: '2016–2017',
+				descripcion: 'Implementación de la aplicación Windows con interfaz gráfica para lectura de los cinco parámetros a 2 Hz, configuración del puerto serie RS-485, módulo de calibración automática de dos puntos y exportación de registros en formato XLS.'
+			},
+			{
+				fase: 'Etapa III',
+				titulo: 'Despliegue y operación en campo',
+				periodo: '2017–2018',
+				descripcion: 'Instalación del sistema en puntos de muestreo del Río San Juan. Calibración in situ con patrones certificados. Inicio de la adquisición continua de series temporales de calidad del agua.'
+			},
+			{
+				fase: 'Etapa IV',
+				titulo: 'Análisis de datos y cierre',
+				periodo: '2018–2019',
+				descripcion: 'Consolidación de la base de datos histórica, análisis de tendencias fisicoquímicas, elaboración de informes técnicos para SECyTI San Juan y cierre formal del proyecto con transferencia de resultados.'
+			}
+		],
+		socios: [
+			{
+				nombre: 'Secretaría de Estado de Medio Ambiente (Gobierno de San Juan)',
+				rol: 'Organismo Financiador',
+				aporte: 'Financiamiento del proyecto en el marco de la política provincial de monitoreo y protección ambiental de la cuenca del Río San Juan.'
+			},
+			{
+				nombre: 'UNSJ – Universidad Nacional de San Juan',
+				rol: 'Institución Ejecutora',
+				aporte: 'Infraestructura de laboratorio, formación de recursos humanos y ejecución técnica del proyecto.'
+			}
+		]
+	},
+	'rfims-cart': {
+		titulo: 'RFIMS-CART',
+		subtitulo: 'Sistema de Monitoreo de Interferencias de RF para el Radio Telescopio Chino-Argentino',
+		estado: 'Finalizado · 2020',
+		vigencia: {
+			inicio: 'Enero 2018',
+			duracion: '24 meses',
+			fin: 'Diciembre 2019'
+		},
+		descripcion: 'RFIMS-CART es el sistema de monitoreo de interferencias de radiofrecuencia (RFI) desarrollado por el LED&T para proteger al Radio Telescopio Chino-Argentino (CART), el radiotelescopio de plato único orientable más grande de América del Sur. El observatorio, instalado en la Estación de Altura "Dr. Carlos U. Cesco" (CESCO) del OAFA en el Parque Nacional El Leoncito (Calingasta, 2348 msnm), opera en las bandas IEEE L a Q (1–45 GHz). El proyecto desarrolló un sistema de detección basado en Radio Definida por Software (SDR) capaz de identificar señales interferentes en banda estrecha (NB) y banda ancha (WB), siguiendo los protocolos del SKA (Square Kilometre Array) y la recomendación UIT-R RA.769-2. El Dr. Marcelo Segura, investigador del LED&T, fue designado Project Manager del CART por CONICET. El sistema fue transferido a la administración del CART al cierre del proyecto.',
+		objetivo: 'Diseñar e implementar un Sistema de Monitoreo de Radio Interferencia para el CART basado en SDR, investigando nuevas técnicas de Procesamiento Digital de Señales (DSP) para la detección de RFI en banda estrecha y banda ancha, y evaluando su desempeño en campañas de campo en el sitio del CART según los protocolos SKA y UIT RA.769-2.',
+		desafiosTecnologicos: [
+			{
+				titulo: 'Receptor SDR Wideband para Medición de RFI',
+				descripcion: 'Implementación de un sistema de recepción basado en SDR (Ettus USRP B210, 70 MHz – 6 GHz) capaz de detectar señales interferentes de banda estrecha y banda ancha en el rango 1–9 GHz (bandas IEEE L a parte baja de X) donde se concentran las principales RFI externas al CART. El receptor SDR ofrece una flexibilidad de procesamiento inalcanzable con analizadores de espectro de hardware fijo.'
+			},
+			{
+				titulo: 'Algoritmos DSP para Detección NB y WB',
+				descripcion: 'Diseño y simulación de algoritmos de Procesamiento Digital de Señales (DSP) para detección de RFI de banda estrecha (celulares, WiFi, microondas) y banda ancha (ISDB-Tb TV digital, UWB), ajustados a los estándares UMTS (4G), IMT-2020 (5G) e IEEE 802.11b/g/n. Los algoritmos fueron primero validados en software y luego evaluados en campañas de campo en el predio CESCO.'
+			},
+			{
+				titulo: 'Sistema de Mástil con Rotor Automático de Antena',
+				descripcion: 'Diseño, fabricación e integración de un mástil con rotor automático de antena conforme a las especificaciones de medición del protocolo SKA. El sistema realiza de manera autónoma el escaneo en 360° de azimut y la rotación de polarización vertical y horizontal del elemento antena (Aaronia HyperLOG 60100, 680 MHz – 10 GHz), permitiendo la caracterización completa del entorno radioeléctrico del sitio.'
+			},
+			{
+				titulo: 'Conformidad con Protocolos Internacionales de Medición (SKA / UIT)',
+				descripcion: 'El sistema fue diseñado para cumplir con dos estándares internacionales de medición de RFI para radioastronomía: el protocolo SKA 2003 (mediciones de una semana, candidatos a sitio) y la recomendación UIT-R RA.769-2 "Criterios de protección para las mediciones radioastronómicas" (adquisición autónoma de larga duración, criterio de nivel perjudicial, tiempo de integración y anchura de banda específicos por banda de observación del CART).'
+			},
+			{
+				titulo: 'Evaluación de Desempeño en Campo en CESCO / PNEL',
+				descripcion: 'Campañas de campo en la Estación CESCO del OAFA (31°48\'17.5"S 69°19\'31.1"W, 2348 msnm), protegida por la Ley Provincial 345-L de pureza del espectro electromagnético. Se colocaron interferentes controlados para evaluar la probabilidad de detección de cada algoritmo DSP antes de la llegada del CART al predio, y se realizó la adquisición autónoma de larga duración según UIT RA.769-2.'
+			},
+			{
+				titulo: 'Transferencia Tecnológica al CART y Escalabilidad',
+				descripcion: 'El RFIMS-CART fue diseñado para ser transferido a la administración permanente del CART con ajustes mínimos para operación continua. El conocimiento y equipamiento adquirido posiciona al LED&T para ofrecer servicios de monitoreo de RFI a otras estaciones de radioastronomía del país (LLAMA, QUBIC, futuro HERON) y a empresas de telecomunicaciones con problemas de interferencia en sus equipamientos.'
+			}
+		],
+		equipoTrabajo: [
+			{
+				nombre: 'Dr. Ing. Martín Alejandro Guzzo',
+				rol: 'Director del Proyecto',
+				unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
+				dedicacion: 'Director'
+			},
+			{
+				nombre: 'Dr. Ing. Marcelo J. Segura',
+				rol: 'Co-investigador / Project Manager CART',
+				unidad: 'LED&T – DEA, UNSJ / CONICET',
+				dedicacion: 'Co-Investigador'
+			},
+			{
+				nombre: 'Mg. Ing. Hernán Alvis Rojas',
+				rol: 'Colaborador – Acceso a Sitio CESCO',
+				unidad: 'OAFA – UNSJ',
+				dedicacion: 'Colaborador'
+			},
+			{
+				nombre: 'Dr. Juan Pablo Aguiar',
+				rol: 'Investigador',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Investigador'
+			},
+			{
+				nombre: 'Leandro Saldivar',
+				rol: 'Becario de Investigación',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Becario'
+			},
+			{
+				nombre: 'Johana Quinteros',
+				rol: 'Becaria de Investigación',
+				unidad: 'LED&T – DEA, UNSJ',
+				dedicacion: 'Becaria'
+			}
+		],
+		caracteristicas: [
+			{
+				aspecto: 'Rango de Frecuencia',
+				valor: '1 GHz – 9 GHz (bandas IEEE L, S, C, parte baja de X); escalable hasta 10 GHz con Aaronia HyperLOG 60100'
+			},
+			{
+				aspecto: 'Receptor SDR',
+				valor: 'Ettus Research USRP B210 – Dual Channel Transceiver (70 MHz – 6 GHz), 2 canales simultáneos'
+			},
+			{
+				aspecto: 'Analizador de Espectro',
+				valor: 'Aaronia SPECTRAN HF-60100 V4 X (9 kHz – 9,4 GHz) + LNA Minicircuit ZX60-83LN+'
+			},
+			{
+				aspecto: 'Antena',
+				valor: 'Aaronia HyperLOG 60100 (680 MHz – 10 GHz) en mástil con rotor automático 360° azimut + polarización V/H'
+			},
+			{
+				aspecto: 'Protocolos de Medición',
+				valor: 'SKA 2003 (campañas cortas / sitio candidato) y UIT-R RA.769-2 (adquisición autónoma de larga duración)'
+			},
+			{
+				aspecto: 'Sitio de Campo',
+				valor: 'Estación CESCO – Parque Nacional El Leoncito, 2348 msnm, Calingasta, protegida por Ley Provincial 345-L'
+			}
+		],
+		hitos: [
+			{
+				fase: 'Etapa I',
+				titulo: 'Implementación del Sistema Base de Monitoreo RFI',
+				periodo: 'Q1–Q2 2018',
+				descripcion: 'Estudio profundo del protocolo SKA y UIT RA.769-2. Integración del sistema antena + LNA + receptor SDR. Fabricación del mástil con rotor automático de antena (360° azimut, polarización V/H). Sistema básico de monitoreo RFI operativo al cierre de la etapa.'
+			},
+			{
+				fase: 'Etapa II',
+				titulo: 'Diseño y Simulación de Algoritmos DSP de Detección de RFI',
+				periodo: 'Q3–Q4 2018',
+				descripcion: 'Desarrollo mediante software SDR de algoritmos de detección de RFI de banda estrecha (NB) y banda ancha (WB), ajustados a estándares UMTS (4G), IMT-2020 (5G), IEEE 802.11b/g/n. Simulaciones previas de desempeño antes de pruebas de campo. Conjunto de algoritmos NB y WB validados en simulación.'
+			},
+			{
+				fase: 'Etapa III',
+				titulo: 'Evaluaciones de Campo según Protocolo SKA y Ajuste de Algoritmos',
+				periodo: 'Q1–Q2 2019',
+				descripcion: 'Primera campaña de campo en CESCO (Parque Nacional El Leoncito) según protocolo SKA. Interferentes conocidos instalados en campo para evaluación de probabilidad de detección de cada algoritmo DSP. Ajuste y selección de los algoritmos más eficientes. Adquisición de computadora portátil de campo. RFIMS-CART operativo al cierre de la etapa.'
+			},
+			{
+				fase: 'Etapa IV',
+				titulo: 'Pruebas de Desempeño según UIT RA.769-2 y Publicación de Resultados',
+				periodo: 'Q3–Q4 2019',
+				descripcion: 'Adquisición autónoma de larga duración en campo según UIT RA.769-2. Evaluación final del desempeño de todos los algoritmos desarrollados. Publicación de resultados: comparativa de algoritmos y desempeños según SKA y UIT RA.769-2. Detección de RFI reales con intervención potencial del estado. Transferencia del sistema a la administración del CART.'
+			}
+		],
+		socios: [
+			{
+				nombre: 'OAFA – Observatorio Astronómico Félix Aguilar (UNSJ)',
+				rol: 'Colaborador Científico y Acceso a Sitio',
+				aporte: 'Acceso a la Estación CESCO en el Parque Nacional El Leoncito para todas las campañas de campo. Experiencia en operación de instrumentos astronómicos en el sitio (Mg. Ing. Hernán Alvis Rojas).'
+			},
+			{
+				nombre: 'CART – China-Argentina Radio Telescope',
+				rol: 'Destinatario del Sistema',
+				aporte: 'Especificaciones técnicas de las bandas de observación (1–45 GHz). Infraestructura del predio CESCO en acondicionamiento para la instalación del radiotelescopio de 40 m de diámetro. La UNSJ y el NAOC (Observatorio Astronómico Nacional de China) colaboraron en campañas de selección de sitio desde 2011.'
+			},
+			{
+				nombre: 'CONICET / Dr. Marcelo Segura',
+				rol: 'Project Manager del CART',
+				aporte: 'El Dr. Marcelo Segura (LED&T–UNSJ), co-investigador del proyecto, fue designado Project Manager del CART por CONICET. Su doble rol garantizó la alineación técnica entre el sistema de monitoreo RFI y los requerimientos del telescopio.'
+			},
+			{
+				nombre: 'CICITCA – UNSJ',
+				rol: 'Financiador',
+				aporte: 'Financiamiento bajo el programa Proyectos de I+D – Convocatoria 2018/19, Resolución 63-17-CS. Becas de estudiante avanzado para los alumnos participantes.'
+			}
+		]
 	}
 };
 
-const proyecto = proyectos[slug];
+const slugCanonico = slug === 'cart' ? 'backend-digital-cart' : slug;
+const proyecto = proyectos[slugCanonico];
 
-const fallbackTitulo = slug
+const fallbackTitulo = slugCanonico
 	.split('-')
 	.filter(Boolean)
 	.map((p) => p.charAt(0).toUpperCase() + p.slice(1))
@@ -439,13 +1303,63 @@ const pageTitle = proyecto
 						<div class="bg-primario/10 border border-primario/20 rounded-lg p-6">
 							<h3 class="text-sm font-mono uppercase tracking-widest text-acento mb-3">Identificación</h3>
 							<ul class="space-y-3 text-sm text-texto">
-								{slug === 'chaze-agro' ? (
+								{slugCanonico === 'chaze-agro' ? (
 									<>
 										<li><strong>Tipo:</strong> Apoyo a la Investigación Científica (AIC)</li>
 										<li><strong>Convocatoria:</strong> Agencia I+D+i – Préstamo BID N° 5293/OC-AR</li>
 										<li><strong>Institución Ejecutora:</strong> LED&T - DEA, FI, UNSJ</li>
 										<li><strong>TRL Objetivo:</strong> TRL 6 (Validación en Entorno Relevante)</li>
 									</>
+										) : slugCanonico === 'sat-pae-jachal' ? (
+											<>
+												<li><strong>Tipo:</strong> Sistema de Alerta Temprana (SAT)</li>
+												<li><strong>Ámbito:</strong> Cuenca del Río Jáchal</li>
+												<li><strong>Infraestructura objetivo:</strong> 20 estaciones automáticas</li>
+												<li><strong>Inversión de referencia:</strong> USD 11,94 millones</li>
+												<li><strong>Estado:</strong> En evaluación</li>
+											</>
+										) : slugCanonico === 'heron' ? (
+									<>
+										<li><strong>Tipo:</strong> ERC Synergy Grant – Horizonte Europa</li>
+										<li><strong>Financiador:</strong> European Research Council (ERC)</li>
+										<li><strong>Monto:</strong> 14 millones de euros</li>
+										<li><strong>Duración:</strong> 6 años</li>
+										<li><strong>Contraparte AR:</strong> CNEA / ITeDA (Third Party)</li>
+										<li><strong>Site Manager UNSJ:</strong> Dr. Ing. Martín A. Guzzo</li>
+									</>
+										) : slugCanonico === 'bodega-40' ? (
+											<>
+												<li><strong>Tipo:</strong> Proyecto PDTS UNSJ</li>
+												<li><strong>Ámbito:</strong> Industria vitivinícola</li>
+												<li><strong>Tecnologías:</strong> IoT, nube y Machine Learning</li>
+												<li><strong>Vigencia:</strong> 2020–2022</li>
+												<li><strong>Estado:</strong> Finalizado · 2022</li>
+											</>
+										) : slugCanonico === 'monitoreo-rio-san-juan' ? (
+								<>
+									<li><strong>Tipo:</strong> Proyecto de Investigación Aplicada</li>
+									<li><strong>Financiador:</strong> Secretaría de Medio Ambiente – Gobierno de San Juan</li>
+									<li><strong>Institución Ejecutora:</strong> LED&T – DEA, FI, UNSJ</li>
+									<li><strong>Ámbito:</strong> Cuenca del Río San Juan</li>
+									<li><strong>Vigencia:</strong> 2016–2019</li>
+									<li><strong>Estado:</strong> Finalizado · 2019</li>
+								</>
+							) : slugCanonico === 'rfims-cart' ? (
+									<>
+										<li><strong>Tipo:</strong> Proyecto de I+D – CICITCA UNSJ</li>
+										<li><strong>Convocatoria:</strong> 2018/19 – Resolución 63-17-CS</li>
+										<li><strong>Institución Ejecutora:</strong> LED&T – DEA, FI, UNSJ</li>
+										<li><strong>Vigencia:</strong> 2018–2019</li>
+										<li><strong>Estado:</strong> Finalizado · Transferido al CART</li>
+									</>
+										) : slugCanonico === 'backend-digital-cart' ? (
+											<>
+												<li><strong>Tipo:</strong> Proyecto PIPE</li>
+												<li><strong>Institución Ejecutora:</strong> LED&T – DEA, FI, UNSJ</li>
+												<li><strong>Vigencia:</strong> 2022–2024</li>
+												<li><strong>Estado:</strong> Finalizado</li>
+												<li><strong>Alias histórico:</strong> /proyectos/cart</li>
+											</>
 								) : (
 									<>
 										<li><strong>Tipo:</strong> Desarrollo Tecnológico y Social (PDTS)</li>
