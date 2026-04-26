@@ -1,0 +1,222 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Slugs definidos en src/pages/staff/index.astro
+// Si en el futuro se crea una colección /content/staff/, ajustar los slugs aquí.
+const docentes = [
+  {
+    slug: 'martin-guzzo',
+    nombre: 'Dr. Martín A. Guzzo',
+    materias: 'Sistemas Digitales A (2023) · Electrónica Digital I y II (2006)',
+  },
+  {
+    slug: 'gabriel-canadas',
+    nombre: 'Dr. Gabriel E. Cañadas',
+    materias: 'Sistemas Digitales C (2023) · Sistemas Digitales I (BIO)',
+  },
+  {
+    slug: 'eugenio-orosco',
+    nombre: 'Dr. Eugenio Orosco',
+    materias: 'Sistemas Digitales B (2023) · Sistemas Digitales II y III (BIO) · Microprocesadores · Electrónica Digital III (2006)',
+  },
+  {
+    slug: 'juan-sebastian',
+    nombre: 'Ing. Juan Ignacio Sebastián',
+    materias: 'Sistemas Digitales A (2023)',
+  },
+  {
+    slug: 'juan-pablo-aguiar',
+    nombre: 'Ing. Juan Pablo Aguiar',
+    materias: 'Telecomunicaciones A y B (2023) · Telecomunicaciones I y II (2006)',
+  },
+  {
+    slug: 'rodolfo-arroqui',
+    nombre: 'Ing. Rodolfo H. Arroqui',
+    materias: 'Propagación y Radiación · Temas Específicos de Telecomunicaciones I',
+  },
+  {
+    slug: 'alejandro-martin',
+    nombre: 'Ing. Alejandro D. Martín',
+    materias: 'Propagación y Radiación',
+  },
+  {
+    slug: 'raul-klenzi',
+    nombre: 'Mg. Raúl O. Klenzi',
+    materias: 'Telecomunicaciones I y II (2006, en cierre)',
+  },
+];
+---
+
+<Layout title="Cátedras Asociadas | LED&T - UNSJ">
+  <main class="min-h-[65vh] bg-slate-50">
+
+    <!-- ENCABEZADO -->
+    <section class="bg-linear-to-br from-slate-50 via-white to-cyan-50/40 border-b border-slate-200 py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-xs text-slate-500 mb-4">
+          <a href="/" class="hover:text-blue-700">Inicio</a>
+          <span class="mx-2">/</span>
+          <a href="/academica" class="hover:text-blue-700">Académica</a>
+          <span class="mx-2">/</span>
+          <span class="text-slate-700">Cátedras</span>
+        </nav>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-4">
+          Cátedras con base operativa en el <span class="text-blue-700">LED&T</span>
+        </h1>
+        <p class="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
+          El laboratorio es el espacio físico y tecnológico donde se dictan estas materias,
+          integrando docencia, investigación y desarrollo.
+        </p>
+      </div>
+    </section>
+
+    <!-- MATERIAS POR CARRERA -->
+    <section class="py-14 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-8">Materias por carrera</h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+          <!-- Ingeniería Electrónica -->
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 mb-1">Ingeniería Electrónica (ELO)</h3>
+              <p class="text-xs text-slate-500 mb-5">Departamento de Electrónica y Automática · FI-UNSJ</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+              <p class="text-xs font-semibold text-blue-700 uppercase tracking-wider mb-3">Plan 2023 · vigente</p>
+              <ul class="space-y-2 text-sm text-slate-700">
+                {['Sistemas Digitales A', 'Sistemas Digitales B', 'Sistemas Digitales C', 'Telecomunicaciones A', 'Telecomunicaciones B'].map(m => (
+                  <li class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0"></span>
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+              <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Plan 2006 · en cierre</p>
+              <ul class="space-y-2 text-sm text-slate-700">
+                {['Electrónica Digital I, II y III', 'Telecomunicaciones I y II'].map(m => (
+                  <li class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span>
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+              <p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-3">Optativas</p>
+              <ul class="space-y-2 text-sm text-slate-700">
+                {['Temas Específicos de Telecomunicaciones I', 'Temas Específicos de Telecomunicaciones III'].map(m => (
+                  <li class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0"></span>
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bioingeniería -->
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 mb-1">Bioingeniería (BIO)</h3>
+              <p class="text-xs text-slate-500 mb-5">Plan 2025</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-6">
+              <p class="text-xs font-semibold text-blue-700 uppercase tracking-wider mb-3">Plan 2025 · vigente</p>
+              <ul class="space-y-2 text-sm text-slate-700">
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0"></span>
+                  Sistemas Digitales I
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0"></span>
+                  Sistemas Digitales II
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0"></span>
+                  Sistemas Digitales III <span class="text-slate-400 ml-1">(optativa)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EQUIPO DOCENTE -->
+    <section class="py-14 bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-6">Equipo docente</h2>
+        <h3 class="text-2xl font-bold text-slate-900 mb-6">Docentes con cátedras en el LED&T</h3>
+
+        <div class="overflow-x-auto rounded-xl border border-slate-200">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-slate-50 border-b border-slate-200">
+              <tr>
+                <th class="px-5 py-3 font-semibold text-slate-700 w-1/3">Docente</th>
+                <th class="px-5 py-3 font-semibold text-slate-700">Materias que dicta</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              {docentes.map((d) => (
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-5 py-4">
+                    <a href={`/staff#${d.slug}`} class="text-blue-700 hover:text-blue-900 hover:underline font-medium">
+                      {d.nombre}
+                    </a>
+                  </td>
+                  <td class="px-5 py-4 text-slate-600 leading-relaxed">{d.materias}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENLACES EXTERNOS -->
+    <section class="py-14">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-6">Recursos y enlaces</h2>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a
+            href="https://dea.unsj.edu.ar/horarios-electronica"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-5 py-4 text-sm font-medium text-slate-700 hover:border-blue-300 hover:text-blue-700 transition-colors shadow-sm"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Horarios DEA · Electrónica
+          </a>
+          <a
+            href="https://dea.unsj.edu.ar/horarios-bioingenieria"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-5 py-4 text-sm font-medium text-slate-700 hover:border-blue-300 hover:text-blue-700 transition-colors shadow-sm"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Horarios DEA · Bioingeniería
+          </a>
+          <a
+            href="https://dea.unsj.edu.ar"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-5 py-4 text-sm font-medium text-slate-700 hover:border-blue-300 hover:text-blue-700 transition-colors shadow-sm"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Departamento de Electrónica y Automática (DEA)
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>

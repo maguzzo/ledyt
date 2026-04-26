@@ -53,7 +53,7 @@ const equipoDocente = [
     slug: 'juan-sebastian',
     nombre: 'Ing. Juan Ignacio Sebastián',
     cargoFormal: 'Docente',
-    catedras: ['Cátedras vinculadas (a confirmar)'],
+    catedras: ['Sistemas Digitales A'],
     especialidades: ['FPGAs', 'Mantenimiento industrial'],
     oficina: 'Oficina 2',
     email: 'jsebastian@unsj.edu.ar',
@@ -78,7 +78,7 @@ const equipoDocente = [
     nombre: 'Ing. Rodolfo H. Arroqui',
     cargoFormal: 'Profesor Titular',
     catedras: [
-      'Propagación y Radiación (Planes 2006 y 2026)',
+      'Propagación y Radiación (Planes 2006 y 2023)',
       'Temas Específicos de Telecomunicaciones I (optativa)'
     ],
     especialidades: ['Propagación y radiación electromagnética', 'Telecomunicaciones aplicadas'],
@@ -91,7 +91,7 @@ const equipoDocente = [
     slug: 'alejandro-martin',
     nombre: 'Ing. Alejandro D. Martín',
     cargoFormal: 'Profesor Adjunto',
-    catedras: ['Propagación y Radiación (Planes 2006 y 2026)'],
+    catedras: ['Propagación y Radiación (Planes 2006 y 2023)'],
     especialidades: ['Propagación y radiación electromagnética'],
     oficina: 'Oficina 5',
     email: null, // sin email público por ahora
@@ -119,32 +119,6 @@ function getIniciales(nombre: string) {
 <Layout title="Staff · LED&T - Laboratorio de Electrónica Digital y Telecomunicaciones | UNSJ">
 
   <!-- ========================================================================== -->
-  <!-- HEADER STICKY                                                                -->
-  <!-- ========================================================================== -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3 group">
-        <img src="/images/logos/logo-main.png" alt="LED&T" class="h-10 sm:h-12 w-auto" />
-        <div class="hidden sm:block">
-          <div class="text-xs text-slate-500 leading-tight">Laboratorio de Electrónica Digital</div>
-          <div class="text-xs text-slate-500 leading-tight">y Telecomunicaciones · UNSJ</div>
-        </div>
-      </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="/proyectos" class="text-slate-700 hover:text-blue-700 transition-colors">Proyectos</a>
-        <a href="/#capacidades" class="text-slate-700 hover:text-blue-700 transition-colors">Capacidades</a>
-        <a href="/staff" class="text-blue-700 font-semibold">Staff</a>
-        <a href="/oportunidades" class="text-slate-700 hover:text-blue-700 transition-colors">Oportunidades</a>
-        <a href="/#contacto" class="text-slate-700 hover:text-blue-700 transition-colors">Contacto</a>
-        <a href="/en/staff/" class="text-xs px-3 py-1.5 border border-slate-300 rounded-md hover:bg-slate-50 transition-colors">EN</a>
-      </nav>
-      <button class="md:hidden text-slate-700" aria-label="Abrir menú">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- ========================================================================== -->
   <!-- HERO chico                                                                   -->
   <!-- ========================================================================== -->
   <section class="bg-linear-to-br from-slate-50 via-white to-cyan-50/40 py-12 md:py-16 border-b border-slate-200">
@@ -170,14 +144,14 @@ function getIniciales(nombre: string) {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-6">Coordinación</h2>
 
-      <article class="bg-linear-to-br from-blue-50 via-white to-cyan-50/30 border-2 border-blue-100 rounded-2xl overflow-hidden shadow-md">
+      <article id={coordinacion.slug} class="bg-linear-to-br from-blue-50 via-white to-cyan-50/30 border-2 border-blue-100 rounded-2xl overflow-hidden shadow-md">
         <div class="grid md:grid-cols-3 gap-0">
           <!-- Columna foto/iniciales -->
           <div class="bg-blue-700 p-8 flex items-center justify-center md:min-h-70">
             {coordinacion.foto ? (
-              <img src={coordinacion.foto} alt={coordinacion.nombre} class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl" />
+              <img src={coordinacion.foto} alt={coordinacion.nombre} class="w-16 h-16 rounded-full object-cover border-4 border-white shadow-xl" />
             ) : (
-              <div class="w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-5xl font-bold text-white">
+              <div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-2xl font-bold text-white">
                 {getIniciales(coordinacion.nombre)}
               </div>
             )}
@@ -231,7 +205,7 @@ function getIniciales(nombre: string) {
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {equipoDocente.map((p) => (
-          <article class="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
+          <article id={p.slug} class="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
             <!-- Header card: foto + nombre -->
             <div class="flex items-start gap-4 mb-4">
               {p.foto ? (

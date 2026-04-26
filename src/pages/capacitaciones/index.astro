@@ -1,58 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
-const diplomaturas = [
-  {
-    nombre: 'Diplomatura Universitaria en Redes de Computadoras',
-    enfoque:
-      'Capacitacion en principios, tecnologias cableadas e inalambricas, operacion, configuracion y mantenimiento de redes informaticas, con enfasis en seguridad basica.',
-    modulos: [
-      'Fundamentos de Redes de Computadoras',
-      'Seguridad Informatica en Redes',
-      'Diseno de Redes Inalambricas y Cableadas y Resolucion de Problemas',
-    ],
-  },
-  {
-    nombre: 'Diplomatura Universitaria en Fabricacion y Reparacion de Fuentes de Alimentacion (DC-DC y AC-DC)',
-    enfoque:
-      'Comprender, disenar, fabricar y reparar fuentes de alimentacion, esenciales para el funcionamiento de equipamiento electronico.',
-    modulos: [
-      'Electrotecnia, Electricidad y Mediciones Fundamentales',
-      'Diseno de Fuentes de Alimentacion Lineales y PCB',
-      'Reparacion de Fuentes Conmutadas y Lineales',
-    ],
-  },
-  {
-    nombre: 'Diplomatura Universitaria en Internet de las Cosas (IoT)',
-    enfoque:
-      'Formacion en electronica, programacion de microcontroladores (Arduino y ESP32), conectividad e interaccion con plataformas en la nube para desarrollar soluciones IoT.',
-    modulos: [
-      'Fundamentos de Electricidad, Electronica y Componentes Digitales',
-      'Programacion con Arduino y Primeros Pasos en Conectividad',
-      'Creacion de Soluciones IoT Sencillas y Visualizacion de Datos',
-    ],
-  },
-  {
-    nombre: 'Diplomatura Universitaria en Instalacion y Mantenimiento de Redes de Fibra Optica',
-    enfoque:
-      'Capacitacion tecnica para instalacion y mantenimiento de redes de datos basadas en fibra optica, tecnologia clave para proveedores de internet (ISP).',
-    modulos: [
-      'Fundamentos de la Fibra Optica',
-      'Instalacion y Mantenimiento de Redes de Fibra Optica',
-      'Implementacion de Proyectos y Redes de Datos',
-    ],
-  },
-  {
-    nombre: 'Diplomatura Universitaria en Radio-Operacion para Zonas de Montana',
-    enfoque:
-      'Capacitacion tecnica y operativa para radiocomunicacion en entornos desafiantes, como zonas de montana y ambientes industriales.',
-    modulos: [
-      'Fundamentos Electricos y de Radiocomunicacion',
-      'Sistemas Digitales, Operacion, Normativa y Emergencias',
-      'Programacion, Calculo de Enlaces y Mantenimiento Avanzado',
-    ],
-  },
-];
+import Layout from '../../layouts/Layout.astro';
+import { diplomaturas, getEstadoCapacitacionTexto } from '../../data/capacitaciones';
 
 const caracteristicas = [
   'Modalidad presencial.',
@@ -130,6 +78,9 @@ const caracteristicas = [
         <div class="grid md:grid-cols-2 gap-6">
           {diplomaturas.map((diplomatura) => (
             <article class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col">
+              <p class="text-xs font-semibold uppercase tracking-wider mb-3 text-blue-700">
+                {getEstadoCapacitacionTexto(diplomatura.estado)}
+              </p>
               <h4 class="text-xl font-bold text-slate-900 mb-3">{diplomatura.nombre}</h4>
               <p class="text-slate-600 leading-relaxed mb-5 flex-1">{diplomatura.enfoque}</p>
               <div>
@@ -143,6 +94,10 @@ const caracteristicas = [
                   ))}
                 </ul>
               </div>
+              <a href={`/capacitaciones/${diplomatura.slug}`} class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-900">
+                Ver detalle
+                <span aria-hidden="true">-></span>
+              </a>
             </article>
           ))}
         </div>
