@@ -1,6 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+export function getStaticPaths() {
+	return [
+		{ params: { slug: 'chalu-x' } },
+		{ params: { slug: 'chaze-agro' } },
+		{ params: { slug: 'sat-pae-jachal' } },
+		{ params: { slug: 'cart' } },
+	];
+	}
+
 const { slug = 'proyecto' } = Astro.params;
 const titulo = slug
 	.split('-')

@@ -1,6 +1,10 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 
+export function getStaticPaths() {
+	return [{ params: { slug: 'introduction' } }];
+}
+
 const { slug = 'academic' } = Astro.params;
 const titleText = slug
 	.split('-')

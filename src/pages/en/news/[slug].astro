@@ -1,6 +1,10 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 
+export function getStaticPaths() {
+	return [{ params: { slug: 'upcoming-news' } }];
+}
+
 const { slug = 'news-item' } = Astro.params;
 const titleText = slug
 	.split('-')

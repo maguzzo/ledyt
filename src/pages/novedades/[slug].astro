@@ -1,6 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
+export function getStaticPaths() {
+	return [{ params: { slug: 'proxima-novedad' } }];
+}
+
 const { slug = 'novedad' } = Astro.params;
 const titulo = slug
 	.split('-')
