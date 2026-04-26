@@ -1,24 +1,64 @@
-# build output
-dist/
-
-# generated types
-.astro/
-
-# dependencies
+# Dependencias y compilación
 node_modules/
+.astro/
+dist/
+build/
 
-# logs
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
+*.tmp
+*.cache
 
-# environment variables
+# Variables de entorno
 .env
+.env.*
 .env.production
+.env.local
 
-# macOS-specific files
+# Archivos grandes y documentos
+docs/
+*.pdf
+*.zip
+*.rar
+*.7z
+*.exe
+*.msi
+*.dmg
+*.iso
+
+# Archivos multimedia pesados
+*.mp4
+*.mkv
+*.opus
+*.wav
+*.mp3
+
+# Imágenes originales (opcional, si pesan mucho)
+# *.jpg
+# *.png
+# *.webp
+
+# Entornos virtuales (Python)
+.venv/
+venv/
+env/
+__pycache__/
+
+# Archivos de sistema
 .DS_Store
+Thumbs.db
+desktop.ini
 
-# jetbrains setting folder
+# IDEs y editores
+.vscode/
 .idea/
+*.swp
+*.swo
+
+# Otros
+*.lock
+*.log
