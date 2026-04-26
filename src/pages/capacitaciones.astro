@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const diplomaturas = [
+  {
+    nombre: 'Diplomatura Universitaria en Redes de Computadoras',
+    enfoque:
+      'Capacitacion en principios, tecnologias cableadas e inalambricas, operacion, configuracion y mantenimiento de redes informaticas, con enfasis en seguridad basica.',
+    modulos: [
+      'Fundamentos de Redes de Computadoras',
+      'Seguridad Informatica en Redes',
+      'Diseno de Redes Inalambricas y Cableadas y Resolucion de Problemas',
+    ],
+  },
+  {
+    nombre: 'Diplomatura Universitaria en Fabricacion y Reparacion de Fuentes de Alimentacion (DC-DC y AC-DC)',
+    enfoque:
+      'Comprender, disenar, fabricar y reparar fuentes de alimentacion, esenciales para el funcionamiento de equipamiento electronico.',
+    modulos: [
+      'Electrotecnia, Electricidad y Mediciones Fundamentales',
+      'Diseno de Fuentes de Alimentacion Lineales y PCB',
+      'Reparacion de Fuentes Conmutadas y Lineales',
+    ],
+  },
+  {
+    nombre: 'Diplomatura Universitaria en Internet de las Cosas (IoT)',
+    enfoque:
+      'Formacion en electronica, programacion de microcontroladores (Arduino y ESP32), conectividad e interaccion con plataformas en la nube para desarrollar soluciones IoT.',
+    modulos: [
+      'Fundamentos de Electricidad, Electronica y Componentes Digitales',
+      'Programacion con Arduino y Primeros Pasos en Conectividad',
+      'Creacion de Soluciones IoT Sencillas y Visualizacion de Datos',
+    ],
+  },
+  {
+    nombre: 'Diplomatura Universitaria en Instalacion y Mantenimiento de Redes de Fibra Optica',
+    enfoque:
+      'Capacitacion tecnica para instalacion y mantenimiento de redes de datos basadas en fibra optica, tecnologia clave para proveedores de internet (ISP).',
+    modulos: [
+      'Fundamentos de la Fibra Optica',
+      'Instalacion y Mantenimiento de Redes de Fibra Optica',
+      'Implementacion de Proyectos y Redes de Datos',
+    ],
+  },
+  {
+    nombre: 'Diplomatura Universitaria en Radio-Operacion para Zonas de Montana',
+    enfoque:
+      'Capacitacion tecnica y operativa para radiocomunicacion en entornos desafiantes, como zonas de montana y ambientes industriales.',
+    modulos: [
+      'Fundamentos Electricos y de Radiocomunicacion',
+      'Sistemas Digitales, Operacion, Normativa y Emergencias',
+      'Programacion, Calculo de Enlaces y Mantenimiento Avanzado',
+    ],
+  },
+];
+
+const caracteristicas = [
+  'Modalidad presencial.',
+  'Duracion por diplomatura: 105 horas reloj (3 modulos de 35 horas).',
+  'Proyecto integrador final obligatorio para aplicar competencias en escenarios reales o simulados.',
+  'Requisitos de ingreso: secundario completo, acceso a PC o celular con internet; se prefieren nociones basicas del area.',
+  'Equipamiento de laboratorio e instructores especializados provistos por el DEA-FI-UNSJ.',
+  'Certificados de aprobacion (80% asistencia y practicas aprobadas) y certificados de asistencia.',
+  'Costo de referencia: USD 150 por hora docente. Inversion estimada por diplomatura: USD 15.750, mas viaticos, transporte y alojamiento del equipo docente.',
+];
+---
+
+<Layout title="Capacitaciones | LED&T - UNSJ">
+  <main class="min-h-[65vh] bg-slate-50">
+    <section class="relative overflow-hidden bg-linear-to-br from-slate-50 via-white to-cyan-50/40 border-b border-slate-200">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-100/30 rounded-full blur-3xl z-0"></div>
+      <div class="absolute bottom-0 left-0 w-80 h-80 bg-blue-100/30 rounded-full blur-3xl z-0"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div class="lg:col-span-7">
+            <p class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-700 mb-5 tracking-wide">
+              <span class="w-8 h-px bg-cyan-600"></span>
+              FORMACION TECNICA PARA EMPRESAS Y PROFESIONALES
+            </p>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-[1.1] mb-6">
+              Capacitaciones Tecnologicas
+              <span class="text-blue-700 block mt-1">LED&T - Facultad de Ingenieria, UNSJ</span>
+            </h1>
+            <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-2xl">
+              Propuesta academica orientada a empresas externas, profesionales y publico interesado,
+              con enfoque practico en electronica y telecomunicaciones de alta demanda tecnologica.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a href="#oferta" class="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-md">
+                Ver oferta academica
+              </a>
+              <a href="/docs/Propuesta%20de%20Capacitaci%C3%B3n%20Tecnol%C3%B3gica%20para%20Empresas%20LED%26T.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-blue-700 text-blue-700 font-semibold rounded-lg hover:bg-blue-700 hover:text-white transition-colors">
+                Descargar propuesta PDF
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="relative">
+              <picture>
+                <source srcset="/images/lab/curso-fibra-optica.webp" type="image/webp" />
+                <img
+                  src="/images/lab/curso-fibra-optica.jpg"
+                  alt="Curso de fibra optica del LED&T"
+                  class="w-full h-auto rounded-2xl shadow-2xl"
+                  loading="eager"
+                />
+              </picture>
+              <div class="absolute -bottom-4 -left-4 bg-blue-700 text-white px-5 py-3 rounded-lg shadow-xl text-sm font-semibold hidden sm:block">
+                Capacitacion en campo y laboratorio
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="oferta" class="py-16 md:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Oferta academica</h2>
+          <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Diplomaturas universitarias</h3>
+          <p class="text-slate-600 leading-relaxed">
+            Cada diplomatura se estructura en tres modulos de 35 horas para un total de 105 horas reloj
+            de cursado sincrono, con fuerte enfoque practico y proyecto integrador final.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          {diplomaturas.map((diplomatura) => (
+            <article class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col">
+              <h4 class="text-xl font-bold text-slate-900 mb-3">{diplomatura.nombre}</h4>
+              <p class="text-slate-600 leading-relaxed mb-5 flex-1">{diplomatura.enfoque}</p>
+              <div>
+                <p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-2">Modulos</p>
+                <ul class="space-y-2 text-sm text-slate-700">
+                  {diplomatura.modulos.map((modulo) => (
+                    <li class="flex items-start gap-2">
+                      <span class="mt-2 w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0"></span>
+                      <span>{modulo}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-white border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-6">Caracteristicas comunes</h3>
+            <ul class="space-y-3 text-slate-700 leading-relaxed">
+              {caracteristicas.map((item) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-1.5 w-2 h-2 rounded-full bg-cyan-600 shrink-0"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <aside class="lg:col-span-5 bg-slate-900 text-slate-100 rounded-2xl p-7">
+            <p class="text-xs font-semibold text-cyan-300 uppercase tracking-wider mb-3">Coordinacion y contacto</p>
+            <h4 class="text-2xl font-bold text-white mb-4">Secretaria de Extension Universitaria</h4>
+            <p class="text-slate-300 leading-relaxed mb-5">
+              Las propuestas son coordinadas por la SEU de la Facultad de Ingenieria de la UNSJ.
+              Para formalizar convenios de capacitacion empresarial, solicita reunion tecnica y plan de implementacion.
+            </p>
+            <div class="space-y-2 text-sm">
+              <p><span class="text-slate-400">Institucion:</span> Facultad de Ingenieria - UNSJ</p>
+              <p><span class="text-slate-400">Unidad tecnica:</span> DEA / LED&T</p>
+              <p><span class="text-slate-400">Administracion de fondos:</span> Fundacion UNSJ</p>
+            </div>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="/contacto" class="inline-flex items-center gap-2 px-5 py-3 bg-cyan-500 text-slate-900 font-semibold rounded-lg hover:bg-cyan-400 transition-colors">
+                Ir a contacto
+              </a>
+              <a href="/" class="inline-flex items-center gap-2 px-5 py-3 border border-slate-500 text-slate-100 font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+                Volver al inicio
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

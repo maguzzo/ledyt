@@ -1,19 +1,403 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+// =============================================================================
+// STAFF DEL LED&T
+// =============================================================================
+// Estructura honesta sobre la naturaleza institucional actual del laboratorio:
+// grupo de docentes-investigadores con cátedras radicadas en el LED&T,
+// dentro del DEA-FI-UNSJ. En proceso de formalización institucional.
+// =============================================================================
+
+// Coordinación (1 persona, card destacada)
+const coordinacion = {
+  slug: 'martin-guzzo',
+  nombre: 'Dr. Martín A. Guzzo',
+  rol: 'Coordinación del LED&T',
+  cargoFormal: 'Profesor Titular',
+  catedras: ['Sistemas Digitales A (Plan 2023)', 'Electrónica Digital I y II (Plan 2006)'],
+  especialidades: ['Telecomunicaciones', 'FPGA', 'VHDL'],
+  oficina: 'Oficina 3',
+  email: 'm.guzzo@unsj.edu.ar',
+  bio: 'Doctor en Ingeniería. Lleva adelante los proyectos estratégicos del laboratorio: director técnico de CHALÚ-X (módem satelital dual-band), supervisor del Área Electrónica y Electromecánica del SAT-PAE Jáchal, y Site Manager argentino del proyecto HERON (Hybrid Elevated Radio Observatory for Neutrinos, financiado por el ERC, en gestión de convenios para 2026).',
+  foto: null, // futuro: '/images/people/guzzo.jpg'
+};
+
+// Equipo docente — cátedras radicadas en el LED&T
+const equipoDocente = [
+  {
+    slug: 'gabriel-canadas',
+    nombre: 'Dr. Gabriel E. Cañadas',
+    cargoFormal: 'Investigador / Docente',
+    catedras: ['Sistemas Digitales C (Plan 2023)', 'Sistemas Digitales I (Bioingeniería)'],
+    especialidades: ['Bioingeniería', 'Adquisición de señales fisiológicas', 'Instrumentación inalámbrica'],
+    oficina: 'Oficina 1',
+    email: 'gcanadas@unsj.edu.ar',
+    foto: null,
+  },
+  {
+    slug: 'eugenio-orosco',
+    nombre: 'Dr. Eugenio Orosco',
+    cargoFormal: 'Investigador / Docente',
+    catedras: [
+      'Sistemas Digitales B (Plan 2023)',
+      'Sistemas Digitales II y III (Bioingeniería)',
+      'Microprocesadores · Electrónica Digital III (Plan 2006)'
+    ],
+    especialidades: ['Procesamiento de señales EMG', 'Robots de asistencia', 'Sistemas embebidos'],
+    oficina: 'Oficina 2',
+    email: 'eorosco@inaut.unsj.edu.ar',
+    foto: null,
+  },
+  {
+    slug: 'juan-sebastian',
+    nombre: 'Ing. Juan Ignacio Sebastián',
+    cargoFormal: 'Docente',
+    catedras: ['Cátedras vinculadas (a confirmar)'],
+    especialidades: ['FPGAs', 'Mantenimiento industrial'],
+    oficina: 'Oficina 2',
+    email: 'jsebastian@unsj.edu.ar',
+    foto: null,
+  },
+  {
+    slug: 'juan-pablo-aguiar',
+    nombre: 'Ing. Juan Pablo Aguiar',
+    cargoFormal: 'Profesor Titular',
+    catedras: [
+      'Telecomunicaciones A y B (Plan 2023)',
+      'Telecomunicaciones I y II (Plan 2006)'
+    ],
+    especialidades: ['Telecomunicaciones', 'Sistemas de aplicación científica'],
+    oficina: 'Oficina 5',
+    email: 'jpaguiar@inpres.gob.ar',
+    rolParalelo: 'Especialista en INPRES (Instituto Nacional de Prevención Sísmica)',
+    foto: null,
+  },
+  {
+    slug: 'rodolfo-arroqui',
+    nombre: 'Ing. Rodolfo H. Arroqui',
+    cargoFormal: 'Profesor Titular',
+    catedras: [
+      'Propagación y Radiación (Planes 2006 y 2026)',
+      'Temas Específicos de Telecomunicaciones I (optativa)'
+    ],
+    especialidades: ['Propagación y radiación electromagnética', 'Telecomunicaciones aplicadas'],
+    oficina: 'Oficina 5',
+    email: 'rodolfo.arroqui@gmail.com',
+    rolParalelo: 'Experiencia en sector privado: telecomunicaciones, minería e infraestructura',
+    foto: null,
+  },
+  {
+    slug: 'alejandro-martin',
+    nombre: 'Ing. Alejandro D. Martín',
+    cargoFormal: 'Profesor Adjunto',
+    catedras: ['Propagación y Radiación (Planes 2006 y 2026)'],
+    especialidades: ['Propagación y radiación electromagnética'],
+    oficina: 'Oficina 5',
+    email: null, // sin email público por ahora
+    foto: null,
+  },
+  {
+    slug: 'raul-klenzi',
+    nombre: 'Mg. Raúl O. Klenzi',
+    cargoFormal: 'Profesor de Telecomunicaciones',
+    catedras: ['Telecomunicaciones I y II (Plan 2006, en cierre)'],
+    especialidades: ['Telecomunicaciones', 'Inteligencia Artificial', 'Teoría de la información'],
+    oficina: null, // no tiene oficina en el LED&T
+    email: 'rauloscarklenzi@gmail.com',
+    foto: null,
+  },
+];
+
+// Helper para iniciales (placeholder de foto)
+function getIniciales(nombre: string) {
+  const palabras = nombre.replace('Dr. ', '').replace('Mg. ', '').replace('Ing. ', '').split(' ');
+  return palabras.map(p => p[0]).join('').slice(0, 2).toUpperCase();
+}
 ---
 
-<Layout title="Staff | En construccion">
-	<main class="min-h-[65vh] bg-fondo">
-		<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Sitio en construccion</p>
-			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">Staff</h1>
-			<p class="text-texto-suave text-lg leading-relaxed mb-8 max-w-3xl">
-				Esta seccion esta en desarrollo. Proximamente se mostrara el equipo,
-				perfiles de investigadores y areas de especialidad.
-			</p>
-			<a href="/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
-				Volver al inicio
-			</a>
-		</section>
-	</main>
+<Layout title="Staff · LED&T - Laboratorio de Electrónica Digital y Telecomunicaciones | UNSJ">
+
+  <!-- ========================================================================== -->
+  <!-- HEADER STICKY                                                                -->
+  <!-- ========================================================================== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/images/logos/logo-main.png" alt="LED&T" class="h-10 sm:h-12 w-auto" />
+        <div class="hidden sm:block">
+          <div class="text-xs text-slate-500 leading-tight">Laboratorio de Electrónica Digital</div>
+          <div class="text-xs text-slate-500 leading-tight">y Telecomunicaciones · UNSJ</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="/proyectos" class="text-slate-700 hover:text-blue-700 transition-colors">Proyectos</a>
+        <a href="/#capacidades" class="text-slate-700 hover:text-blue-700 transition-colors">Capacidades</a>
+        <a href="/staff" class="text-blue-700 font-semibold">Staff</a>
+        <a href="/oportunidades" class="text-slate-700 hover:text-blue-700 transition-colors">Oportunidades</a>
+        <a href="/#contacto" class="text-slate-700 hover:text-blue-700 transition-colors">Contacto</a>
+        <a href="/en/staff/" class="text-xs px-3 py-1.5 border border-slate-300 rounded-md hover:bg-slate-50 transition-colors">EN</a>
+      </nav>
+      <button class="md:hidden text-slate-700" aria-label="Abrir menú">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================== -->
+  <!-- HERO chico                                                                   -->
+  <!-- ========================================================================== -->
+  <section class="bg-linear-to-br from-slate-50 via-white to-cyan-50/40 py-12 md:py-16 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-xs text-slate-500 mb-4">
+        <a href="/" class="hover:text-blue-700">Inicio</a>
+        <span class="mx-2">/</span>
+        <span class="text-slate-700">Staff</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+        Equipo del <span class="text-blue-700">LED&T</span>
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
+        Docentes-investigadores que comparten infraestructura y proyectos dentro del Departamento de Electrónica y Automática (DEA) de la Facultad de Ingeniería, UNSJ. En proceso de formalización institucional.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- COORDINACIÓN (card destacada)                                                -->
+  <!-- ========================================================================== -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-6">Coordinación</h2>
+
+      <article class="bg-linear-to-br from-blue-50 via-white to-cyan-50/30 border-2 border-blue-100 rounded-2xl overflow-hidden shadow-md">
+        <div class="grid md:grid-cols-3 gap-0">
+          <!-- Columna foto/iniciales -->
+          <div class="bg-blue-700 p-8 flex items-center justify-center md:min-h-70">
+            {coordinacion.foto ? (
+              <img src={coordinacion.foto} alt={coordinacion.nombre} class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl" />
+            ) : (
+              <div class="w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-5xl font-bold text-white">
+                {getIniciales(coordinacion.nombre)}
+              </div>
+            )}
+          </div>
+          <!-- Columna info -->
+          <div class="md:col-span-2 p-8">
+            <p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-2">{coordinacion.rol}</p>
+            <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">{coordinacion.nombre}</h3>
+            <p class="text-slate-600 font-medium mb-4">{coordinacion.cargoFormal}</p>
+
+            <p class="text-sm text-slate-700 leading-relaxed mb-5">{coordinacion.bio}</p>
+
+            <div class="space-y-3 text-sm">
+              <div>
+                <span class="font-semibold text-slate-900 block mb-1">Cátedras:</span>
+                <ul class="text-slate-600 space-y-1">
+                  {coordinacion.catedras.map(c => <li>· {c}</li>)}
+                </ul>
+              </div>
+              <div>
+                <span class="font-semibold text-slate-900">Especialidades: </span>
+                <span class="text-slate-600">{coordinacion.especialidades.join(' · ')}</span>
+              </div>
+              <div class="flex flex-wrap gap-x-6 gap-y-2 pt-3 border-t border-slate-200">
+                <span class="text-slate-500">📍 {coordinacion.oficina}</span>
+                <a href={`mailto:${coordinacion.email}`} class="text-blue-700 hover:underline font-mono text-xs">
+                  ✉ {coordinacion.email}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- EQUIPO DOCENTE                                                               -->
+  <!-- ========================================================================== -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Equipo docente</h2>
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+          Cátedras radicadas en el LED&T
+        </h3>
+        <p class="text-slate-600 max-w-3xl leading-relaxed">
+          Las áreas de Sistemas Digitales, Telecomunicaciones, Microprocesadores y Propagación y Radiación tienen base operativa en el laboratorio.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {equipoDocente.map((p) => (
+          <article class="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
+            <!-- Header card: foto + nombre -->
+            <div class="flex items-start gap-4 mb-4">
+              {p.foto ? (
+                <img src={p.foto} alt={p.nombre} class="w-16 h-16 rounded-full object-cover shrink-0" />
+              ) : (
+                <div class="w-16 h-16 rounded-full bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-xl font-bold text-white shrink-0">
+                  {getIniciales(p.nombre)}
+                </div>
+              )}
+              <div class="flex-1 min-w-0">
+                <h4 class="font-bold text-slate-900 leading-tight mb-1">{p.nombre}</h4>
+                <p class="text-xs text-slate-500">{p.cargoFormal}</p>
+              </div>
+            </div>
+
+            <!-- Cátedras -->
+            <div class="mb-3">
+              <span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Cátedras</span>
+              <ul class="text-sm text-slate-600 space-y-1">
+                {p.catedras.map(c => <li class="leading-snug">· {c}</li>)}
+              </ul>
+            </div>
+
+            <!-- Especialidades -->
+            <div class="mb-3">
+              <span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Especialidades</span>
+              <div class="flex flex-wrap gap-1.5">
+                {p.especialidades.map(e => (
+                  <span class="text-xs px-2 py-0.5 bg-slate-100 text-slate-700 rounded">{e}</span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Rol paralelo (si existe) -->
+            {p.rolParalelo && (
+              <p class="text-xs text-slate-500 italic mb-3 leading-relaxed border-l-2 border-slate-200 pl-2">
+                {p.rolParalelo}
+              </p>
+            )}
+
+            <!-- Footer card: oficina + email -->
+            <div class="flex flex-wrap gap-x-4 gap-y-1 pt-3 border-t border-slate-100 text-xs">
+              {p.oficina && <span class="text-slate-500">📍 {p.oficina}</span>}
+              {p.email ? (
+                <a href={`mailto:${p.email}`} class="text-blue-700 hover:underline font-mono break-all">
+                  ✉ {p.email}
+                </a>
+              ) : (
+                <a href="mailto:sec_dea@unsj.edu.ar?subject=Consulta para Ing. Alejandro D. Martín" class="text-slate-500 hover:text-blue-700 italic">
+                  ✉ contactar vía Secretaría DEA
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- NOTA INSTITUCIONAL                                                           -->
+  <!-- ========================================================================== -->
+  <section class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-amber-50 border-l-4 border-amber-400 p-5 rounded-r-lg">
+        <p class="text-sm text-slate-700 leading-relaxed">
+          <strong class="text-slate-900">Nota institucional:</strong> Algunos docentes del equipo son <strong>semi-exclusivos</strong> y desempeñan roles paralelos en industria u otros institutos científicos (INPRES, sector privado, FCEFN-UNSJ). Esta dualidad enriquece al laboratorio con experiencia aplicada en contextos profesionales reales.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- EN MEMORIA / EMÉRITOS (placeholder)                                          -->
+  <!-- ========================================================================== -->
+  <section class="py-16 bg-slate-100 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-3">Memoria del laboratorio</h2>
+        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-4">
+          Profesores eméritos y miembros históricos
+        </h3>
+        <p class="text-slate-600 leading-relaxed mb-6">
+          A lo largo de 53 años, muchos docentes formaron generaciones de ingenieros e investigadores en este laboratorio. Próximamente publicaremos información sobre profesores eméritos, personal en licencia por mayor jerarquía y miembros que ya no están con nosotros.
+        </p>
+        <p class="text-xs text-slate-500 italic">
+          Sección en desarrollo. Si querés aportar información o fotos históricas, escribinos a sec_dea@unsj.edu.ar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- CTA inferior: ¿querés sumarte?                                               -->
+  <!-- ========================================================================== -->
+  <section class="py-16 bg-linear-to-br from-blue-900 via-blue-800 to-slate-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">¿Te interesa sumarte al equipo?</h2>
+      <p class="text-blue-100 mb-8 leading-relaxed">
+        Buscamos estudiantes para proyectos integradores, adscripciones, becas pagas y tesis. Si querés ser parte del LED&T, hay varios caminos.
+      </p>
+      <a href="/oportunidades" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-900 font-semibold rounded-lg hover:bg-slate-100 transition-colors shadow-md">
+        Ver oportunidades
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- FOOTER (compacto, mismo que home)                                            -->
+  <!-- ========================================================================== -->
+  <footer id="contacto" class="bg-slate-900 text-white pt-12 pb-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+
+        <div class="lg:col-span-1">
+          <img src="/images/logos/logo-main-dark.png" alt="LED&T" class="h-12 w-auto mb-4" onerror="this.src='/images/logos/logo-main.png'" />
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Laboratorio de Electrónica Digital y Telecomunicaciones. DEA, FI-UNSJ.
+          </p>
+          <p class="text-xs text-cyan-400 mt-3 font-semibold">Desde 1973</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-4 text-cyan-300">Contacto</h3>
+          <ul class="space-y-3 text-slate-300 text-sm">
+            <li>
+              <span class="text-slate-500 block mb-1 text-xs uppercase tracking-wider">Email</span>
+              <a href="mailto:sec_dea@unsj.edu.ar" class="hover:text-cyan-300 transition-colors font-mono break-all">
+                sec_dea@unsj.edu.ar
+              </a>
+              <p class="text-slate-500 text-xs mt-1">Secretaría DEA</p>
+            </li>
+            <li>
+              <span class="text-slate-500 block mb-1 text-xs uppercase tracking-wider">Teléfono</span>
+              <a href="tel:+542644211700" class="hover:text-cyan-300 transition-colors font-mono">
+                +54 264 421-1700
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-4 text-cyan-300">Coordinación</h3>
+          <p class="text-slate-200 font-semibold mb-1">Dr. Martín A. Guzzo</p>
+          <p class="text-slate-500 text-xs mb-3">Prof. Titular · Sistemas Digitales A</p>
+          <a href="mailto:m.guzzo@unsj.edu.ar" class="hover:text-cyan-300 transition-colors font-mono text-sm break-all">
+            m.guzzo@unsj.edu.ar
+          </a>
+        </div>
+
+        <div>
+          <h3 class="font-bold mb-4 text-cyan-300">Enlaces</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/" class="text-slate-300 hover:text-cyan-300 transition-colors">Inicio</a></li>
+            <li><a href="/proyectos" class="text-slate-300 hover:text-cyan-300 transition-colors">Proyectos</a></li>
+            <li><a href="/oportunidades" class="text-slate-300 hover:text-cyan-300 transition-colors">Oportunidades</a></li>
+            <li><a href="/sobre" class="text-slate-300 hover:text-cyan-300 transition-colors">Sobre el LED&T</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-slate-700 text-xs text-slate-500 text-center">
+        <p>© 2026 LED&T · Universidad Nacional de San Juan. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
 </Layout>

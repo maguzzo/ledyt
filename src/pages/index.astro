@@ -89,7 +89,15 @@ const oportunidades: Oportunidad[] = [
   { icon: '🔬', titulo: 'Tesis y trabajos finales', descripcion: 'Para investigación profunda.', href: '/oportunidades/tesis' },
 ];
 
-const partners = ['UNSJ', 'FI-UNSJ', 'DEA', 'CONICET', 'CONAE', 'INTA', 'IAR', 'Fundación Williams'];
+const partners = [
+  { nombre: 'IAR', href: 'https://www.iar.unlp.edu.ar/' },
+  { nombre: 'CONAE', href: 'https://www.argentina.gob.ar/ciencia/conae' },
+  { nombre: 'INTA', href: 'https://www.argentina.gob.ar/inta/cr-mendoza-sanjuan/eea-sanjuan' },
+  { nombre: 'SECyTI', href: 'https://ciencia.sanjuan.gob.ar/' },
+  { nombre: 'INBIO', href: 'https://inbio.fi.unsj.edu.ar/' },
+  { nombre: 'INAUT', href: 'http://www.inaut.unsj.edu.ar/' },
+  { nombre: 'IDECOM', href: 'https://www.idecom.unsj.edu.ar/' },
+];
 
 // Estilos por estado de proyecto
 function badgeClass(estado: string) {
@@ -120,6 +128,8 @@ function badgeClass(estado: string) {
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
         <a href="/proyectos" class="text-slate-700 hover:text-blue-700 transition-colors">Proyectos</a>
         <a href="/#capacidades" class="text-slate-700 hover:text-blue-700 transition-colors">Capacidades</a>
+        <a href="/staff" class="text-slate-700 hover:text-blue-700 transition-colors">Staff</a>
+        <a href="/capacitaciones" class="text-slate-700 hover:text-blue-700 transition-colors">Capacitaciones</a>
         <a href="/oportunidades" class="text-slate-700 hover:text-blue-700 transition-colors">Oportunidades</a>
         <a href="/#contacto" class="text-slate-700 hover:text-blue-700 transition-colors">Contacto</a>
         <a href="/en/" class="text-xs px-3 py-1.5 border border-slate-300 rounded-md hover:bg-slate-50 transition-colors">EN</a>
@@ -146,9 +156,9 @@ function badgeClass(estado: string) {
             <span class="w-8 h-px bg-cyan-600"></span>
             UNIVERSIDAD NACIONAL DE SAN JUAN · DESDE 1973
           </p>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] mb-6">
-            Del FPGA al satélite:<br/>
-            <span class="text-blue-700">53 años</span> de ingeniería en Cuyo
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-[1.1] mb-6">
+            Del microprocesador al satélite:<br/>
+            <span class="text-blue-700">53 años</span> de ingeniería en San Juan
           </h1>
           <p class="text-lg text-slate-600 mb-8 max-w-2xl leading-relaxed">
             Laboratorio de Electrónica Digital y Telecomunicaciones. Investigación, desarrollo y servicios en sistemas digitales reconfigurables, radioastronomía, satélites y telecomunicaciones avanzadas.
@@ -190,11 +200,13 @@ function badgeClass(estado: string) {
   <!-- ========================================================================== -->
   <!-- FRANJA HERON (sobria, una sola línea destacada)                              -->
   <!-- ========================================================================== -->
-  <section class="bg-slate-900 text-white py-6 border-y-4 border-cyan-500">
+  <a href="https://www.fi.unsj.edu.ar/noticias/noticia/1139/el-observatorio-internacional-heron-arribo-a-la-facultad-de-ingenieria-para-articular-una-factible-instalacion-de-un-observatorio-de-neutrinos" target="_blank" rel="noopener noreferrer" class="block bg-slate-900 text-white py-6 border-y-4 border-cyan-500 hover:bg-slate-800 transition-colors group">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
         <div class="flex items-center gap-4 shrink-0">
-          <img src="/images/projects/heron/heron-logo.png" alt="HERON" class="h-12 w-auto" />
+          <div class="w-16 h-16 rounded-lg overflow-hidden shrink-0">
+            <img src="/images/projects/heron/heron-logo.png" alt="HERON" class="w-full h-full object-cover" />
+          </div>
           <div>
             <p class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Próximamente</p>
             <p class="text-lg font-bold leading-tight">HERON</p>
@@ -204,9 +216,12 @@ function badgeClass(estado: string) {
           <strong class="text-white">Hybrid Elevated Radio Observatory for Neutrinos.</strong>
           Observatorio internacional de neutrinos cósmicos financiado por el ERC. El Dr. Martín A. Guzzo (Coordinador LED&T, UNSJ) fue seleccionado como Site Manager argentino del proyecto. Convenios en gestión, firma 2026.
         </div>
+        <div class="shrink-0 text-cyan-400 group-hover:translate-x-1 transition-transform">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </div>
       </div>
     </div>
-  </section>
+  </a>
 
   <!-- ========================================================================== -->
   <!-- QUIÉNES SOMOS                                                                -->
@@ -399,7 +414,14 @@ function badgeClass(estado: string) {
       </p>
       <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-slate-600 font-semibold text-sm md:text-base">
         {partners.map((p) => (
-          <span class="hover:text-blue-700 transition-colors">{p}</span>
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-blue-700 transition-colors"
+          >
+            {p.nombre}
+          </a>
         ))}
       </div>
     </div>
