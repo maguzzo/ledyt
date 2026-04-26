@@ -1,46 +1,72 @@
-# Astro Starter Kit: Basics
+# LED&T — Sitio web institucional
 
-```sh
-npm create astro@latest -- --template basics
+Sitio web del **Laboratorio de Electrónica Digital y Telecomunicaciones**, perteneciente al Departamento de Electrónica y Automática (DEA) de la Facultad de Ingeniería de la Universidad Nacional de San Juan.
+
+🌐 **URL prevista**: `ledyt.unsj.edu.ar` (en desarrollo)
+
+## Sobre el LED&T
+
+Centro de excelencia en investigación, desarrollo y servicios en sistemas digitales reconfigurables, radioastronomía, satélites y telecomunicaciones avanzadas. Activo desde 1973.
+
+## Stack técnico
+
+- **[Astro 6](https://astro.build/)** — generador de sitios estáticos
+- **[Tailwind CSS v4](https://tailwindcss.com/)** — estilos utilitarios
+- **TypeScript** — para data layer tipado
+- Sin frameworks JS de cliente (vanilla JS donde es necesario)
+
+## Estructura del proyecto
+
+
+ledyt/
+├── public/              # Assets estáticos (imágenes, favicons, logos)
+├── src/
+│   ├── components/      # Componentes Astro reutilizables (Header, etc.)
+│   ├── data/            # Data files TypeScript (capacitaciones, staff, etc.)
+│   ├── layouts/         # Layouts base (Layout.astro)
+│   ├── pages/           # Rutas del sitio (index.astro, staff/, proyectos/, etc.)
+│   └── styles/          # Estilos globales (global.css con Tailwind)
+├── docs/
+│   └── coordinacion/    # Handoffs entre asistentes IA durante desarrollo
+└── astro.config.mjs     # Configuración de Astro + plugin Tailwind
+
+
+## Desarrollo local
+
+Requiere Node.js 18+ y npm.
+
+```bash
+# Instalar dependencias
+npm install
+
+# Servidor de desarrollo
+npm run dev              # localhost:4321
+npm run dev -- --host    # accesible desde la red local (móvil)
+
+# Build de producción
+npm run build            # genera carpeta dist/
+
+# Preview del build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Mantenedor
 
-## 🚀 Project Structure
+**Dr. Martín A. Guzzo**
+Coordinación del LED&T
+Profesor Titular · Sistemas Digitales A
+✉ m.guzzo@unsj.edu.ar
 
-Inside of your Astro project, you'll see the following folders and files:
+## Contacto institucional
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+📧 Secretaría DEA: sec_dea@unsj.edu.ar
+📞 +54 264 421-1700 (int. 4380, 4381, 4383, 4386)
+📍 Av. Lib. Gral. San Martín 1109 (O), J5400ARL · San Juan, Argentina
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Licencia
 
-## 🧞 Commands
+Este proyecto está bajo licencia **[**MIT**](**LICENSE**)**. Sos libre de usar, modificar y distribuir el código, mencionando la atribución original al LED&T - UNSJ.
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+🤝 Sitio desarrollado en colaboración con asistentes IA (Claude, Deep, GitHub Copilot) bajo coordinación humana.
