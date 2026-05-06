@@ -1,19 +1,315 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+type Publicacion = {
+	titulo: string;
+	autores: string;
+	medio: string;
+	citadoPor: number | null;
+	anio: number | null;
+};
+
+const publicaciones: Publicacion[] = [
+	{
+		titulo: 'Desarrollo de un sistema de adquisicion y procesamiento de senales ECG para monitorizacion de pacientes de alto riesgo',
+		autores: 'C. DellAquila, G. E. Canadas, M. Segura, C. Sisterna, E. Laciar',
+		medio: 'III Congreso Argentino de Sistemas Embebidos, ISBN 978-987-9374-82-5, trabajo 64, pp. 229, Buenos Aires (Argentina), Agosto de 2012',
+		citadoPor: null,
+		anio: 2012,
+	},
+	{
+		titulo: 'Desarrollo de un sistema de adquisicion de senales ECG de muy bajo consumo para la monitorizacion de pacientes de alto riesgo',
+		autores: 'Gabriel E. Canadas',
+		medio: '1er Encuentro de Investigadores Jovenes de San Juan y 2as Jornadas de Becarios de Investigacion de la UNSJ, ISBN 978-950-605-737-4, San Juan (Argentina), Diciembre de 2012',
+		citadoPor: null,
+		anio: 2012,
+	},
+	{
+		titulo: 'Adquisicion y Transmision de Datos en Ambientes de Dificil Acceso o Expuestos a Interferencia Electromagnetica',
+		autores: 'L. Montero, C. Sisterna, E. Gargiulo, J. Santalucia, C. Gil, G. Ensink, C. DellAquila, G. Canadas',
+		medio: 'IV Congreso de Microelectronica Aplicada, ISBN 978-987-1896-18-9, trabajo 16, pp. 85, Bahia Blanca (Argentina), Septiembre de 2013',
+		citadoPor: null,
+		anio: 2013,
+	},
+	{
+		titulo: 'Design and implementation of an algorithm for ventricular fibrillation detection in a microcontroller',
+		autores: 'C. DellAquila, G. E. Canadas, C. Sisterna, E. Laciar',
+		medio: 'VI Congreso Latinoamericano de Ingenieria Biomedica (CLAIB), Parana (Argentina), Octubre de 2014',
+		citadoPor: null,
+		anio: 2014,
+	},
+	{
+		titulo: 'Development of an apnea detection algorithm based on temporal analysis of thoracic respiratory effort signal',
+		autores: 'C. DellAquila, G. E. Canadas, L. S. Correa, E. Laciar',
+		medio: 'XX Congreso Argentino de Bioingenieria (SABI), San Nicolas (Argentina), Octubre de 2015',
+		citadoPor: null,
+		anio: 2015,
+	},
+	{
+		titulo: 'Development of portable device to measure respiratory activity based on impedance pneumography',
+		autores: 'G. E. Canadas, C. DellAquila, E. Laciar',
+		medio: 'II Latin-American Conference on Bioimpedance (CLABIO), Montevideo (Uruguay), Septiembre de 2015',
+		citadoPor: null,
+		anio: 2015,
+	},
+	{
+		titulo: 'Embedded System for Athletes Jump Performance Analysis',
+		autores: 'Jeremias Gaia Amoros; Eugenio C. Orosco; Lucas Trigo; Marcos Toibero',
+		medio: 'IEEE Embedded Systems Letters (2025): 1-1',
+		citadoPor: null,
+		anio: 2025,
+	},
+	{
+		titulo: 'Fusing Direct and Indirect Visual Odometry for SLAM: An ICM-Based Framework',
+		autores: 'Gaia, Jeremias; Gimenez, Javier; Orosco, Eugenio; Rossomando, Francisco; Soria, Carlos; Ulloa-Vasquez, Fernando',
+		medio: 'World Electric Vehicle Journal, 16 num.9 (2025)',
+		citadoPor: null,
+		anio: 2025,
+	},
+	{
+		titulo: 'Fast FPGA-Based Image Feature Extraction for Data Fusion in Autonomous Vehicles',
+		autores: 'Gaia, Jeremias; Orosco, Eugenio; Rossomando, Francisco; Soria, Carlos',
+		medio: 'International Journal of Engineering Insights, 1 num.1 (2023): 1-8',
+		citadoPor: null,
+		anio: 2023,
+	},
+	{
+		titulo: 'Mapping the Landscape of SLAM Research: A Review',
+		autores: 'Jeremias Gaia; Eugenio C. Orosco; Francisco Rossomando; Carlos M. Soria',
+		medio: 'IEEE Latin America Transactions, 21 num.12 (2023): 1313-1336',
+		citadoPor: null,
+		anio: 2023,
+	},
+	{
+		titulo: 'Wearable Full-Body Inertial Measurement with Task Classification Using Deep ...',
+		autores: 'Jeremias Gaia; Eugenio Orosco; Carlos Soria',
+		medio: 'Registro recibido con datos incompletos (falta fuente y anio exacto)',
+		citadoPor: null,
+		anio: null,
+	},
+	{
+		titulo: 'Embedded System for Athletes Performance Evaluation Through Jump Tests',
+		autores: 'Jeremias Gaia Amoros; Juan Ignacio Sebastian; Eugenio C. Orosco; Marcos Toibero',
+		medio: 'Anales de Congreso Argentino de Sistemas Embebidos (CASE 2024), UNT, Argentina',
+		citadoPor: null,
+		anio: 2024,
+	},
+	{
+		titulo: 'High-Speed Textural Image Features Extraction using FPGA',
+		autores: 'Gaia Jeremias; Emanuel Trabes; Eugenio C. Orosco; Francisco Rossomando; Carlos M. Soria',
+		medio: 'XI Southern Programmable Logic Conference (2023), UNSL, Argentina',
+		citadoPor: null,
+		anio: 2023,
+	},
+	{
+		titulo: 'Detector de accidentes por caida basado en sensores IMU altamente integrado',
+		autores: 'Eugenio Orosco; Jeremias Gaia; Marcos Toibero; Carlos Soria',
+		medio: 'Actas de la XIX Reunion de Trabajo en Procesamiento de la Informacion y Control, RPIC 2021, UNSJ, Argentina. 978-987-88-2891-6',
+		citadoPor: null,
+		anio: 2021,
+	},
+	{
+		titulo: 'El Universo SLAM: Composicion y Aspectos Principales de la Nueva Generacion',
+		autores: 'Jeremias Gaia Amoros; Eugenio C. Orosco; Carlos M. Soria; Francisco Rossomando',
+		medio: 'Actas de la XIX Reunion de Trabajo en Procesamiento de la Informacion y Control, RPIC 2021, UNSJ, Argentina. 978-987-88-2891-6',
+		citadoPor: null,
+		anio: 2021,
+	},
+	{
+		titulo: 'Desarrollo de nodos de medicion multisensor para la gestion de sistemas de riego de precision',
+		autores: 'J. Lopez; M. Lopez; F. Capraro; Eugenio Orosco',
+		medio: 'Actas de la XIX Reunion de Trabajo en Procesamiento de la Informacion y Control, RPIC 2021, UNSJ, Argentina. 978-987-88-2891-6',
+		citadoPor: null,
+		anio: 2021,
+	},
+	{
+		titulo: 'FPGA implementation of an ultra-high speed ADC interface',
+		autores: 'C Sisterna, M Segura, M Guzzo, G Ensinck, C Gil',
+		medio: '2011 VII Southern Conference on Programmable Logic (SPL), 161-166',
+		citadoPor: 20,
+		anio: 2011,
+	},
+	{
+		titulo: 'Mobility and orientation aid for blind persons using artificial vision',
+		autores: 'G Costa, A Gusberti, JP Graffigna, M Guzzo, O Nasisi',
+		medio: 'Journal of Physics: Conference Series 90 (1), 012090',
+		citadoPor: 20,
+		anio: 2007,
+	},
+	{
+		titulo: 'Ventricular Fibrillation Detection Algorithm Implemented in a Cell-Phone Platform',
+		autores: 'M Rospierski, M Segura, M Guzzo, E Zavalla, C Sisterna, E Laciar, ...',
+		medio: 'Congreso Argentino de Sistemas Embebidos (CASE) 2011',
+		citadoPor: 4,
+		anio: 2011,
+	},
+	{
+		titulo: 'Ultra wideband digital receiver implemented on FPGA for mobile robot indoor self-localization',
+		autores: 'M Segura, C Sisterna, M Guzzo, G Ensinck, C Gil',
+		medio: '2011 VII Southern Conference on Programmable Logic (SPL), 97-102',
+		citadoPor: 3,
+		anio: 2011,
+	},
+	{
+		titulo: 'Time domain method for power line channel statistical identification',
+		autores: 'MA Guzzo, N Amaya, R Linares, H Patino',
+		medio: '2010 IEEE Latin-American Conference on Communications, 1-6',
+		citadoPor: 2,
+		anio: 2010,
+	},
+	{
+		titulo: 'Banco de prueba mejorado para modelado de la linea de energia electrica como canal de comunicacion',
+		autores: 'MA Guzzo, F Grasso, D Diaz',
+		medio: 'XIII Reunion de Trabajo en Procesamiento de la Informacion y Control (RPIC 2009)',
+		citadoPor: 2,
+		anio: 2009,
+	},
+	{
+		titulo: 'Stereoscopic Vision System on Wearable Hardware for Blind People',
+		autores: 'A Gusberti, G Costa, JP Graffigna, M Guzzo, O Nasisi',
+		medio: 'Facultad de Ingenieria - Universidad Nacional de San Juan - Argentina - XII ...',
+		citadoPor: 1,
+		anio: 2007,
+	},
+	{
+		titulo: 'PLC link control based on minimal total distance and LDPC codes',
+		autores: 'M Guzzo, M Segura, JP Aguiar, HD Patino',
+		medio: '2010 IEEE Latin-American Conference on Communications, 1-6',
+		citadoPor: null,
+		anio: 2010,
+	},
+	{
+		titulo: 'Adaptacion de transmisor matricial mediante distancia minima total para canal variante en el tiempo Powerline',
+		autores: 'Martin A. Guzzo, Juan P. Aguiar, Marcelo J. Segura, Hector D. Patino',
+		medio: 'XIII Reunion de Trabajo en Procesamiento de la Informacion y Control (RPIC 2009)',
+		citadoPor: null,
+		anio: 2009,
+	},
+	{
+		titulo: 'PROCESAMIENTO DE SENALES MIOELECTRICAS IMPLEMENTADO EN PROCESADOR DIGITAL DE SENALES',
+		autores: 'E Orosco, N Lopez, C Soria, M Guzzo',
+		medio: 'XXI Congreso Argentino de Control Automatico',
+		citadoPor: null,
+		anio: 2008,
+	},
+	{
+		titulo: 'Desarrollo de Banco de Prueba para Comunicacion de Banda Ancha sobre Linea de Energia',
+		autores: 'MA Guzzo, JJ Aciar, AA Gimenez',
+		medio: 'XII Reunion en Procesamiento de la Informacion y Control, RPIC 2007',
+		citadoPor: null,
+		anio: 2007,
+	},
+	{
+		titulo: 'COMUNICACION POR LA LINEA DE ENERGIA ELECTRICA (PLT)',
+		autores: 'JJ ACIAR, AA GIMENEZ, MA GUZZO',
+		medio: 'XII Reunion en Procesamiento de la Informacion y Control, RPIC 2007',
+		citadoPor: null,
+		anio: 2007,
+	},
+	{
+		titulo: 'Procesador dedicado para redes neuronales basados en FPGA: neuro-chip II',
+		autores: 'GE A. Miguel, P. Olguin, J. Penachioni, M. Guzzo, HD Patino, C. Gil',
+		medio: 'XI Reunion en Procesamiento, Informacion y Control RPIC 2005',
+		citadoPor: null,
+		anio: 2005,
+	},
+	{
+		titulo: 'Diseno e implementacion de un Procesador Dedicado para Identificacion de patrones mediante Redes Neuronales y FPGA',
+		autores: 'MA Guzzo, G Eduardo, P Hector D.',
+		medio: 'X Reunion de Trabajo en Procesamiento de la Informacion y Control',
+		citadoPor: null,
+		anio: 2003,
+	},
+	{
+		titulo: 'DISENO Y DESARROLLO DE UN NEURO-CHIP BASADO EN FPGAS',
+		autores: 'HD Patino, MA Guzzo, E Gargiulo',
+		medio: 'Congreso Latinoamericano de Control Automatico CLCA 2002, Mexico',
+		citadoPor: null,
+		anio: 2002,
+	},
+];
+
+const publicacionesOrdenadas = [...publicaciones].sort((a, b) => {
+	const anioA = a.anio ?? -Infinity;
+	const anioB = b.anio ?? -Infinity;
+	if (anioA !== anioB) {
+		return anioB - anioA;
+	}
+
+	const citasA = a.citadoPor ?? -Infinity;
+	const citasB = b.citadoPor ?? -Infinity;
+	if (citasA !== citasB) {
+		return citasB - citasA;
+	}
+
+	return a.titulo.localeCompare(b.titulo);
+});
+
 ---
 
-<Layout title="Publicaciones | En construccion">
-	<main class="min-h-[65vh] bg-fondo">
-		<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Sitio en construccion</p>
-			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">Publicaciones</h1>
-			<p class="text-texto-suave text-lg leading-relaxed mb-8">
-				Esta seccion se esta preparando. Se incorporaran articulos, congresos,
-				reportes tecnicos y produccion cientifica del laboratorio.
-			</p>
-			<a href="/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
-				Volver al inicio
-			</a>
+<Layout title="Publicaciones | LED&T">
+	<main class="bg-slate-50 min-h-[65vh]">
+		<section class="bg-linear-to-br from-slate-50 via-white to-cyan-50/40 py-12 md:py-16 border-b border-slate-200">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<nav class="text-xs text-slate-500 mb-4">
+					<a href="/" class="hover:text-blue-700">Inicio</a>
+					<span class="mx-2">/</span>
+					<span class="text-slate-700">Publicaciones</span>
+				</nav>
+				<p class="text-cyan-700 font-mono text-xs uppercase tracking-widest mb-3">Produccion cientifica</p>
+				<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">Publicaciones de integrantes del LED&T</h1>
+				<p class="text-slate-600 text-base sm:text-lg max-w-3xl leading-relaxed">
+					Primera carga de trabajos en el area de procesamiento digital de senales, PLC e IPTV.
+				</p>
+				<p class="text-xs text-slate-500 mt-3">{publicacionesOrdenadas.length} registros</p>
+			</div>
+		</section>
+
+		<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+			<div class="hidden md:block overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+				<table class="min-w-full text-sm">
+					<thead class="bg-slate-100 text-slate-700">
+						<tr>
+							<th class="text-left px-4 py-3 font-semibold">Titulo</th>
+							<th class="text-left px-4 py-3 font-semibold">Autores</th>
+							<th class="text-left px-4 py-3 font-semibold">Fuente</th>
+							<th class="text-left px-4 py-3 font-semibold">Citado por</th>
+							<th class="text-left px-4 py-3 font-semibold">Anio</th>
+						</tr>
+					</thead>
+					<tbody>
+						{publicacionesOrdenadas.map((pub) => (
+							<tr class="border-t border-slate-100 align-top hover:bg-slate-50/70">
+								<td class="px-4 py-3 text-slate-900 font-medium leading-relaxed">{pub.titulo}</td>
+								<td class="px-4 py-3 text-slate-700 leading-relaxed">{pub.autores}</td>
+								<td class="px-4 py-3 text-slate-600 leading-relaxed">{pub.medio}</td>
+								<td class="px-4 py-3 text-slate-700">{pub.citadoPor ?? '-'}</td>
+								<td class="px-4 py-3 text-slate-700">{pub.anio ?? '-'}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="md:hidden space-y-4">
+				{publicacionesOrdenadas.map((pub) => (
+					<article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+						<h2 class="text-base font-semibold text-slate-900 leading-snug mb-2">{pub.titulo}</h2>
+						<p class="text-sm text-slate-700 mb-2"><strong>Autores:</strong> {pub.autores}</p>
+						<p class="text-sm text-slate-600 mb-3"><strong>Fuente:</strong> {pub.medio}</p>
+						<div class="flex items-center gap-4 text-xs text-slate-600">
+							<span><strong>Citado por:</strong> {pub.citadoPor ?? '-'}</span>
+							<span><strong>Anio:</strong> {pub.anio ?? '-'}</span>
+						</div>
+					</article>
+				))}
+			</div>
+
+			<div class="mt-8">
+				<a href="/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
+					Volver al inicio
+				</a>
+			</div>
 		</section>
 	</main>
 </Layout>

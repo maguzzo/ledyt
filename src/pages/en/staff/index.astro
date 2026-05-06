@@ -1,18 +1,293 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import {
+	getEquipoDocenteNormalizado,
+	getEmeritosNormalizados,
+	getInMemoriamNormalizados,
+} from '../../../data/staffNormalizado';
+
+const equipoDocente = getEquipoDocenteNormalizado();
+const emeritosBase = getEmeritosNormalizados();
+const inMemoriam = getInMemoriamNormalizados();
+
+const emeritosList = [
+	...emeritosBase,
+	...inMemoriam.filter((persona) => !emeritosBase.some((emerito) => emerito.slug === persona.slug)),
+];
+
+type DireccionPlaceholder = {
+	slug: string;
+	nombre_completo: string;
+	rol: string;
+	cargo: string;
+	catedras: { nombre: string }[];
+	especialidades: string[];
+	oficina: string;
+	email: string;
+	bio_es: string;
+	foto_url: string | null;
+};
+
+// TODO: complete with real leadership data from normalized source.
+const direccion: DireccionPlaceholder = {
+	slug: 'direction-to-be-defined',
+	nombre_completo: 'Direction to be defined',
+	// TODO: complete with real role.
+	rol: 'Pending internal election',
+	cargo: 'Position currently vacant',
+	catedras: [],
+	especialidades: [],
+	oficina: '',
+	email: '',
+	bio_es:
+		'The director role will be defined through an internal election process. Meanwhile, laboratory activities continue with the current academic and technical staff.',
+	foto_url: null,
+};
+
+function getInitials(nombre: string): string {
+	const words = nombre.replace(/Dr\. Ing\. |Msc\. Ing\. |Dr\. |Mg\. |Ing\. /g, '').split(' ');
+	return words.map((word) => word[0]).join('').slice(0, 2).toUpperCase();
+}
 ---
 
-<Layout title="Staff | Under construction">
-	<main class="min-h-[65vh] bg-fondo">
-		<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Website under construction</p>
-			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">Staff</h1>
-			<p class="text-texto-suave text-lg leading-relaxed mb-8 max-w-3xl">
-				Team profiles are being prepared and will be available soon.
+<Layout title="Staff · LED&T - Digital Electronics and Telecommunications Lab | UNSJ">
+	<section class="bg-linear-to-br from-slate-50 via-white to-cyan-50/40 py-12 md:py-16 border-b border-slate-200">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<nav class="text-xs text-slate-500 mb-4">
+				<a href="/en/" class="hover:text-blue-700">Home</a>
+				<span class="mx-2">/</span>
+				<span class="text-slate-700">Staff</span>
+			</nav>
+			<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+				LED&amp;T <span class="text-blue-700">Team</span>
+			</h1>
+			<p class="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">
+				Lecturers and researchers who share infrastructure and projects within the Department of Electronics and Automatics (DEA), Engineering Faculty, UNSJ.
 			</p>
-			<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
-				Back to English home
-			</a>
+		</div>
+	</section>
+
+	<section class="py-16 bg-white">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-6">Direction</h2>
+
+			<article id={direccion.slug} class="bg-linear-to-br from-blue-50 via-white to-cyan-50/30 border-2 border-blue-100 rounded-2xl overflow-hidden shadow-md">
+				<div class="grid md:grid-cols-[340px_1fr] gap-0">
+					<div class="bg-blue-700 p-4 flex items-center justify-center">
+						{direccion.foto_url ? (
+							<img src={direccion.foto_url} alt={direccion.nombre_completo} class="w-72 h-72 rounded-full object-cover border-4 border-white shadow-xl" />
+						) : (
+							<div class="w-72 h-72 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-8xl font-bold text-white">
+								{getInitials(direccion.nombre_completo)}
+							</div>
+						)}
+					</div>
+
+					<div class="p-8">
+						<p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-2">{direccion.rol}</p>
+						<h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">{direccion.nombre_completo}</h3>
+						<p class="text-slate-600 font-medium mb-4">{direccion.cargo}</p>
+
+						<p class="text-sm text-slate-700 leading-relaxed mb-5">{direccion.bio_es}</p>
+
+						<div class="space-y-3 text-sm">
+							{direccion.catedras.length > 0 && (
+								<div>
+									<span class="font-semibold text-slate-900 block mb-1">Courses:</span>
+									<ul class="text-slate-600 space-y-1">
+										{(direccion.catedras as { nombre: string }[]).map((course) => <li>· {course.nombre}</li>)}
+									</ul>
+								</div>
+							)}
+
+							{direccion.especialidades.length > 0 && (
+								<div>
+									<span class="font-semibold text-slate-900">Specialties: </span>
+									<span class="text-slate-600">{direccion.especialidades.join(' · ')}</span>
+								</div>
+							)}
+
+							<div class="flex flex-wrap gap-x-6 gap-y-2 pt-3 border-t border-slate-200">
+								{direccion.oficina && <span class="text-slate-500">Location: {direccion.oficina}</span>}
+								{direccion.email ? (
+									<a href={`mailto:${direccion.email}`} class="text-blue-700 hover:underline font-mono text-xs">
+										Email: {direccion.email}
+									</a>
+								) : (
+									<span class="text-slate-500 italic">Position to be filled by internal election</span>
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section class="py-16 bg-slate-50">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="mb-10">
+				<h2 class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-3">Academic Team</h2>
+				<h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Courses and lines of work hosted in LED&amp;T</h3>
+				<p class="text-slate-600 max-w-3xl leading-relaxed">
+					Digital Systems, Telecommunications, Microprocessors, and Propagation &amp; Radiation have their operational base in the lab.
+				</p>
+			</div>
+
+			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{equipoDocente.map((person) => (
+					<article id={person.slug} class="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
+						<div class="flex items-start gap-4 mb-4">
+							{person.foto_url ? (
+								<img src={person.foto_url} alt={person.nombre_completo} class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover shrink-0" />
+							) : (
+								<div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-3xl font-bold text-white shrink-0">
+									{getInitials(person.nombre_completo)}
+								</div>
+							)}
+							<div class="flex-1 min-w-0">
+								<h4 class="font-bold text-slate-900 leading-tight mb-1">{person.nombre_completo}</h4>
+								<p class="text-xs text-slate-500">{person.cargo || 'Faculty-researcher'}</p>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Courses</span>
+							<ul class="text-sm text-slate-600 space-y-1">
+								{person.catedras.map((course) => <li class="leading-snug">· {course.nombre}</li>)}
+							</ul>
+						</div>
+
+						<div class="mb-3">
+							<span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Specialties</span>
+							<div class="flex flex-wrap gap-1.5">
+								{person.especialidades.map((specialty) => (
+									<span class="text-xs px-2 py-0.5 bg-slate-100 text-slate-700 rounded">{specialty}</span>
+								))}
+							</div>
+						</div>
+
+						{person.afiliacion_externa && (
+							<p class="text-xs text-slate-500 italic mb-3 leading-relaxed border-l-2 border-slate-200 pl-2">
+								{person.afiliacion_externa}
+							</p>
+						)}
+
+						<div class="flex flex-wrap gap-x-4 gap-y-1 pt-3 border-t border-slate-100 text-xs">
+							{person.oficina && <span class="text-slate-500">Location: {person.oficina}</span>}
+							{person.email ? (
+								<a href={`mailto:${person.email}`} class="text-blue-700 hover:underline font-mono break-all">
+									Email: {person.email}
+								</a>
+							) : (
+								<a href="mailto:sec_dea@unsj.edu.ar?subject=Staff inquiry" class="text-slate-500 hover:text-blue-700 italic">
+									Contact via DEA Secretariat
+								</a>
+							)}
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-12 bg-white">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="bg-amber-50 border-l-4 border-amber-400 p-5 rounded-r-lg">
+				<p class="text-sm text-slate-700 leading-relaxed">
+					<strong class="text-slate-900">Institutional note:</strong> Some team members hold part-time academic appointments and parallel roles in industry or other scientific institutions (INPRES, private sector, FCEFN-UNSJ). This dual profile strengthens the lab with real-world applied experience.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	{emeritosList.length > 0 && (
+		<section class="py-16 bg-slate-100 border-t border-slate-200">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="mb-10">
+					<h2 class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-3">Emeritus Faculty</h2>
+					<h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">Historical legacy of LED&amp;T</h3>
+					<p class="text-slate-600 max-w-3xl leading-relaxed">
+						Retired professors who built the foundations of this lab and contributed decisively to its growth over decades.
+					</p>
+				</div>
+
+				<div class="grid sm:grid-cols-2 gap-8">
+					{emeritosList.map((person) => (
+						<article id={person.slug} class="bg-white rounded-xl border border-slate-300 p-6 shadow-md">
+							<div class="flex items-start gap-4 mb-4">
+								{person.foto_url ? (
+									<img
+										src={person.foto_url}
+										alt={person.nombre_completo}
+										class:list={[
+											'w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover shrink-0',
+											person.estado === 'in_memoriam' && 'grayscale',
+										]}
+									/>
+								) : (
+									<div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-linear-to-br from-slate-400 to-slate-600 flex items-center justify-center text-3xl font-bold text-white shrink-0">
+										{getInitials(person.nombre_completo)}
+									</div>
+								)}
+								<div class="flex-1 min-w-0">
+									<h4 class="font-bold text-slate-900 leading-tight mb-1">{person.nombre_completo}</h4>
+									<p class="text-xs text-slate-500 mb-2">{person.cargo || 'Emeritus'}</p>
+									{person.estado === 'in_memoriam' && (
+										<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-300 mb-2">
+											Tribute
+										</span>
+									)}
+									<p class="text-xs text-amber-700 font-semibold italic">
+										{person.estado === 'in_memoriam' ? 'Emeritus professor · In memoriam' : 'Emeritus professor'}
+									</p>
+								</div>
+							</div>
+
+							{person.bio_es && (
+								<p class="text-sm text-slate-700 leading-relaxed mb-4 italic border-l-2 border-amber-400 pl-3">{person.bio_es}</p>
+							)}
+
+							{person.catedras.length > 0 && (
+								<div class="mb-3">
+									<span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Courses taught</span>
+									<ul class="text-sm text-slate-600 space-y-1">
+										{person.catedras.map((course) => <li class="leading-snug">· {course.nombre}</li>)}
+									</ul>
+								</div>
+							)}
+
+							{person.especialidades.length > 0 && (
+								<div class="mb-3">
+									<span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Specialties</span>
+									<div class="flex flex-wrap gap-1.5">
+										{person.especialidades.map((specialty) => (
+											<span class="text-xs px-2 py-0.5 bg-slate-100 text-slate-700 rounded">{specialty}</span>
+										))}
+									</div>
+								</div>
+							)}
+
+							{person.afiliacion_externa && (
+								<p class="text-xs text-slate-500 italic mb-3 leading-relaxed border-l-2 border-amber-300 pl-2">{person.afiliacion_externa}</p>
+							)}
+						</article>
+					))}
+				</div>
+			</div>
 		</section>
-	</main>
+	)}
+
+	<section class="py-16 bg-linear-to-br from-blue-900 via-blue-800 to-slate-900 text-white">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<h2 class="text-2xl sm:text-3xl font-bold mb-4">Interested in joining the team?</h2>
+			<p class="text-blue-100 mb-8 leading-relaxed">
+				We are looking for students for integrative projects, assistantships, scholarships, and thesis opportunities.
+			</p>
+			<a href="/en/opportunities" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-900 font-semibold rounded-lg hover:bg-slate-100 transition-colors shadow-md">
+				See Opportunities
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+			</a>
+		</div>
+	</section>
 </Layout>

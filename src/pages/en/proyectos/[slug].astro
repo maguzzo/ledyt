@@ -1,0 +1,15 @@
+---
+import { proyectos } from '../../../data/proyectos';
+
+export function getStaticPaths() {
+	return [
+		...proyectos.map((proyecto) => ({ params: { slug: proyecto.slug } })),
+		{ params: { slug: 'cart' } },
+	];
+}
+
+const { slug = 'project' } = Astro.params;
+const targetSlug = slug === 'cart' ? 'backend-digital-cart' : slug;
+
+return Astro.redirect(`/en/projects/${targetSlug}`);
+---

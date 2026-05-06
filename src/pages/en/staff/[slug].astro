@@ -1,37 +1,123 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import { getPersonaNormalizadaBySlug, staffNormalizado } from '../../../data/staffNormalizado';
+import { getIniciales } from '../../../utils/strings';
 
 export function getStaticPaths() {
-	return [{ params: { slug: 'team-profile' } }];
+	return staffNormalizado.map((persona) => ({
+		params: { slug: persona.slug },
+	}));
 }
 
-const { slug = 'profile' } = Astro.params;
-const nameText = slug
-	.split('-')
-	.filter(Boolean)
-	.map((p) => p.charAt(0).toUpperCase() + p.slice(1))
-	.join(' ');
+const { slug = '' } = Astro.params;
+const persona = getPersonaNormalizadaBySlug(slug);
 ---
 
-<Layout title={`${nameText} | Under construction`}>
-	<main class="min-h-[65vh] bg-fondo">
-		<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Website under construction</p>
-			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">{nameText}</h1>
-			<p class="text-texto-suave text-lg leading-relaxed mb-3 max-w-3xl">
-				This profile page is not published yet.
-			</p>
-			<p class="text-texto-tenue font-mono text-sm mb-8">
-				current slug: /en/staff/{slug}
-			</p>
-			<div class="flex flex-wrap gap-3">
-				<a href="/en/staff" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border-2 border-primario text-primario font-semibold hover:bg-primario hover:text-white transition-colors">
-					Back to staff
-				</a>
-				<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
-					Go to English home
-				</a>
-			</div>
-		</section>
+<Layout title={`${persona?.nombre_completo ?? 'Staff'} | LED&T - UNSJ`}>
+	<main class="min-h-[65vh] bg-slate-50">
+		{persona ? (
+			<>
+				<section class="bg-linear-to-br from-slate-50 via-white to-cyan-50/40 py-12 md:py-16 border-b border-slate-200">
+					<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+						<nav class="text-xs text-slate-500 mb-4">
+							<a href="/en/" class="hover:text-blue-700">Home</a>
+							<span class="mx-2">/</span>
+							<a href="/en/staff" class="hover:text-blue-700">Staff</a>
+							<span class="mx-2">/</span>
+							<span class="text-slate-700">{persona.nombre_completo}</span>
+						</nav>
+						<h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">{persona.nombre_completo}</h1>
+						<p class="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed">{persona.cargo || 'Faculty-researcher'}</p>
+					</div>
+				</section>
+
+				<section class="py-14 md:py-16">
+					<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-8">
+						<aside class="lg:col-span-4">
+							<div class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+								<div class="flex items-center justify-center mb-5">
+									{persona.foto_url ? (
+										<img src={persona.foto_url} alt={persona.nombre_completo} class="w-44 h-44 rounded-full object-cover border-4 border-slate-100 shadow" />
+									) : (
+										<div class="w-44 h-44 rounded-full bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-5xl font-bold text-white">
+											{getIniciales(persona.nombre_completo)}
+										</div>
+									)}
+								</div>
+
+								<div class="space-y-2 text-sm border-t border-slate-100 pt-4">
+									{persona.oficina && <p class="text-slate-600"><span class="font-semibold text-slate-800">Office:</span> {persona.oficina}</p>}
+									{persona.email && (
+										<p>
+											<a href={`mailto:${persona.email}`} class="text-blue-700 hover:text-blue-900 hover:underline font-mono break-all">{persona.email}</a>
+										</p>
+									)}
+								</div>
+							</div>
+						</aside>
+
+						<div class="lg:col-span-8 space-y-6">
+							<article class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+								<h2 class="text-xl font-bold text-slate-900 mb-4">Courses</h2>
+								<ul class="space-y-2 text-sm text-slate-700">
+									{persona.catedras.map((course) => (
+										<li class="flex items-start gap-2">
+											<span class="mt-2 w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0"></span>
+											<span>{course.nombre}</span>
+										</li>
+									))}
+								</ul>
+							</article>
+
+							<article class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+								<h2 class="text-xl font-bold text-slate-900 mb-4">Specialties</h2>
+								<div class="flex flex-wrap gap-2">
+									{persona.especialidades.map((specialty) => (
+										<span class="text-xs px-2.5 py-1 bg-slate-100 text-slate-700 rounded">{specialty}</span>
+									))}
+								</div>
+							</article>
+
+							{persona.bio_en && (
+								<article class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+									<h2 class="text-xl font-bold text-slate-900 mb-4">Bio</h2>
+									<p class="text-sm text-slate-700 leading-relaxed">{persona.bio_en}</p>
+								</article>
+							)}
+
+							{persona.afiliacion_externa && (
+								<article class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
+									<h2 class="text-xl font-bold text-slate-900 mb-4">External Affiliation</h2>
+									<p class="text-sm text-slate-700 leading-relaxed">{persona.afiliacion_externa}</p>
+								</article>
+							)}
+
+							<div class="flex flex-wrap gap-3">
+								<a href="/en/staff" class="inline-flex items-center gap-2 px-5 py-3 border border-blue-700 text-blue-700 font-semibold rounded-lg hover:bg-blue-700 hover:text-white transition-colors">
+									Back to staff
+								</a>
+								<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+									Go to home
+								</a>
+							</div>
+						</div>
+					</div>
+				</section>
+			</>
+		) : (
+			<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+				<p class="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-4">Profile not found</p>
+				<h1 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Member not available</h1>
+				<p class="text-slate-600 text-lg leading-relaxed mb-8 max-w-3xl">No staff profile was found for the requested slug.</p>
+				<div class="flex flex-wrap gap-3">
+					<a href="/en/staff" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border-2 border-blue-700 text-blue-700 font-semibold hover:bg-blue-700 hover:text-white transition-colors">
+						Back to staff
+					</a>
+					<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors">
+						Go to home
+					</a>
+				</div>
+			</section>
+		)}
 	</main>
 </Layout>

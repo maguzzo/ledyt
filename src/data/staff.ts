@@ -292,7 +292,7 @@ export const staff: Persona[] = [
   {
     slug: 'gustavo-ensinck',
     nombre: 'Ing. Gustavo A. Ensinck',
-    cargoFormal: { es: 'Profesor Adjunto (jubilado)', en: 'Associate Professor (retired)' },
+    cargoFormal: { es: 'Profesor Titular (jubilado)', en: 'Full Professor (retired)' },
     catedras: {
       es: ['Microprocesadores I', 'Microprocesadores II'],
       en: ['Microprocessors I', 'Microprocessors II'],
@@ -306,8 +306,8 @@ export const staff: Persona[] = [
       en: 'Researcher and mentor in programmable hardware development',
     },
     bio: {
-      es: 'Ingeniero Electrónico egresado de la UNSJ. Jefe de Trabajos Prácticos (por concurso) y posteriormente Profesor Adjunto a partir de 2000 en las cátedras de Microprocesadores I y II. Cotitular de numerosos proyectos de investigación en sistemas digitales, FPGA, microcontroladores y hardware programable. Supervisor y codirector de múltiples tesis de grado y becarios. Colaborador estratégico en el desarrollo de sistemas embebidos para aplicaciones biomédicas, agricultura de precisión y plataformas robóticas. Desde 1991 desarrolló sistemas electrónicos de avanzada en el sector privado, aportando experiencia aplicada al laboratorio.',
-      en: 'Electronic Engineer graduated from UNSJ. Head of Practical Labs (by competition) and subsequently Associate Professor from 2000 in Microprocessors I and II courses. Co-holder of numerous research projects in digital systems, FPGA, microcontrollers, and programmable hardware. Supervisor and co-director of multiple thesis projects and graduate researchers. Strategic collaborator in the development of embedded systems for biomedical applications, precision agriculture, and robotic platforms. Since 1991 developed advanced electronic systems in the private sector, bringing applied experience to the laboratory.',
+      es: 'Ingeniero Electrónico egresado de la UNSJ. Jefe de Trabajos Prácticos (por concurso) y posteriormente Profesor Titular a partir de 2000 en las cátedras de Microprocesadores I y II. Cotitular de numerosos proyectos de investigación en sistemas digitales, FPGA, microcontroladores y hardware programable. Supervisor y codirector de múltiples tesis de grado y becarios. Colaborador estratégico en el desarrollo de sistemas embebidos para aplicaciones biomédicas, agricultura de precisión y plataformas robóticas. Desde 1991 desarrolló sistemas electrónicos de avanzada en el sector privado, aportando experiencia aplicada al laboratorio.',
+      en: 'Electronic Engineer graduated from UNSJ. Head of Practical Labs (by competition) and subsequently Full Professor from 2000 in Microprocessors I and II courses. Co-holder of numerous research projects in digital systems, FPGA, microcontrollers, and programmable hardware. Supervisor and co-director of multiple thesis projects and graduate researchers. Strategic collaborator in the development of embedded systems for biomedical applications, precision agriculture, and robotic platforms. Since 1991 developed advanced electronic systems in the private sector, bringing applied experience to the laboratory.',
     },
     email: 'gustavo@unsj.edu.ar',
     foto: '/images/people/gustavo-ensinck.png',
@@ -316,7 +316,7 @@ export const staff: Persona[] = [
   {
     slug: 'roberto-linares',
     nombre: 'Ing. Roberto Teófilo Linares',
-    cargoFormal: { es: 'Profesor de Telecomunicaciones (jubilado)', en: 'Telecommunications Professor (retired)' },
+    cargoFormal: { es: 'Profesor de Telecomunicaciones (in memoriam)', en: 'Telecommunications Professor (in memoriam)' },
     catedras: {
       es: ['Telecomunicaciones I', 'Telecomunicaciones II'],
       en: ['Telecommunications I', 'Telecommunications II'],

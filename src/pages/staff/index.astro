@@ -1,71 +1,44 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { staff, getCoordinador, getEquipoDocente, getEmeritos } from '../../data/staff';
+import {
+  getEquipoDocenteNormalizado,
+  getEmeritosNormalizados,
+  getInMemoriamNormalizados,
+} from '../../data/staffNormalizado';
 
 const currentPath = Astro.url.pathname;
 const isEn = currentPath.startsWith('/en/');
 const idioma = isEn ? 'en' : 'es';
 
-const coordinador = getCoordinador();
-const equipoDocenteData = getEquipoDocente();
+const equipoDocente = getEquipoDocenteNormalizado();
+const emeritosBase = getEmeritosNormalizados();
+const inMemoriam = getInMemoriamNormalizados();
 
-const direccion = coordinador
-  ? {
-      slug: coordinador.slug,
-      nombre: coordinador.nombre,
-      rol: coordinador.rol?.[idioma] ?? '',
-      cargoFormal: coordinador.cargoFormal[idioma],
-      catedras: coordinador.catedras[idioma],
-      especialidades: coordinador.especialidades[idioma],
-      oficina: coordinador.oficina,
-      email: coordinador.email,
-      bio: coordinador.bio?.[idioma] ?? '',
-      foto: coordinador.foto,
-    }
-  : {
-      slug: 'direccion-a-definir',
-      nombre: idioma === 'en' ? 'Direction to be defined' : 'Dirección a definir',
-      rol: idioma === 'en' ? 'Pending internal election' : 'Pendiente de elección interna',
-      cargoFormal: idioma === 'en' ? 'Position currently vacant' : 'Cargo actualmente vacante',
-      catedras: [] as string[],
-      especialidades: [],
-      oficina: undefined,
-      email: undefined,
-      bio:
-        idioma === 'en'
-          ? 'The director role will be defined through an internal election process. Meanwhile, laboratory activities continue with the current academic and technical staff.'
-          : 'La figura de director del laboratorio se definirá mediante un proceso interno de elección. Mientras tanto, las actividades continúan con el equipo académico y técnico actual.',
-      foto: null,
-    };
+const emeritosList = [
+  ...emeritosBase,
+  ...inMemoriam.filter((persona) => !emeritosBase.some((emerito) => emerito.slug === persona.slug)),
+];
 
-const equipoDocente = equipoDocenteData.map((persona) => ({
-  slug: persona.slug,
-  nombre: persona.nombre,
-  cargoFormal: persona.cargoFormal[idioma],
-  catedras: persona.catedras[idioma],
-  especialidades: persona.especialidades[idioma],
-  oficina: persona.oficina,
-  email: persona.email,
-  rolParalelo: persona.rolParalelo?.[idioma],
-  foto: persona.foto,
-}));
-
-const emeritosList = getEmeritos().map((persona) => ({
-  slug: persona.slug,
-  nombre: persona.nombre,
-  cargoFormal: persona.cargoFormal[idioma],
-  catedras: persona.catedras[idioma],
-  especialidades: persona.especialidades[idioma],
-  oficina: persona.oficina,
-  email: persona.email,
-  rolParalelo: persona.rolParalelo?.[idioma],
-  bio: persona.bio?.[idioma] ?? '',
-  foto: persona.foto,
-  esInMemoriam: persona.esInMemoriam === true,
-}));
+// TODO: completar con dato real de coordinacion desde la capa normalizada.
+const direccion = {
+  slug: 'direccion-a-definir',
+  nombre_completo: idioma === 'en' ? 'Direction to be defined' : 'Dirección a definir',
+  // TODO: completar con dato real.
+  rol: idioma === 'en' ? 'Pending internal election' : 'Pendiente de elección interna',
+  cargo: idioma === 'en' ? 'Position currently vacant' : 'Cargo actualmente vacante',
+  catedras: [],
+  especialidades: [],
+  oficina: '',
+  email: '',
+  bio_es:
+    idioma === 'en'
+      ? 'The director role will be defined through an internal election process. Meanwhile, laboratory activities continue with the current academic and technical staff.'
+      : 'La figura de director del laboratorio se definirá mediante un proceso interno de elección. Mientras tanto, las actividades continúan con el equipo académico y técnico actual.',
+  foto_url: null,
+};
 
 function getIniciales(nombre: string): string {
-  const palabras = nombre.replace(/Dr\. |Mg\. |Ing\. /g, '').split(' ');
+  const palabras = nombre.replace(/Dr\. Ing\. |Msc\. Ing\. |Dr\. |Mg\. |Ing\. /g, '').split(' ');
   return palabras.map(p => p[0]).join('').slice(0, 2).toUpperCase();
 }
 ---
@@ -102,28 +75,28 @@ function getIniciales(nombre: string): string {
         <div class="grid md:grid-cols-[340px_1fr] gap-0">
           <!-- Columna foto/iniciales -->
           <div class="bg-blue-700 p-4 flex items-center justify-center">
-            {direccion.foto ? (
-              <img src={direccion.foto} alt={direccion.nombre} class="w-72 h-72 rounded-full object-cover border-4 border-white shadow-xl" />
+            {direccion.foto_url ? (
+              <img src={direccion.foto_url} alt={direccion.nombre_completo} class="w-72 h-72 rounded-full object-cover border-4 border-white shadow-xl" />
             ) : (
               <div class="w-72 h-72 rounded-full bg-white/10 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-8xl font-bold text-white">
-                {getIniciales(direccion.nombre)}
+                {getIniciales(direccion.nombre_completo)}
               </div>
             )}
           </div>
           <!-- Columna info -->
           <div class="p-8">
             <p class="text-xs font-semibold text-cyan-700 uppercase tracking-wider mb-2">{direccion.rol}</p>
-            <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">{direccion.nombre}</h3>
-            <p class="text-slate-600 font-medium mb-4">{direccion.cargoFormal}</p>
+            <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">{direccion.nombre_completo}</h3>
+            <p class="text-slate-600 font-medium mb-4">{direccion.cargo}</p>
 
-            <p class="text-sm text-slate-700 leading-relaxed mb-5">{direccion.bio}</p>
+            <p class="text-sm text-slate-700 leading-relaxed mb-5">{direccion.bio_es}</p>
 
             <div class="space-y-3 text-sm">
               {direccion.catedras.length > 0 && (
                 <div>
                   <span class="font-semibold text-slate-900 block mb-1">Cátedras:</span>
                   <ul class="text-slate-600 space-y-1">
-                    {direccion.catedras.map(c => <li>· {c}</li>)}
+                    {direccion.catedras.map(c => <li>· {c.nombre}</li>)}
                   </ul>
                 </div>
               )}
@@ -170,16 +143,16 @@ function getIniciales(nombre: string): string {
           <article id={p.slug} class="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
             <!-- Header card: foto + nombre -->
             <div class="flex items-start gap-4 mb-4">
-              {p.foto ? (
-                <img src={p.foto} alt={p.nombre} class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover shrink-0" />
+              {p.foto_url ? (
+                <img src={p.foto_url} alt={p.nombre_completo} class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover shrink-0" />
               ) : (
                 <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-3xl font-bold text-white shrink-0">
-                  {getIniciales(p.nombre)}
+                  {getIniciales(p.nombre_completo)}
                 </div>
               )}
               <div class="flex-1 min-w-0">
-                <h4 class="font-bold text-slate-900 leading-tight mb-1">{p.nombre}</h4>
-                <p class="text-xs text-slate-500">{p.cargoFormal}</p>
+                <h4 class="font-bold text-slate-900 leading-tight mb-1">{p.nombre_completo}</h4>
+                <p class="text-xs text-slate-500">{p.cargo}</p>
               </div>
             </div>
 
@@ -187,7 +160,7 @@ function getIniciales(nombre: string): string {
             <div class="mb-3">
               <span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Cátedras</span>
               <ul class="text-sm text-slate-600 space-y-1">
-                {p.catedras.map(c => <li class="leading-snug">· {c}</li>)}
+                {p.catedras.map(c => <li class="leading-snug">· {c.nombre}</li>)}
               </ul>
             </div>
 
@@ -202,9 +175,9 @@ function getIniciales(nombre: string): string {
             </div>
 
             <!-- Rol paralelo (si existe) -->
-            {p.rolParalelo && (
+            {p.afiliacion_externa && (
               <p class="text-xs text-slate-500 italic mb-3 leading-relaxed border-l-2 border-slate-200 pl-2">
-                {p.rolParalelo}
+                {p.afiliacion_externa}
               </p>
             )}
 
@@ -261,31 +234,31 @@ function getIniciales(nombre: string): string {
             <article id={p.slug} class="bg-white rounded-xl border border-slate-300 p-6 shadow-md">
               <!-- Header card: foto + nombre -->
               <div class="flex items-start gap-4 mb-4">
-                {p.foto ? (
-                  <img src={p.foto} alt={p.nombre} class:list={["w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover shrink-0", p.esInMemoriam && "grayscale"]} />
+                {p.foto_url ? (
+                  <img src={p.foto_url} alt={p.nombre_completo} class:list={["w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover shrink-0", p.estado === 'in_memoriam' && "grayscale"]} />
                 ) : (
                   <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-linear-to-br from-slate-400 to-slate-600 flex items-center justify-center text-3xl font-bold text-white shrink-0">
-                    {getIniciales(p.nombre)}
+                    {getIniciales(p.nombre_completo)}
                   </div>
                 )}
                 <div class="flex-1 min-w-0">
-                  <h4 class="font-bold text-slate-900 leading-tight mb-1">{p.nombre}</h4>
-                  <p class="text-xs text-slate-500 mb-2">{p.cargoFormal}</p>
-                  {p.esInMemoriam && (
+                  <h4 class="font-bold text-slate-900 leading-tight mb-1">{p.nombre_completo}</h4>
+                  <p class="text-xs text-slate-500 mb-2">{p.cargo}</p>
+                  {p.estado === 'in_memoriam' && (
                     <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-300 mb-2">
                       Homenaje
                     </span>
                   )}
                   <p class="text-xs text-amber-700 font-semibold italic">
-                    {p.esInMemoriam ? 'Profesor emérito · In memoriam' : 'Profesor emérito'}
+                    {p.estado === 'in_memoriam' ? 'Profesor emérito · In memoriam' : 'Profesor emérito'}
                   </p>
                 </div>
               </div>
 
               <!-- Bio -->
-              {p.bio && (
+              {p.bio_es && (
                 <p class="text-sm text-slate-700 leading-relaxed mb-4 italic border-l-2 border-amber-400 pl-3">
-                  {p.bio}
+                  {p.bio_es}
                 </p>
               )}
 
@@ -294,7 +267,7 @@ function getIniciales(nombre: string): string {
                 <div class="mb-3">
                   <span class="text-xs font-semibold text-slate-700 uppercase tracking-wider block mb-1.5">Cátedras dictadas</span>
                   <ul class="text-sm text-slate-600 space-y-1">
-                    {p.catedras.map(c => <li class="leading-snug">· {c}</li>)}
+                    {p.catedras.map(c => <li class="leading-snug">· {c.nombre}</li>)}
                   </ul>
                 </div>
               )}
@@ -312,9 +285,9 @@ function getIniciales(nombre: string): string {
               )}
 
               <!-- Rol paralelo (si existe) -->
-              {p.rolParalelo && (
+              {p.afiliacion_externa && (
                 <p class="text-xs text-slate-500 italic mb-3 leading-relaxed border-l-2 border-amber-300 pl-2">
-                  {p.rolParalelo}
+                  {p.afiliacion_externa}
                 </p>
               )}
             </article>

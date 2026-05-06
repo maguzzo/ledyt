@@ -1,37 +1,425 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import { getProyectoBySlug, proyectos } from '../../../data/proyectos';
+import { staff } from '../../../data/staff';
+
+type DetailItem = {
+	title: string;
+	description: string;
+};
+
+type FeatureItem = {
+	aspect: string;
+	value: string;
+};
+
+type MilestoneItem = {
+	phase: string;
+	title: string;
+	period: string;
+	description: string;
+};
+
+type PartnerItem = {
+	name: string;
+	role: string;
+	contribution: string;
+};
+
+type DetailedProjectContent = {
+	objective: string;
+	challenges: DetailItem[];
+	features: FeatureItem[];
+	milestones: MilestoneItem[];
+	partners: PartnerItem[];
+};
 
 export function getStaticPaths() {
-	return [{ params: { slug: 'placeholder-project' } }];
+	return [
+		...proyectos.map((proyecto) => ({ params: { slug: proyecto.slug } })),
+		{ params: { slug: 'cart' } },
+	];
 }
 
 const { slug = 'project' } = Astro.params;
-const titleText = slug
-	.split('-')
-	.filter(Boolean)
-	.map((p) => p.charAt(0).toUpperCase() + p.slice(1))
-	.join(' ');
+const slugCanonico = slug === 'cart' ? 'backend-digital-cart' : slug;
+const proyecto = getProyectoBySlug(slugCanonico);
+
+function slugToLabel(value: string) {
+	return value
+		.split('-')
+		.filter(Boolean)
+		.map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+		.join(' ');
+}
+
+const docenteNombres = proyecto
+	? proyecto.docentes.map((docenteSlug) => staff.find((persona) => persona.slug === docenteSlug)?.nombre ?? slugToLabel(docenteSlug))
+	: [];
+
+const detailedBySlug: Record<string, DetailedProjectContent> = {
+	'chalu-x': {
+		objective: 'Design, develop, and validate in a relevant environment the CHALU-X space communications module, an engineering prototype at TRL 5 that delivers a robust downlink of up to 2 Mbps for IAR CubeSats, integrating LDPC coding, adaptive link control, and a survivability architecture for COTS components.',
+		challenges: [
+			{
+				title: 'Adaptive System-on-Chip architecture',
+				description: 'Implement an AMD-Xilinx Zynq SoC where programmable logic hosts high-performance LDPC encoders and adaptive link protocols, while the ARM processor runs Linux for flexible mission management. This core architecture is critical for maximizing efficiency in a harsh space channel.',
+			},
+			{
+				title: 'LDPC coding and link adaptation',
+				description: 'Develop and integrate LDPC codes aligned with DVB-S2 practices and dynamically adaptable N-PSK modulation. The system must automatically adjust coding and modulation according to channel conditions, increasing throughput without hardware redesign.',
+			},
+			{
+				title: 'COTS survivability architecture',
+				description: 'Design an enhanced survivability layer with an MSP430FR supervisor microcontroller, including latch-up control (LCL), power sequencing, and golden-image recovery. This is the key risk-mitigation layer for space operation with commercial parts.',
+			},
+			{
+				title: 'High-speed multilayer PCB design',
+				description: 'Design a 90 x 95 mm CubeSat board with BGA integration, advanced thermal management, and controlled routing for critical signals (DDR3, LVDS). Include SPI-over-LVDS interface with the OBC for plug-and-play satellite integration.',
+			},
+			{
+				title: 'SDR-oriented scalability',
+				description: 'Build the PCB with initial compatibility for AT86RF215 (EDU phase) and a prepared footprint for future migration to wideband SDR transceivers (for example AD9361 class), reducing obsolescence and protecting investment.',
+			},
+			{
+				title: 'TRL 5 relevant-environment validation',
+				description: 'Execute a full validation campaign with IAR/CONAE facilities, including BER vs Eb/No performance tests, EMC checks, and environmental qualification activities such as thermal-vacuum cycling, vibration, and shock.',
+			},
+		],
+		features: [
+			{ aspect: 'Link performance', value: 'Up to 2 Mbps useful rate in S band, BER target below 1e-7' },
+			{ aspect: 'Form factor', value: '90 x 95 mm board, compatible with CubeSat 1U PC/104 constraints' },
+			{ aspect: 'Central processing', value: 'AMD-Xilinx Zynq SoC with ARM + FPGA running Linux' },
+			{ aspect: 'Link robustness', value: 'LDPC coding plus adaptive link control strategy' },
+			{ aspect: 'Survivability', value: 'MSP430FR supervisor with latch-up handling and recovery image' },
+			{ aspect: 'Scalability path', value: 'Hardware prepared for future SDR transceivers and higher throughput' },
+		],
+		milestones: [
+			{ phase: 'Phase 1', title: 'Architecture and kit-level validation', period: 'M1-M7', description: 'Architecture baseline, preliminary BOM, LDPC algorithm development, and adaptive-link prototyping.' },
+			{ phase: 'Phase 2', title: 'Engineering prototype design', period: 'M6-M10', description: 'Multilayer PCB design, schematics, layout closure, and thermal-risk management.' },
+			{ phase: 'Phase 3', title: 'Manufacturing and hardware integration', period: 'M11-M15', description: 'External PCB fabrication, BGA assembly flow, and delivery of engineering prototypes.' },
+			{ phase: 'Phase 4', title: 'Software integration and lab validation', period: 'M15-M19', description: 'Final firmware integration on FlatSat with electrical and communications validation tests.' },
+			{ phase: 'Phase 5', title: 'Relevant-environment validation and transfer', period: 'M19-M24', description: 'EMC and environmental campaign plus final documentation and transfer package.' },
+		],
+		partners: [
+			{ name: 'IAR (Argentine Institute of Radio Astronomy)', role: 'Adopting and demanding institution', contribution: 'Provides mission demand, validation infrastructure, and specialized technical criteria.' },
+			{ name: 'CONAE', role: 'Validation collaborator', contribution: 'Supports environmental testing resources and guidance on applicable space standards.' },
+		],
+	},
+	'chaze-agro': {
+		objective: 'Develop and scientifically validate, within 18 months, a functional hyperspectral payload prototype based on a 450-900 nm integrated sensor with a reconfigurable SoC processing pipeline and in-house radiometric calibration, achieving TRL 6 on relevant crop environments in San Juan and establishing the path to satellite scaling.',
+		challenges: [
+			{
+				title: 'High-density hyperspectral PCB design',
+				description: 'Design, manufacture, and characterize a 10-layer HDI board that integrates the hyperspectral sensor, Zynq-class processing, high-speed memory, and controlled-impedance links with passive thermal management for UAV operation.',
+			},
+			{
+				title: 'Embedded FPGA processing IP cores',
+				description: 'Develop FPGA IP cores for synchronized LVDS capture, real-time demosaicing, radiometric correction, and CCSDS-style compression under strict power limits for airborne payloads.',
+			},
+			{
+				title: 'Radiometric calibration and spectral library',
+				description: 'Establish a validated radiometric workflow and build a crop spectral library across phenological stages and controlled water-stress levels to support robust agronomic interpretation.',
+			},
+			{
+				title: 'UAV integration and TRL 6 validation',
+				description: 'Integrate the payload in a stabilized UAV configuration with precise georeferencing and execute multi-campaign flights over commercial fields to demonstrate operational validity.',
+			},
+			{
+				title: 'Open and reconfigurable in-flight architecture',
+				description: 'Implement an open FPGA architecture, unlike closed commercial systems, enabling in-flight adjustments of integration time, spectral response, and correction algorithms.',
+			},
+			{
+				title: 'Environmental qualification and satellite scaling',
+				description: 'Perform environmental stress testing aligned with aerospace practice and preserve firmware-core continuity toward CubeSat-class scaling without architecture reset.',
+			},
+		],
+		features: [
+			{ aspect: 'Spectral range', value: '450-900 nm with fine focus on red-edge response for water-stress detection' },
+			{ aspect: 'Central processing', value: 'Zynq-class ARM + FPGA architecture with embedded Linux workflow' },
+			{ aspect: 'Form factor', value: 'Compact high-density payload design with satellite-oriented engineering criteria' },
+			{ aspect: 'Power envelope', value: 'Designed for low-power airborne operation with integrated processing' },
+			{ aspect: 'Validation target', value: 'TRL 6 through relevant UAV campaigns on productive fields' },
+			{ aspect: 'Scalability path', value: 'Prepared migration route toward CubeSat 2U/3U payload evolution' },
+		],
+		milestones: [
+			{ phase: 'Stage 1', title: 'Design and early science setup', period: 'M1-M6', description: 'Reference-kit operation, field radiometry baseline, lab setup, and preliminary hardware architecture review.' },
+			{ phase: 'Stage 2', title: 'Native payload implementation', period: 'M7-M12', description: 'Critical procurement, HDI fabrication, BGA assembly, FPGA firmware development, and integrated bench validation.' },
+			{ phase: 'Stage 3', title: 'TRL 6 operational validation', period: 'M13-M18', description: 'UAV integration, multi-campaign field flights, agronomic correlation, and final readiness evidence.' },
+			{ phase: 'Cross-cutting', title: 'Management, IP, and transfer', period: 'M1-M18', description: 'Program tracking, technical reporting, IP strategy, and transfer package preparation for institutional adoption.' },
+		],
+		partners: [
+			{ name: 'INTA San Juan', role: 'Scientific co-executor', contribution: 'Provides agronomic validation framework, spectral interpretation, and field scientific support.' },
+			{ name: 'CONAE', role: 'Institutional technical advisor', contribution: 'Supports aerospace engineering criteria, environmental qualification logic, and satellite-integration roadmapping.' },
+			{ name: 'Barcelo Femenia SRL', role: 'Primary industry associate', contribution: 'Provides real crop environments and operational logistics for extensive field validation campaigns.' },
+			{ name: 'Nutrientes SA', role: 'Industry associate', contribution: 'Contributes agronomic support and complementary field conditions for stress-response experiments.' },
+		],
+	},
+	'sat-pae-jachal': {
+		objective: 'Deploy and validate an early-warning system at basin scale for water-quality and hydrological risk detection, enabling auditable and actionable environmental decision support.',
+		challenges: [
+			{
+				title: 'Distributed sensing network',
+				description: 'Design and deploy 20 monitoring stations with representative spatial coverage over critical basin points.',
+			},
+			{
+				title: 'Industrial-grade sensor integration',
+				description: 'Integrate multiparametric probes and biosensors with repeatable calibration and maintenance protocols.',
+			},
+			{
+				title: 'Hybrid satellite telemetry',
+				description: 'Guarantee data continuity in remote areas through redundant satellite communication schemes.',
+			},
+			{
+				title: 'SCADA and alert intelligence',
+				description: 'Implement real-time dashboards, thresholding, and traceability for pollution and hydrological anomalies.',
+			},
+		],
+		features: [
+			{ aspect: 'Coverage target', value: '20 automatic monitoring stations' },
+			{ aspect: 'Core instrumentation', value: 'YSI EXO2 probes and bbe biosensors' },
+			{ aspect: 'Telemetry', value: 'Hybrid Starlink/Iridium architecture' },
+			{ aspect: 'Reference investment', value: 'USD 11.94 million' },
+		],
+		milestones: [
+			{ phase: 'Phase 1', title: 'System engineering', period: 'M1-M6', description: 'Architecture definition, station planning, and communication design.' },
+			{ phase: 'Phase 2', title: 'Pilot deployment', period: 'M7-M14', description: 'Initial field rollout, calibration, and telemetry hardening.' },
+			{ phase: 'Phase 3', title: 'Scale-up and alerts', period: 'M15-M26', description: 'Network expansion and operationalization of alert rules.' },
+			{ phase: 'Phase 4', title: 'Transfer and continuity', period: 'M27-M36', description: 'Operational validation, training, and sustainability handoff.' },
+		],
+		partners: [
+			{ name: 'UNSJ', role: 'Lead executor', contribution: 'Leads engineering integration and technical coordination.' },
+			{ name: 'UCC', role: 'Co-executor', contribution: 'Supports validation and technical articulation.' },
+			{ name: 'Government and social institutions', role: 'Territorial partners', contribution: 'Enable deployment governance and long-term institutional adoption.' },
+		],
+	},
+	'heron': {
+		objective: 'Contribute to ultra-high-energy neutrino detection through a radio-based observatory in San Juan, leveraging low-RFI mountain conditions and international scientific collaboration.',
+		challenges: [
+			{
+				title: 'Extreme-energy radio detection',
+				description: 'Support detector deployment and operations for Askaryan-based radio signatures under demanding scientific constraints.',
+			},
+			{
+				title: 'Radio-quiet environment assurance',
+				description: 'Maintain continuous RFI monitoring and mitigation as a prerequisite for data quality and observatory sensitivity.',
+			},
+			{
+				title: 'High-altitude site engineering',
+				description: 'Address logistics, power, environmental compliance, and safe operation in a remote mountain environment.',
+			},
+			{
+				title: 'Multi-institutional governance',
+				description: 'Coordinate legal, technical, and financial processes among international hosts and Argentine partners.',
+			},
+		],
+		features: [
+			{ aspect: 'Funding scheme', value: 'ERC Synergy Grant (14M EUR)' },
+			{ aspect: 'Scientific scope', value: 'Ultra-high-energy neutrino astronomy' },
+			{ aspect: 'Local role', value: 'Site management and RFI monitoring capability from LED&T' },
+			{ aspect: 'Program horizon', value: 'Multi-year deployment and operation roadmap' },
+		],
+		milestones: [
+			{ phase: 'Phase 0', title: 'Site campaigns', period: '2026', description: 'RFI characterization and site validation in San Juan highlands.' },
+			{ phase: 'Phase 1', title: 'Institutional agreements', period: '2026', description: 'Consortium formalization and local governance framework.' },
+			{ phase: 'Phase 2', title: 'Infrastructure deployment', period: '2026-2027', description: 'Site engineering, procurement, and initial technical installation.' },
+			{ phase: 'Phase 3', title: 'Commissioning and operations', period: '2027 onward', description: 'Detector commissioning, data operations, and sustained scientific output.' },
+		],
+		partners: [
+			{ name: 'ERC and host institutions', role: 'Program funders and coordinators', contribution: 'Provide governance and financing framework for execution.' },
+			{ name: 'CNEA/ITeDA', role: 'Argentine executing counterpart', contribution: 'Coordinates local technical execution and integration with consortium needs.' },
+			{ name: 'UNSJ and San Juan institutions', role: 'Territorial and academic partners', contribution: 'Support site operations, RFI monitoring, and human-resource development.' },
+		],
+	},
+};
+
+const fallbackDetails: DetailedProjectContent | null = proyecto
+	? {
+			objective: proyecto.descripcion.en,
+			challenges: proyecto.tecnologias.map((tecnologia) => ({
+				title: `${tecnologia} integration`,
+				description: `Implement and validate ${tecnologia} capabilities in a robust operational workflow for the project context.`,
+			})),
+			features: [
+				{ aspect: 'Status', value: proyecto.estadoLabel.en },
+				{ aspect: 'Technical area', value: proyecto.categoria.en },
+				{ aspect: 'Partners involved', value: `${proyecto.socios.en.length}` },
+				{ aspect: 'Technology stack', value: proyecto.tecnologias.join(', ') },
+			],
+			milestones: [
+				{ phase: 'Phase 1', title: 'Definition', period: 'Initial stage', description: 'Requirements, architecture, and planning.' },
+				{ phase: 'Phase 2', title: 'Development', period: 'Core stage', description: 'Implementation and iterative validation.' },
+				{ phase: 'Phase 3', title: 'Deployment', period: 'Final stage', description: 'Operational validation and knowledge transfer.' },
+			],
+			partners: proyecto.socios.en.map((partnerName) => ({
+				name: partnerName,
+				role: 'Strategic partner',
+				contribution: 'Supports execution, validation, and project deployment in its domain.',
+			})),
+		}
+	: null;
+
+const details = proyecto ? detailedBySlug[proyecto.slug] ?? fallbackDetails : null;
+
+const pageTitle = proyecto ? `${proyecto.nombre} | Projects · LED&T` : `${slugToLabel(slugCanonico)} | Projects · LED&T`;
 ---
 
-<Layout title={`${titleText} | Under construction`}>
+<Layout title={pageTitle}>
 	<main class="min-h-[65vh] bg-fondo">
-		<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Website under construction</p>
-			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">{titleText}</h1>
-			<p class="text-texto-suave text-lg leading-relaxed mb-3 max-w-3xl">
-				This project page is not published yet.
-			</p>
-			<p class="text-texto-tenue font-mono text-sm mb-8">
-				current slug: /en/projects/{slug}
-			</p>
-			<div class="flex flex-wrap gap-3">
-				<a href="/en/projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border-2 border-primario text-primario font-semibold hover:bg-primario hover:text-white transition-colors">
-					Back to projects
-				</a>
-				<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
-					Go to English home
-				</a>
-			</div>
-		</section>
+		{proyecto && (
+			<>
+				<section class="bg-linear-to-br from-slate-50 via-white to-cyan-50/40 py-12 md:py-16 border-b border-slate-200">
+					<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+						<nav class="text-xs text-slate-500 mb-4">
+							<a href="/en/" class="hover:text-blue-700">Home</a>
+							<span class="mx-2">/</span>
+							<a href="/en/projects" class="hover:text-blue-700">Projects</a>
+							<span class="mx-2">/</span>
+							<span class="text-slate-700">{proyecto.nombre}</span>
+						</nav>
+
+						<span class="inline-block px-3 py-1 rounded-full bg-acento/20 text-acento font-mono text-xs uppercase tracking-widest mb-4">
+							{proyecto.estadoLabel.en}
+						</span>
+						<h1 class="text-4xl md:text-5xl font-bold text-texto mb-3">{proyecto.nombre}</h1>
+						<p class="text-texto-suave text-xl mb-6">{proyecto.categoria.en}</p>
+						<p class="text-texto-suave leading-relaxed max-w-4xl">{proyecto.resumen.en}</p>
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						<div class="md:col-span-2">
+							<h2 class="text-2xl font-bold text-texto mb-4">Project Description</h2>
+							<p class="text-texto-suave leading-relaxed mb-6">
+								{proyecto.descripcion.en}
+							</p>
+						</div>
+						<div class="bg-primario/10 border border-primario/20 rounded-lg p-6">
+							<h3 class="text-sm font-mono uppercase tracking-widest text-acento mb-3">Identification</h3>
+							<ul class="space-y-3 text-sm text-texto">
+								<li><strong>Status:</strong> {proyecto.estadoLabel.en}</li>
+								<li><strong>Area:</strong> {proyecto.categoria.en}</li>
+								<li><strong>Code:</strong> /en/projects/{proyecto.slug}</li>
+								<li><strong>Partners:</strong> {proyecto.socios.en.length}</li>
+								<li><strong>Technologies:</strong> {proyecto.tecnologias.length}</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<h2 class="text-2xl font-bold text-texto mb-6">Main Objective</h2>
+					<div class="bg-acento/5 border-l-4 border-acento p-6 rounded">
+						<p class="text-texto leading-relaxed text-lg">
+							{details?.objective ?? proyecto.resumen.en}
+						</p>
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<h2 class="text-2xl font-bold text-texto mb-8">Technological Challenges</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						{details?.challenges.map((challenge) => (
+							<div class="border border-texto-tenue rounded-lg p-6 hover:border-primario transition-colors hover:bg-primario/5">
+								<h3 class="text-lg font-semibold text-primario mb-3">{challenge.title}</h3>
+								<p class="text-texto-suave leading-relaxed text-sm">{challenge.description}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<h2 class="text-2xl font-bold text-texto mb-8">Key Features</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+						{details?.features.map((feature) => (
+							<div class="bg-fondo-alt border border-texto-tenue rounded-lg p-4">
+								<p class="text-sm text-texto-tenue font-mono uppercase tracking-widest mb-2">{feature.aspect}</p>
+								<p class="text-texto font-semibold text-sm leading-relaxed">{feature.value}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<h2 class="text-2xl font-bold text-texto mb-8">Phase Timeline</h2>
+					<div class="space-y-4">
+						{details?.milestones.map((milestone) => (
+							<div class="border-l-4 border-acento bg-fondo-alt p-6 rounded-r-lg">
+								<div class="flex justify-between items-start mb-2 gap-3">
+									<h3 class="text-lg font-semibold text-texto">{milestone.phase}: {milestone.title}</h3>
+									<span class="text-xs font-mono bg-acento/20 text-acento px-2 py-1 rounded shrink-0">{milestone.period}</span>
+								</div>
+								<p class="text-texto-suave text-sm">{milestone.description}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<h2 class="text-2xl font-bold text-texto mb-8">Team</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div class="border border-texto-tenue rounded-lg p-5">
+							<h3 class="font-semibold text-primario mb-3">Faculty and Researchers</h3>
+							<ul class="space-y-2 text-sm text-texto">
+								{docenteNombres.map((nombre) => <li>{nombre}</li>)}
+							</ul>
+						</div>
+						<div class="border border-texto-tenue rounded-lg p-5">
+							<h3 class="font-semibold text-primario mb-3">Students and Fellows</h3>
+							{proyecto.becarios.length > 0 ? (
+								<ul class="space-y-2 text-sm text-texto">
+									{proyecto.becarios.map((nombre) => <li>{nombre}</li>)}
+								</ul>
+							) : (
+								<p class="text-sm text-texto-suave">No fellows listed for this project yet.</p>
+							)}
+						</div>
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<h2 class="text-2xl font-bold text-texto mb-8">Strategic Partners</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						{details?.partners.map((partner) => (
+							<div class="bg-primario/10 border border-primario/30 rounded-lg p-6">
+								<h3 class="font-semibold text-primario mb-2">{partner.name}</h3>
+								<p class="text-sm text-texto font-medium mb-3">{partner.role}</p>
+								<p class="text-sm text-texto-suave"><strong>Contribution:</strong> {partner.contribution}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+					<div class="flex flex-wrap gap-3">
+						<a href="/en/projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border-2 border-primario text-primario font-semibold hover:bg-primario hover:text-white transition-colors">
+							← Back to projects
+						</a>
+						<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
+							Go to home
+						</a>
+					</div>
+				</section>
+			</>
+		)}
+
+		{!proyecto && (
+			<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+				<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Project</p>
+				<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">{slugToLabel(slug)}</h1>
+				<p class="text-texto-suave text-lg leading-relaxed mb-8 max-w-3xl">
+					This project file is still being prepared. Detailed content will be published soon.
+				</p>
+				<div class="flex flex-wrap gap-3">
+					<a href="/en/projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border-2 border-primario text-primario font-semibold hover:bg-primario hover:text-white transition-colors">
+						Back to projects
+					</a>
+					<a href="/en/" class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">
+						Go to home
+					</a>
+				</div>
+			</section>
+		)}
 	</main>
 </Layout>
