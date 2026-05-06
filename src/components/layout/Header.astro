@@ -4,6 +4,70 @@ import { proyectos } from '../../data/proyectos';
 const pathname = Astro.url.pathname;
 const isEnglish = pathname === '/en' || pathname.startsWith('/en/');
 
+const esToEnSegment: Record<string, string> = {
+	academica: 'academic',
+	capacitaciones: 'academic',
+	contacto: 'contact',
+	novedades: 'news',
+	oportunidades: 'opportunities',
+	proyectos: 'projects',
+	publicaciones: 'publications',
+	servicios: 'services',
+	sobre: 'about',
+	becas: 'scholarships',
+	tesis: 'theses',
+	'proyectos-integradores': 'integrative-projects',
+	adscripciones: 'research-assistantships',
+	catedras: 'index',
+	introduccion: 'introduction',
+};
+
+const enToEsSegment: Record<string, string> = {
+	academic: 'academica',
+	contact: 'contacto',
+	news: 'novedades',
+	opportunities: 'oportunidades',
+	projects: 'proyectos',
+	publications: 'publicaciones',
+	services: 'servicios',
+	about: 'sobre',
+	scholarships: 'becas',
+	theses: 'tesis',
+	'integrative-projects': 'proyectos-integradores',
+	'research-assistantships': 'adscripciones',
+	introduction: 'introduccion',
+};
+
+function mapToSpanishPath(currentPath: string): string {
+	const enPath = currentPath === '/en' ? '/en/' : currentPath;
+	const rest = enPath.replace(/^\/en\/?/, '');
+	if (!rest) return '/';
+
+	const parts = rest.split('/').filter(Boolean).map((part, index) => {
+		if (index === 1 && partsFirstIsAcademic(rest) && part === 'index') {
+			return 'catedras';
+		}
+		return enToEsSegment[part] ?? part;
+	});
+
+	return `/${parts.join('/')}`;
+}
+
+function mapToEnglishPath(currentPath: string): string {
+	if (currentPath === '/') return '/en/';
+
+	const rest = currentPath.replace(/^\//, '');
+	if (!rest) return '/en/';
+
+	const parts = rest.split('/').filter(Boolean).map((part) => esToEnSegment[part] ?? part);
+	return `/en/${parts.join('/')}`;
+}
+
+function partsFirstIsAcademic(pathWithoutEn: string): boolean {
+	const first = pathWithoutEn.split('/').filter(Boolean)[0];
+	return first === 'academic';
+}
+
 type NavChild = {
 	label: string;
 	href: string;
@@ -103,7 +167,7 @@ const contactHref = isEnglish ? '/en/#contacto' : '/#contacto';
 const mobileMenuLabel = isEnglish ? 'Open menu' : 'Abrir menu';
 const closeMenuLabel = isEnglish ? 'Close menu' : 'Cerrar menu';
 const switchLangLabel = isEnglish ? 'ES' : 'EN';
-const switchLangHref = isEnglish ? '/' : '/en/';
+const switchLangHref = isEnglish ? mapToSpanishPath(pathname) : mapToEnglishPath(pathname);
 const labText = isEnglish
 	? 'Digital Electronics and Telecommunications Lab · UNSJ'
 	: 'Laboratorio de Electronica Digital y Telecomunicaciones · UNSJ';

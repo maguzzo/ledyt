@@ -19,8 +19,21 @@ const emeritosList = [
   ...inMemoriam.filter((persona) => !emeritosBase.some((emerito) => emerito.slug === persona.slug)),
 ];
 
+type DireccionPlaceholder = {
+  slug: string;
+  nombre_completo: string;
+  rol: string;
+  cargo: string;
+  catedras: { nombre: string }[];
+  especialidades: string[];
+  oficina: string;
+  email: string;
+  bio_es: string;
+  foto_url: string | null;
+};
+
 // TODO: completar con dato real de coordinacion desde la capa normalizada.
-const direccion = {
+const direccion: DireccionPlaceholder = {
   slug: 'direccion-a-definir',
   nombre_completo: idioma === 'en' ? 'Direction to be defined' : 'Dirección a definir',
   // TODO: completar con dato real.
