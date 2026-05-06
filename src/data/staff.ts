@@ -11,13 +11,14 @@ export interface Persona {
   bio?: { es: string; en: string };
   foto: string | null;
   esCoordinador?: boolean;
+  esEmerito?: boolean;
+  esInMemoriam?: boolean;
 }
 
 export const staff: Persona[] = [
   {
     slug: 'martin-guzzo',
     nombre: 'Dr. Martín A. Guzzo',
-    rol: { es: 'Coordinación del LED&T', en: 'LED&T Coordinator' },
     cargoFormal: { es: 'Profesor Titular', en: 'Full Professor' },
     catedras: {
       es: ['Sistemas Digitales A (Plan 2023)', 'Electrónica Digital I y II (Plan 2006)'],
@@ -34,7 +35,6 @@ export const staff: Persona[] = [
       en: 'PhD in Engineering. Leads the laboratory strategic projects: technical director of CHALÚ-X (dual-band satellite modem), supervisor of the Electronics and Electromechanical Area of SAT-PAE Jáchal, and Argentine Site Manager of the HERON project (Hybrid Elevated Radio Observatory for Neutrinos, ERC, agreements in negotiation for 2026).',
     },
     foto: '/images/people/martin-guzzo.png',
-    esCoordinador: true,
   },
   {
     slug: 'gabriel-canadas',
@@ -220,6 +220,148 @@ export const staff: Persona[] = [
     },
     foto: '/images/people/gualterio-papparelli.png',
   },
+  {
+    slug: 'marcelo-segura',
+    nombre: 'Dr. Ing. Marcelo J. Segura',
+    cargoFormal: { es: 'Profesor Titular (en licencia)', en: 'Full Professor (on leave)' },
+    catedras: {
+      es: ['Temas Específicos de Telecomunicaciones III (Software Defined Radio)'],
+      en: ['Specific Topics in Telecommunications III (Software Defined Radio)'],
+    },
+    especialidades: {
+      es: ['Radioastronomía', 'Radio Definida por Software (SDR)', 'Monitoreo RFI', 'Telecomunicaciones'],
+      en: ['Radio astronomy', 'Software Defined Radio (SDR)', 'RFI monitoring', 'Telecommunications'],
+    },
+    rolParalelo: {
+      es: 'Director del Observatorio Astronómico Félix Aguilar (OAFA, UNSJ) · en licencia en el LED&T',
+      en: 'Director of the Félix Aguilar Astronomical Observatory (OAFA, UNSJ) · on leave from LED&T',
+    },
+    bio: {
+      es: 'Doctor Ingeniero con amplia trayectoria en radioastronomía y telecomunicaciones. Fue Project Manager del CART (China-Argentina Radio Telescope) designado por CONICET. Participó en proyectos de detección de interferencias de radiofrecuencia (RFI) en la Estación CESCO-El Leoncito y en el proyecto SAT-PAE Jáchal. Actualmente en licencia, ejerciendo la Dirección del Observatorio Astronómico Félix Aguilar (OAFA–UNSJ).',
+      en: 'Doctor Engineer with extensive experience in radio astronomy and telecommunications. Served as Project Manager of CART (China-Argentina Radio Telescope) appointed by CONICET. Participated in RFI detection projects at the CESCO-El Leoncito Station and the SAT-PAE Jáchal project. Currently on leave as Director of the Félix Aguilar Astronomical Observatory (OAFA–UNSJ).',
+    },
+    foto: '/images/people/marcelo-segura.png',
+  },
+  {
+    slug: 'carlos-dellaquila',
+    nombre: 'Ing. Carlos R. Dell\'Aquila',
+    cargoFormal: { es: 'Docente / Investigador (en licencia)', en: 'Lecturer / Researcher (on leave)' },
+    catedras: {
+      es: ['Temas Específicos de Electrónica Digital I'],
+      en: ['Specific Topics in Digital Electronics I'],
+    },
+    especialidades: {
+      es: ['Sistemas embebidos', 'Procesamiento de señales biomédicas', 'Bioingeniería', 'Adquisición inalámbrica de señales'],
+      en: ['Embedded systems', 'Biomedical signal processing', 'Bioengineering', 'Wireless signal acquisition'],
+    },
+    oficina: undefined,
+    email: 'carlos.dellaquila@unsj.edu.ar',
+    rolParalelo: {
+      es: 'Investigador en el CERN · en licencia en el LED&T',
+      en: 'Researcher at CERN · on leave from LED&T',
+    },
+    bio: {
+      es: 'Ingeniero Electrónico egresado con Diploma de Honor de la FI-UNSJ (2014, promedio 9.13). Doctorando en Ingeniería de Sistemas de Control (INAUT–UNSJ / CONICET). Becario doctoral CONICET tipo I. Especialista en sistemas embebidos para monitoreo ambulatorio de señales biomédicas. Participó en proyectos de I+D junto al Gabinete de Tecnología Médica (UNSJ) y el LED&T, con publicaciones internacionales en bioingeniería y sistemas embebidos. Actualmente en licencia por investigación en el CERN.',
+      en: 'Electronic Engineer graduated with Honors Diploma from FI-UNSJ (2014, GPA 9.13). PhD candidate in Control Systems Engineering (INAUT–UNSJ / CONICET). CONICET Type I doctoral fellow. Specialist in embedded systems for ambulatory biomedical signal monitoring. Participated in R&D projects with the Medical Technology Lab (UNSJ) and LED&T, with international publications in bioengineering and embedded systems. Currently on leave for research at CERN.',
+    },
+    foto: '/images/people/carlos-dellaquila.png',
+  },
+  {
+    slug: 'carlos-gil',
+    nombre: 'Ing. Carlos Gabriel Gil',
+    cargoFormal: { es: 'Profesor Titular (jubilado)', en: 'Full Professor (retired)' },
+    catedras: {
+      es: ['Sistemas Digitales II', 'Informática I', 'Informática II', 'Microprocesadores'],
+      en: ['Digital Systems II', 'Informatics I', 'Informatics II', 'Microprocessors'],
+    },
+    especialidades: {
+      es: ['Sistemas Digitales', 'Control de Sistemas', 'Microprocesadores', 'Sistemas embebidos', 'Bioingeniería'],
+      en: ['Digital Systems', 'Systems Control', 'Microprocessors', 'Embedded systems', 'Bioengineering'],
+    },
+    rolParalelo: {
+      es: 'Fundador y desarrollador histórico del LED&T',
+      en: 'Founder and historical developer of LED&T',
+    },
+    bio: {
+      es: 'Ingeniero Electromecánico (1980, UNSJ) con orientación en Control. Pionero en la formación del LED&T desde su etapa formativa, con una trayectoria docente e investigadora que abarca más de 40 años (1977–actualmente jubilado). Desarrolló sistemas de control distribuido, instrumentación electrónica y aplicaciones en bioingeniería. Supervisor de numerosas tesis de grado, becarios e iniciador de múltiples líneas de investigación en sistemas digitales, monitoreo de señales biomédicas y plataformas robóticas. Su legado incluye la direccion de proyectos estratégicos que forman la base actual de investigación del laboratorio.',
+      en: 'Electromechanical Engineer (1980, UNSJ) with a Control orientation. Pioneer in LED&T\'s formative stages, with a teaching and research career spanning over 40 years (1977–currently retired). Developed distributed control systems, electronic instrumentation, and bioengineering applications. Supervised numerous thesis projects and graduate researchers, and initiated multiple research lines in digital systems, biomedical signal monitoring, and robotic platforms. His legacy includes the direction of strategic projects that form the current foundation of laboratory research.',
+    },
+    foto: '/images/people/carlos-gil.png',
+    esEmerito: true,
+  },
+  {
+    slug: 'gustavo-ensinck',
+    nombre: 'Ing. Gustavo A. Ensinck',
+    cargoFormal: { es: 'Profesor Adjunto (jubilado)', en: 'Associate Professor (retired)' },
+    catedras: {
+      es: ['Microprocesadores I', 'Microprocesadores II'],
+      en: ['Microprocessors I', 'Microprocessors II'],
+    },
+    especialidades: {
+      es: ['Microprocesadores', 'Sistemas Digitales', 'FPGA', 'Hardware Programable', 'Control de Sistemas'],
+      en: ['Microprocessors', 'Digital Systems', 'FPGA', 'Programmable Hardware', 'Systems Control'],
+    },
+    rolParalelo: {
+      es: 'Investigador y mentor en desarrollo de hardware programable',
+      en: 'Researcher and mentor in programmable hardware development',
+    },
+    bio: {
+      es: 'Ingeniero Electrónico egresado de la UNSJ. Jefe de Trabajos Prácticos (por concurso) y posteriormente Profesor Adjunto a partir de 2000 en las cátedras de Microprocesadores I y II. Cotitular de numerosos proyectos de investigación en sistemas digitales, FPGA, microcontroladores y hardware programable. Supervisor y codirector de múltiples tesis de grado y becarios. Colaborador estratégico en el desarrollo de sistemas embebidos para aplicaciones biomédicas, agricultura de precisión y plataformas robóticas. Desde 1991 desarrolló sistemas electrónicos de avanzada en el sector privado, aportando experiencia aplicada al laboratorio.',
+      en: 'Electronic Engineer graduated from UNSJ. Head of Practical Labs (by competition) and subsequently Associate Professor from 2000 in Microprocessors I and II courses. Co-holder of numerous research projects in digital systems, FPGA, microcontrollers, and programmable hardware. Supervisor and co-director of multiple thesis projects and graduate researchers. Strategic collaborator in the development of embedded systems for biomedical applications, precision agriculture, and robotic platforms. Since 1991 developed advanced electronic systems in the private sector, bringing applied experience to the laboratory.',
+    },
+    email: 'gustavo@unsj.edu.ar',
+    foto: '/images/people/gustavo-ensinck.png',
+    esEmerito: true,
+  },
+  {
+    slug: 'roberto-linares',
+    nombre: 'Ing. Roberto Teófilo Linares',
+    cargoFormal: { es: 'Profesor de Telecomunicaciones (jubilado)', en: 'Telecommunications Professor (retired)' },
+    catedras: {
+      es: ['Telecomunicaciones I', 'Telecomunicaciones II'],
+      en: ['Telecommunications I', 'Telecommunications II'],
+    },
+    especialidades: {
+      es: ['Telecomunicaciones', 'Redes', 'Transmisión por fibra óptica', 'Transmisión digital (SDH)', 'FPGA'],
+      en: ['Telecommunications', 'Networks', 'Fiber optic transmission', 'Digital transmission (SDH)', 'FPGA'],
+    },
+    email: undefined,
+    rolParalelo: {
+      es: 'Homenaje póstumo · In memoriam',
+      en: 'Posthumous tribute · In memoriam',
+    },
+    bio: {
+      es: 'Ingeniero Electrónico (1991) y docente de Telecomunicaciones I y II. Participó en proyectos de investigación como IPTV Learning y RFIMS-CART para monitoreo de interferencias de RF en radioastronomía. Desarrolló una extensa trayectoria profesional en mantenimiento e ingeniería de redes en el sector de cable y telecomunicaciones. Recordado por su compromiso docente y su aporte histórico al LED&T.',
+      en: 'Electronic Engineer (1991) and lecturer of Telecommunications I and II. Participated in research projects such as IPTV Learning and RFIMS-CART for RF interference monitoring in radio astronomy. Built an extensive professional career in maintenance and network engineering in the cable and telecommunications sector. Remembered for his teaching commitment and his historical contribution to LED&T.',
+    },
+    foto: '/images/people/roberto-linares.png',
+    esEmerito: true,
+    esInMemoriam: true,
+  },
+  {
+    slug: 'cristian-sisterna',
+    nombre: 'Msc. Ing. Cristian A. Sisterna',
+    cargoFormal: { es: 'Profesor Asociado', en: 'Associate Professor' },
+    catedras: {
+      es: ['Sistemas Digitales I', 'Sistemas Digitales II', 'Diseño de Sistemas Digitales Avanzados con VHDL e Implementados en FPGAs'],
+      en: ['Digital Systems I', 'Digital Systems II', 'Advanced Digital Systems Design with VHDL and FPGA Implementation'],
+    },
+    especialidades: {
+      es: ['Sistemas Digitales', 'FPGA', 'VHDL', 'Hardware Programable', 'Procesamiento Digital de Señales', 'Diseño de Hardware'],
+      en: ['Digital Systems', 'FPGA', 'VHDL', 'Programmable Hardware', 'Digital Signal Processing', 'Hardware Design'],
+    },
+    oficina: undefined,
+    email: 'cristian@unsj.edu.ar',
+    rolParalelo: {
+      es: 'Presidente de Promatix SRL · Docente en IDIA-UNSJ por extensión al DEA-LED&T',
+      en: 'President of Promatix SRL · Lecturer at IDIA-UNSJ by extension to DEA-LED&T',
+    },
+    bio: {
+      es: 'Master en Ingeniería de Computadoras por Arizona State University (1998). Ingeniero Electrónico egresado de UNSJ (1988). Investigador Categoría II de CONEAU. Amplia experiencia en diseño y desarrollo de sistemas digitales complejos basados en FPGA y VHDL. Trabajó como Ingeniero Senior en Intel Corporation y Marvell Semiconductores desarrollando validación de ASICs para dispositivos móviles. Profesor Instructor internacional en cursos de FPGA patrocinados por ICTP-UNESCO. Actualmente director de C7 Technology, empresa dedicada a capacitación y servicios de diseño en sistemas digitales programables.',
+      en: 'Master in Computer Engineering from Arizona State University (1998). Electronic Engineer graduated from UNSJ (1988). CONEAU Category II Researcher. Extensive experience in design and development of complex digital systems based on FPGA and VHDL. Worked as Senior Engineer at Intel Corporation and Marvell Semiconductors developing ASIC validation for mobile devices. International Instructor Professor in FPGA courses sponsored by ICTP-UNESCO. Currently director of C7 Technology, a company dedicated to training and design services for programmable digital systems.',
+    },
+    foto: '/images/people/cristian-sisterna.png',
+  },
 ];
 
 export function getCoordinador(): Persona | undefined {
@@ -227,7 +369,11 @@ export function getCoordinador(): Persona | undefined {
 }
 
 export function getEquipoDocente(): Persona[] {
-  return staff.filter(p => !p.esCoordinador);
+  return staff.filter(p => !p.esCoordinador && !p.esEmerito);
+}
+
+export function getEmeritos(): Persona[] {
+  return staff.filter(p => p.esEmerito === true);
 }
 
 export function getPersonaBySlug(slug: string): Persona | undefined {

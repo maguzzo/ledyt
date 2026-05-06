@@ -39,9 +39,9 @@ const persona = getPersonaBySlug(slug);
 							<div class="bg-white rounded-2xl border border-slate-200 p-7 shadow-sm">
 								<div class="flex items-center justify-center mb-5">
 									{persona.foto ? (
-										<img src={persona.foto} alt={persona.nombre} class="w-28 h-28 rounded-full object-cover border-4 border-slate-100 shadow" />
+										<img src={persona.foto} alt={persona.nombre} class="w-44 h-44 rounded-full object-cover border-4 border-slate-100 shadow" />
 									) : (
-										<div class="w-28 h-28 rounded-full bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-3xl font-bold text-white">
+										<div class="w-44 h-44 rounded-full bg-linear-to-br from-blue-600 to-cyan-600 flex items-center justify-center text-5xl font-bold text-white">
 											{getIniciales(persona.nombre)}
 										</div>
 									)}
