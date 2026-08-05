@@ -145,22 +145,6 @@ export const staff: Persona[] = [
     foto: '/images/people/rodolfo-arroqui.png',
   },
   {
-    slug: 'alejandro-martin',
-    nombre: 'Ing. Alejandro D. Martín',
-    cargoFormal: { es: 'Profesor Adjunto', en: 'Associate Professor' },
-    catedras: {
-      es: ['Propagación y Radiación (Planes 2006 y 2023)'],
-      en: ['Propagation and Radiation (2006 and 2023 Plans)'],
-    },
-    especialidades: {
-      es: ['Propagación y radiación electromagnética'],
-      en: ['Electromagnetic propagation and radiation'],
-    },
-    oficina: 'Oficina 5',
-    email: undefined,
-    foto: '/images/people/alejandro-martin.png',
-  },
-  {
     slug: 'raul-klenzi',
     nombre: 'Mg. Raúl O. Klenzi',
     cargoFormal: { es: 'Profesor de Telecomunicaciones', en: 'Telecommunications Professor' },
