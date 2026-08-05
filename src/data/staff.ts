@@ -105,6 +105,26 @@ export const staff: Persona[] = [
     foto: '/images/people/juan-pablo-aguiar.png',
   },
   {
+    slug: 'sebastian-sansoni',
+    nombre: 'Dr. Ing. Sebastián Sansoni',
+    cargoFormal: { es: 'Profesor Titular (Reemplazante)', en: 'Full Professor (Substitute)' },
+    catedras: {
+      es: ['Telecomunicaciones B (Plan 2023)'],
+      en: ['Telecommunications B (2023 Plan)'],
+    },
+    especialidades: {
+      es: ['Control de Procesos', 'Inteligencia Artificial en Control', 'Robótica y Sistemas de Manufactura', 'Electrónica Industrial'],
+      en: ['Process Control', 'Artificial Intelligence in Control', 'Robotics and Manufacturing Systems', 'Industrial Electronics'],
+    },
+    oficina: 'Sala 206 (INAUT)',
+    email: 'ssansoni@inaut.unsj.edu.ar',
+    rolParalelo: {
+      es: 'Investigador en INAUT (Instituto de Automática, UNSJ–CONICET)',
+      en: 'Researcher at INAUT (Institute of Automatics, UNSJ–CONICET)',
+    },
+    foto: '/images/people/sebastian-sansoni.png',
+  },
+  {
     slug: 'rodolfo-arroqui',
     nombre: 'Ing. Rodolfo H. Arroqui',
     cargoFormal: { es: 'Profesor Titular', en: 'Full Professor' },
@@ -201,6 +221,24 @@ export const staff: Persona[] = [
       en: 'Electronic Engineer graduated from the Faculty of Engineering at the National University of San Juan (FI-UNSJ).',
     },
     foto: '/images/people/agustin-ezequiel-allegui-babsia.png',
+  },
+  {
+    slug: 'nicolas-trigo',
+    nombre: 'Ing. Nicolás Trigo',
+    cargoFormal: { es: 'Adscripto de Telecomunicaciones A y B', en: 'Course Assistant for Telecommunications A and B' },
+    catedras: {
+      es: ['Telecomunicaciones A', 'Telecomunicaciones B'],
+      en: ['Telecommunications A', 'Telecommunications B'],
+    },
+    especialidades: {
+      es: ['Telecomunicaciones', 'Conmutación', 'Automatización de redes'],
+      en: ['Telecommunications', 'Switching', 'Network automation'],
+    },
+    rolParalelo: {
+      es: 'Especialista de Conmutación y Automatización en Claro Argentina',
+      en: 'Switching and Automation Specialist at Claro Argentina',
+    },
+    foto: '/images/people/nicolas-trigo.png',
   },
   {
     slug: 'gualterio-papparelli',
