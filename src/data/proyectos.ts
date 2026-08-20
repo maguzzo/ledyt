@@ -2,6 +2,7 @@ export interface Proyecto {
   slug: string;
   nombre: string;
   nombreCorto?: string;
+  nombreCortoEs?: string;
   categoria: { es: string; en: string };
   estado: 'activo' | 'evaluacion' | 'finalizado';
   estadoLabel: { es: string; en: string };
@@ -94,6 +95,7 @@ export const proyectos: Proyecto[] = [
     slug: 'heron',
     nombre: 'HERON',
     nombreCorto: 'Hybrid Elevated Radio Observatory for Neutrinos',
+    nombreCortoEs: 'Observatorio de Radio Elevado Híbrido para Neutrinos',
     categoria: { es: 'ASTROPARTÍCULAS · NEUTRINOS', en: 'ASTROPARTICLES · NEUTRINOS' },
     estado: 'evaluacion',
     estadoLabel: { es: 'En gestión · Firma 2026', en: 'In negotiation · Signature 2026' },

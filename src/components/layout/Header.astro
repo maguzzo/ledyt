@@ -134,7 +134,7 @@ const dropdowns: NavDropdown[] = isEnglish
 				items: [
 					{ label: 'Todos los proyectos', href: '/proyectos' },
 					...proyectos.map((proyecto) => ({
-						label: proyecto.nombreCorto ?? proyecto.nombre,
+						label: proyecto.nombreCortoEs ?? proyecto.nombreCorto ?? proyecto.nombre,
 						href: proyecto.href,
 						highlighted: proyecto.destacado === true,
 					})),
