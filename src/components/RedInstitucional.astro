@@ -1,0 +1,186 @@
+---
+const instituciones = [
+  {
+    nombre: 'Universidad Nacional de San Juan (UNSJ)',
+    url: 'https://www.unsj.edu.ar/',
+    imagen: '/images/logos/instituciones/logo-unsj.png',
+  },
+  {
+    nombre: 'Facultad de Ingeniería (FI)',
+    url: 'https://www.fi.unsj.edu.ar/',
+    imagen: '/images/logos/instituciones/logo-fi.png',
+  },
+  {
+    nombre: 'Departamento de Electrónica y Automática (DEA)',
+    url: 'https://dea.unsj.edu.ar/',
+    imagen: '/images/logos/instituciones/logo-DEA.png',
+  },
+  {
+    nombre: 'Instituto de Bioingeniería (INBIO)',
+    url: 'https://inbio.fi.unsj.edu.ar/',
+    imagen: '/images/logos/instituciones/logo-inbio.png',
+  },
+  {
+    nombre: 'Instituto de Computación (IDECOM)',
+    url: 'https://www.idecom.unsj.edu.ar/',
+    imagen: '/images/logos/instituciones/logo-idecom.png',
+  },
+  {
+    nombre: 'Instituto de Automática (INAUT)',
+    url: 'https://www.inaut.unsj.edu.ar/',
+    imagen: '/images/logos/instituciones/logo-inaut.png',
+  },
+];
+---
+
+<div class="red-institucional">
+  <button
+    class="red-institucional__trigger"
+    type="button"
+    aria-expanded="false"
+    aria-controls="red-institucional-menu"
+  >
+    <span>Red institucional</span>
+    <span class="red-institucional__arrow" aria-hidden="true">⌄</span>
+  </button>
+
+  <div class="red-institucional__menu" id="red-institucional-menu" hidden>
+    {instituciones.map((institucion) => (
+      <a
+        class="red-institucional__link"
+        href={institucion.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src={institucion.imagen} alt="" loading="lazy" />
+        <span>{institucion.nombre}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector('.red-institucional');
+  const trigger = root?.querySelector('.red-institucional__trigger');
+  const menu = root?.querySelector('.red-institucional__menu');
+
+  if (root && trigger && menu) {
+    const images = root.querySelectorAll<HTMLImageElement>('img');
+
+    images.forEach((image) => {
+      const imagePath = image.getAttribute('src');
+      console.info('[RedInstitucional] Intentando cargar imagen:', imagePath);
+      image.addEventListener('error', () => {
+        console.error('[RedInstitucional] Error al cargar imagen:', imagePath, image.src);
+      });
+    });
+
+    const setOpen = (open: boolean) => {
+      trigger.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      root.classList.toggle('is-open', open);
+    };
+
+    trigger.addEventListener('click', () => {
+      setOpen(menu.hidden);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!root.contains(event.target as Node)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        trigger.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .red-institucional {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 9999;
+    width: min(300px, calc(100vw - 30px));
+    color: #172b4d;
+    font-family: var(--font-sans, sans-serif);
+  }
+
+  .red-institucional__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 42px;
+    padding: 0.65rem 0.8rem 0.65rem 1rem;
+    border: 1px solid #d8e1ec;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    box-shadow: 0 5px 18px rgb(23 43 77 / 15%);
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .red-institucional__arrow {
+    margin-left: 0.75rem;
+    color: #146c94;
+    font-size: 1.25rem;
+    line-height: 0.7;
+    transition: transform 160ms ease;
+  }
+
+  .red-institucional.is-open .red-institucional__arrow {
+    transform: rotate(180deg);
+  }
+
+  .red-institucional__menu {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 0.4rem;
+    padding: 0.4rem;
+    border: 1px solid #d8e1ec;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgb(23 43 77 / 18%);
+  }
+
+  .red-institucional__link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 48px;
+    padding: 0.35rem 0.45rem;
+    border-radius: 0.3rem;
+    color: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .red-institucional__link:hover,
+  .red-institucional__link:focus-visible {
+    background: #edf7fb;
+    color: #0b6388;
+  }
+
+  .red-institucional__link img {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  @media (hover: hover) {
+    .red-institucional:hover .red-institucional__menu {
+      display: grid !important;
+    }
+  }
+</style>

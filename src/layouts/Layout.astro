@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Header from '../components/layout/Header.astro';
+import RedInstitucional from '../components/RedInstitucional.astro';
 const { title = "LED&T - Laboratorio de Electrónica Digital y Telecomunicaciones | UNSJ" } = Astro.props;
 ---
 
@@ -26,6 +27,7 @@ const { title = "LED&T - Laboratorio de Electrónica Digital y Telecomunicacione
     <title>{title}</title>
   </head>
   <body>
+    <RedInstitucional />
     <Header />
     <slot />
   </body>
