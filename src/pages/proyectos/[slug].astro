@@ -1256,16 +1256,16 @@ const pageTitle = proyecto
 		<!-- Hero Section -->
 		{proyecto && (
 			<>
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-					<div class="mb-8">
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+					<div class="mb-6 md:mb-8">
 						<span class="inline-block px-3 py-1 rounded-full bg-acento/20 text-acento font-mono text-xs uppercase tracking-widest mb-4">
 							{proyecto.estado}
 						</span>
-						<h1 class="text-4xl md:text-5xl font-bold text-texto mb-3">{proyecto.titulo}</h1>
-						<p class="text-texto-suave text-xl mb-6">{proyecto.subtitulo}</p>
+						<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-texto mb-3">{proyecto.titulo}</h1>
+						<p class="text-texto-suave text-lg sm:text-xl mb-5 md:mb-6">{proyecto.subtitulo}</p>
 						
 						<!-- Vigencia -->
-						<div class="flex flex-wrap gap-6 mb-8 text-sm">
+						<div class="flex flex-wrap gap-4 md:gap-6 mb-6 md:mb-8 text-sm">
 							{proyecto.vigencia.inicio ? (
 								<div>
 									<span class="text-texto-tenue font-mono uppercase tracking-widest">Inicio</span>
@@ -1292,15 +1292,15 @@ const pageTitle = proyecto
 				</section>
 
 				<!-- Descripción General -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-16">
 						<div class="md:col-span-2">
-							<h2 class="text-2xl font-bold text-texto mb-4">Descripción del Proyecto</h2>
-							<p class="text-texto-suave leading-relaxed mb-6">
+							<h2 class="text-lg sm:text-xl md:text-2xl font-bold text-texto mb-3 md:mb-4">Descripción del Proyecto</h2>
+							<p class="text-texto-suave leading-relaxed mb-4 md:mb-6">
 								{proyecto.descripcion}
 							</p>
 						</div>
-						<div class="bg-primario/10 border border-primario/20 rounded-lg p-6">
+						<div class="bg-primario/10 border border-primario/20 rounded-lg p-3 md:p-6">
 							<h3 class="text-sm font-mono uppercase tracking-widest text-acento mb-3">Identificación</h3>
 							<ul class="space-y-3 text-sm text-texto">
 								{slugCanonico === 'chaze-agro' ? (
@@ -1373,22 +1373,22 @@ const pageTitle = proyecto
 				</section>
 
 				<!-- Objetivo Principal -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-					<h2 class="text-2xl font-bold text-texto mb-6">Objetivo Principal</h2>
-					<div class="bg-acento/5 border-l-4 border-acento p-6 rounded">
-						<p class="text-texto leading-relaxed text-lg">
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+					<h2 class="text-lg sm:text-xl md:text-2xl font-bold text-texto mb-4 md:mb-6">Objetivo Principal</h2>
+					<div class="bg-acento/5 border-l-4 border-acento p-4 md:p-6 rounded">
+						<p class="text-texto leading-relaxed text-base sm:text-lg">
 							{proyecto.objetivo}
 						</p>
 					</div>
 				</section>
 
 				<!-- Desafíos Tecnológicos -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-					<h2 class="text-2xl font-bold text-texto mb-8">Desafíos Tecnológicos</h2>
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+					<h2 class="text-lg sm:text-xl md:text-2xl font-bold text-texto mb-4 md:mb-8">Desafíos Tecnológicos</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
 						{proyecto.desafiosTecnologicos.map((desafio) => (
-							<div class="border border-texto-tenue rounded-lg p-6 hover:border-primario transition-colors hover:bg-primario/5">
-								<h3 class="text-lg font-semibold text-primario mb-3">{desafio.titulo}</h3>
+							<div class="border border-texto-tenue rounded-lg p-3 md:p-6 hover:border-primario transition-colors hover:bg-primario/5">
+								<h3 class="text-base sm:text-lg font-semibold text-primario mb-2 md:mb-3">{desafio.titulo}</h3>
 								<p class="text-texto-suave leading-relaxed text-sm">
 									{desafio.descripcion}
 								</p>
@@ -1398,11 +1398,11 @@ const pageTitle = proyecto
 				</section>
 
 				<!-- Características Principales -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-					<h2 class="text-2xl font-bold text-texto mb-8">Características Principales</h2>
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+					<h2 class="text-lg sm:text-xl md:text-2xl font-bold text-texto mb-4 md:mb-8">Características Principales</h2>
 					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 						{proyecto.caracteristicas.map((carac) => (
-							<div class="bg-fondo-alt border border-texto-tenue rounded-lg p-4">
+							<div class="bg-fondo-alt border border-texto-tenue rounded-lg p-3 md:p-4">
 								<p class="text-sm text-texto-tenue font-mono uppercase tracking-widest mb-2">{carac.aspecto}</p>
 								<p class="text-texto font-semibold text-sm leading-relaxed">{carac.valor}</p>
 							</div>
@@ -1411,13 +1411,13 @@ const pageTitle = proyecto
 				</section>
 
 				<!-- Cronograma de Fases -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-					<h2 class="text-2xl font-bold text-texto mb-8">Cronograma de Fases</h2>
-					<div class="space-y-4">
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+					<h2 class="text-lg sm:text-xl md:text-2xl font-bold text-texto mb-4 md:mb-8">Cronograma de Fases</h2>
+					<div class="space-y-4 md:space-y-8">
 						{proyecto.hitos.map((hito) => (
-							<div class="border-l-4 border-acento bg-fondo-alt p-6 rounded-r-lg">
-								<div class="flex justify-between items-start mb-2">
-									<h3 class="text-lg font-semibold text-texto">{hito.fase}: {hito.titulo}</h3>
+							<div class="border-l-4 border-acento bg-fondo-alt p-3 md:p-6 rounded-r-lg">
+								<div class="flex flex-wrap items-center gap-x-3 gap-y-2 mb-2">
+									<h3 class="text-base sm:text-lg font-semibold text-texto">{hito.fase}: {hito.titulo}</h3>
 									<span class="text-xs font-mono bg-acento/20 text-acento px-2 py-1 rounded">{hito.periodo}</span>
 								</div>
 								<p class="text-texto-suave text-sm">{hito.descripcion}</p>
@@ -1427,11 +1427,11 @@ const pageTitle = proyecto
 				</section>
 
 				<!-- Equipo de Trabajo -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-					<h2 class="text-2xl font-bold text-texto mb-8">Equipo de Trabajo</h2>
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+					<h2 class="text-lg sm:text-xl md:text-2xl font-bold text-texto mb-4 md:mb-8">Equipo de Trabajo</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
 						{proyecto.equipoTrabajo.map((miembro) => (
-							<div class="border border-texto-tenue rounded-lg p-5 hover:border-primario transition-colors">
+							<div class="border border-texto-tenue rounded-lg p-3 md:p-5 hover:border-primario transition-colors">
 								<h3 class="font-semibold text-primario mb-2">{miembro.nombre}</h3>
 								<p class="text-sm text-texto font-medium mb-1">{miembro.rol}</p>
 								<p class="text-xs text-texto-tenue mb-2">{miembro.unidad}</p>
@@ -1442,11 +1442,11 @@ const pageTitle = proyecto
 				</section>
 
 				<!-- Socios y Colaboradores -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-					<h2 class="text-2xl font-bold text-texto mb-8">Socios Estratégicos</h2>
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
+					<h2 class="text-lg sm:text-xl md:text-2xl font-bold text-texto mb-4 md:mb-8">Socios Estratégicos</h2>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						{proyecto.socios.map((socio) => (
-							<div class="bg-primario/10 border border-primario/30 rounded-lg p-6">
+							<div class="bg-primario/10 border border-primario/30 rounded-lg p-3 md:p-6">
 								<h3 class="font-semibold text-primario mb-2">{socio.nombre}</h3>
 								<p class="text-sm text-texto font-medium mb-3">{socio.rol}</p>
 								<p class="text-sm text-texto-suave"><strong>Aporte:</strong> {socio.aporte}</p>
@@ -1456,7 +1456,7 @@ const pageTitle = proyecto
 				</section>
 
 				<!-- CTA y Navegación -->
-				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
 					<div class="flex flex-wrap gap-3">
 						<a href="/proyectos" class="inline-flex items-center gap-2 px-5 py-3 rounded-md border-2 border-primario text-primario font-semibold hover:bg-primario hover:text-white transition-colors">
 							← Volver a proyectos

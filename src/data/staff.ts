@@ -190,11 +190,11 @@ export const staff: Persona[] = [
     cargoFormal: { es: 'JTP de Telecomunicaciones A y B', en: 'Teaching Assistant Professor for Telecommunications A and B' },
     catedras: {
       es: ['Telecomunicaciones A', 'Telecomunicaciones B'],
-      en: ['Telecommunications A', 'Telecommunications B'],
+      en: ['Telecomunicaciones A', 'Telecomunicaciones B'],
     },
     especialidades: {
       es: ['Telecomunicaciones', 'Diseño de hardware y software', 'Automatización de sistemas industriales', 'Tecnología para beneficio comunitario y ambiental'],
-      en: ['Telecommunications', 'Hardware and software design', 'Industrial systems automation', 'Technology for community and environmental benefit'],
+      en: ['Telecomunicaciones', 'Hardware and software design', 'Industrial systems automation', 'Technology for community and environmental benefit'],
     },
     rolParalelo: {
       es: 'Profesional en ProMatix SRL',
@@ -212,11 +212,11 @@ export const staff: Persona[] = [
     cargoFormal: { es: 'Adscripto de Telecomunicaciones A y B', en: 'Course Assistant for Telecommunications A and B' },
     catedras: {
       es: ['Telecomunicaciones A', 'Telecomunicaciones B'],
-      en: ['Telecommunications A', 'Telecommunications B'],
+      en: ['Telecomunicaciones A', 'Telecomunicaciones B'],
     },
     especialidades: {
       es: ['Telecomunicaciones', 'Conmutación', 'Automatización de redes'],
-      en: ['Telecommunications', 'Switching', 'Network automation'],
+      en: ['Telecomunicaciones', 'Switching', 'Network automation'],
     },
     rolParalelo: {
       es: 'Especialista de Conmutación y Automatización en Claro Argentina',
@@ -230,11 +230,11 @@ export const staff: Persona[] = [
     cargoFormal: { es: 'JTP de Telecomunicaciones A y B', en: 'Teaching Assistant Professor for Telecommunications A and B' },
     catedras: {
       es: ['Telecomunicaciones A', 'Telecomunicaciones B'],
-      en: ['Telecommunications A', 'Telecommunications B'],
+      en: ['Telecomunicaciones A', 'Telecomunicaciones B'],
     },
     especialidades: {
       es: ['Telecomunicaciones', 'Ingeniería de campo'],
-      en: ['Telecommunications', 'Field engineering'],
+      en: ['Telecomunicaciones', 'Field engineering'],
     },
     rolParalelo: {
       es: 'Ingeniero de campo en Minetech (jornada completa desde 2022). Ex Coordinador de Telecomunicaciones en Cruz Roja Argentina Filial San Juan (2009–2015), con experiencia en ayuda humanitaria en desastres naturales.',
@@ -336,16 +336,49 @@ export const staff: Persona[] = [
     esEmerito: true,
   },
   {
+    slug: 'carlos-vargas',
+    nombre: 'Carlos Rodrigo Vargas Guzzo',
+    cargoFormal: {
+      es: 'Pasante',
+      en: 'Intern',
+    },
+    catedras: {
+      es: [],
+      en: [],
+    },
+    especialidades: {
+      es: [
+        'Edición y mantenimiento de la página web del laboratorio',
+        'Carga de contenido',
+        'Colaboración en documentación',
+      ],
+      en: [
+        'Laboratory website editing and maintenance',
+        'Content management',
+        'Documentation collaboration',
+      ],
+    },
+    rolParalelo: {
+      es: 'Oficina 2 · rodrivguzz@gmail.com',
+      en: 'Office 2 · rodrivguzz@gmail.com',
+    },
+    bio: {
+      es: 'Edición y mantenimiento de la página web del laboratorio, carga de contenido y colaboración en documentación.',
+      en: 'Laboratory website editing and maintenance, content management, and documentation collaboration.',
+    },
+    foto: '/images/people/carlos-vargas.png',
+  },
+  {
     slug: 'roberto-linares',
     nombre: 'Ing. Roberto Teófilo Linares',
-    cargoFormal: { es: 'Profesor de Telecomunicaciones (in memoriam)', en: 'Telecommunications Professor (in memoriam)' },
+    cargoFormal: { es: 'Profesor de Telecomunicaciones (in memoriam)', en: 'Telecomunicaciones Professor (in memoriam)' },
     catedras: {
       es: ['Telecomunicaciones I', 'Telecomunicaciones II'],
-      en: ['Telecommunications I', 'Telecommunications II'],
+      en: ['Telecommunications I', 'Telecomunicaciones II'],
     },
     especialidades: {
       es: ['Telecomunicaciones', 'Redes', 'Transmisión por fibra óptica', 'Transmisión digital (SDH)', 'FPGA'],
-      en: ['Telecommunications', 'Networks', 'Fiber optic transmission', 'Digital transmission (SDH)', 'FPGA'],
+      en: ['Telecomunicaciones', 'Networks', 'Fiber optic transmission', 'Digital transmission (SDH)', 'FPGA'],
     },
     email: undefined,
     rolParalelo: {

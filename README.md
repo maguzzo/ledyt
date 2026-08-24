@@ -70,3 +70,5 @@ Este proyecto está bajo licencia **[**MIT**](**LICENSE**)**. Sos libre de usar,
 ---
 
 🤝 Sitio desarrollado en colaboración con asistentes IA (Claude, Deep, GitHub Copilot) bajo coordinación humana.
+
+contraseñas y gmails del proyecto: public/docs
