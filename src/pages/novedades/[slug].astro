@@ -2,10 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 
 export function getStaticPaths() {
-	return [{ params: { slug: 'curso-redes-fibra-optica' } }];
+	return [
+		{ params: { slug: 'curso-redes-fibra-optica' } },
+		{ params: { slug: 'estancia-investigacion-iar' } },
+	];
 }
 
 const { slug = 'novedad' } = Astro.params;
+const esEstanciaIar = slug === 'estancia-investigacion-iar';
 const titulo = slug
 	.split('-')
 	.filter(Boolean)
@@ -14,12 +18,70 @@ const titulo = slug
 ---
 
 <Layout title={`${titulo} | LED&T`}>
-	<main class="min-h-[65vh] bg-fondo">
-		<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-			<p class="text-acento font-mono text-sm uppercase tracking-widest mb-4">Inscripciones abiertas</p>
-			<h1 class="text-3xl md:text-5xl font-bold text-texto mb-6">Redes de Fibra Optica: Instalacion y Mantenimiento</h1>
-			<p class="text-texto-suave text-lg leading-relaxed mb-8">Consulta toda la informacion del curso y escribinos para solicitar la preinscripcion.</p>
-			<a href="/novedades" class="inline-flex items-center px-5 py-3 rounded-md bg-primario text-white font-semibold hover:bg-primario-oscuro transition-colors">Ver la noticia completa</a>
-		</section>
-	</main>
+	{esEstanciaIar ? (
+		<main class="bg-fondo">
+			<section class="relative overflow-hidden bg-fondo-oscuro text-white">
+				<div class="mx-auto grid max-w-7xl items-end gap-8 px-4 pb-12 pt-12 sm:px-6 md:pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pt-20">
+					<div class="relative z-10">
+						<p class="mb-5 font-mono text-sm uppercase tracking-[0.2em] text-acento-claro">Investigación · IAR · UNSJ</p>
+						<h1 class="max-w-3xl text-4xl font-bold leading-tight md:text-6xl">Estancia de investigación en el Instituto Argentino de Radioastronomía (IAR)</h1>
+						<p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">Ciencia, tecnología y cooperación para el desarrollo de capacidades espaciales en Argentina.</p>
+					</div>
+					<figure class="overflow-hidden rounded-lg border border-white/15 bg-slate-800 shadow-strong">
+						<img src="/images/noticias/super-antena.jpeg" alt="Antena principal del Instituto Argentino de Radioastronomía" class="h-full max-h-[560px] w-full object-cover" />
+						<figcaption class="px-4 py-3 text-sm text-slate-300">Instituto Argentino de Radioastronomía, Buenos Aires.</figcaption>
+					</figure>
+				</div>
+			</section>
+
+			<article class="mx-auto max-w-4xl px-4 py-12 sm:px-6 md:py-20 lg:px-8">
+				<div class="mb-10 border-l-4 border-acento bg-acento-suave px-5 py-4 text-lg font-semibold leading-relaxed text-texto md:px-7 md:py-5">
+					🛰️ Ciencia, tecnología y cooperación para el desarrollo de capacidades espaciales en Argentina.
+				</div>
+
+				<div class="space-y-8 text-lg leading-relaxed text-texto-suave">
+					<p>El Dr. Ing. Jeremías Gaia Amorós se encuentra realizando una estancia de investigación de dos meses en el Instituto Argentino de Radioastronomía (IAR, CONICET–CIC–UNLP), en el marco de la colaboración entre el IAR y la Universidad Nacional de San Juan (UNSJ).</p>
+					<p>La estancia tiene como objetivo avanzar en el desarrollo de <strong class="text-texto">CHALÚ-X</strong>, un módulo de comunicaciones de doble banda para satélites tipo CubeSat, desarrollado en el marco de un proyecto conjunto entre ambas instituciones.</p>
+
+					<div class="grid gap-8 py-4 md:grid-cols-2 md:items-center">
+						<div>
+							<h2 class="mb-3 text-2xl font-bold text-texto">Integración de sistemas espaciales</h2>
+							<p>Durante este período, el Dr. Ing. Gaia trabajará junto al equipo del IAR en el desarrollo e integración del sistema de comunicación entre la computadora de a bordo del satélite y el módulo de comunicaciones, utilizando una plataforma FPGA Zynq y protocolos espaciales.</p>
+						</div>
+						<img src="/images/noticias/equipo-trabajo.png" alt="Equipo de trabajo del IAR y la UNSJ" class="w-full rounded-lg object-cover shadow-card" loading="lazy" />
+					</div>
+
+					<p>El trabajo contempla además la validación del sistema con hardware real y la aplicación de metodologías de desarrollo de sistemas espaciales bajo estándares específicos, aprovechando el conocimiento y la infraestructura especializada con la que cuenta el IAR.</p>
+
+					<div class="grid gap-8 py-4 md:grid-cols-2 md:items-center">
+						<img src="/images/noticias/laptop.png" alt="Instrumentación y mediciones durante la validación del sistema" class="w-full rounded-lg object-cover shadow-card md:order-first" loading="lazy" />
+						<div>
+							<h2 class="mb-3 text-2xl font-bold text-texto">Conocimiento que se transforma en capacidad</h2>
+							<p>La estancia representa una oportunidad para fortalecer la transferencia de conocimientos y la colaboración científico-tecnológica entre el IAR y la UNSJ, generando capacidades y desarrollos que contribuyan a futuros proyectos de sistemas espaciales.</p>
+						</div>
+					</div>
+				</div>
+
+				<section class="mt-14 border-t border-borde pt-8" aria-labelledby="galeria-titulo">
+					<h2 id="galeria-titulo" class="mb-5 text-2xl font-bold text-texto">Trabajo experimental</h2>
+					<div class="grid gap-4 sm:grid-cols-2">
+						<figure class="overflow-hidden rounded-lg bg-fondo-alt sm:col-span-2"><img src="/images/noticias/laptop-componentes.png" alt="Componentes del sistema de comunicaciones CHALÚ-X" class="h-auto max-h-[520px] w-full object-cover" loading="lazy" /></figure>
+					</div>
+				</section>
+
+				<div class="mt-10 flex flex-wrap gap-2" aria-label="Etiquetas de la noticia">
+					{['IAR', 'CONICET', 'UNSJ', 'CienciaArgentina', 'TecnologíaEspacial', 'CubeSat', 'Satélites', 'FPGA', 'Ingeniería', 'Investigación', 'DesarrolloTecnológico'].map((tag) => <span class="rounded-full border border-borde px-3 py-1 text-sm text-texto-tenue">#{tag}</span>)}
+				</div>
+			</article>
+		</main>
+	) : (
+		<main class="min-h-[65vh] bg-fondo">
+			<section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+				<p class="mb-4 font-mono text-sm uppercase tracking-widest text-acento">Inscripciones abiertas</p>
+				<h1 class="mb-6 text-3xl font-bold text-texto md:text-5xl">Redes de Fibra Optica: Instalacion y Mantenimiento</h1>
+				<p class="mb-8 text-lg leading-relaxed text-texto-suave">Consulta toda la informacion del curso y escribinos para solicitar la preinscripcion.</p>
+				<a href="/novedades" class="inline-flex items-center rounded-md bg-primario px-5 py-3 font-semibold text-white transition-colors hover:bg-primario-oscuro">Ver la noticia completa</a>
+			</section>
+		</main>
+	)}
 </Layout>

@@ -1,4 +1,10 @@
 ---
+interface Props {
+  id?: string;
+}
+
+const { id = 'default' } = Astro.props;
+
 const instituciones = [
   {
     nombre: 'Universidad Nacional de San Juan (UNSJ)',
@@ -38,13 +44,13 @@ const instituciones = [
     class="red-institucional__trigger"
     type="button"
     aria-expanded="false"
-    aria-controls="red-institucional-menu"
+    aria-controls={`red-institucional-menu-${id}`}
   >
     <span>Red institucional</span>
     <span class="red-institucional__arrow" aria-hidden="true">⌄</span>
   </button>
 
-  <div class="red-institucional__menu" id="red-institucional-menu" hidden>
+  <div class="red-institucional__menu" id={`red-institucional-menu-${id}`} hidden>
     {instituciones.map((institucion) => (
       <a
         class="red-institucional__link"
@@ -60,11 +66,12 @@ const instituciones = [
 </div>
 
 <script>
-  const root = document.querySelector('.red-institucional');
-  const trigger = root?.querySelector('.red-institucional__trigger');
-  const menu = root?.querySelector('.red-institucional__menu');
+  document.querySelectorAll('.red-institucional').forEach((root) => {
+    const trigger = root.querySelector('.red-institucional__trigger');
+    const menu = root.querySelector('.red-institucional__menu');
 
-  if (root && trigger && menu) {
+    if (!trigger || !menu) return;
+
     const images = root.querySelectorAll<HTMLImageElement>('img');
 
     images.forEach((image) => {
@@ -95,16 +102,15 @@ const instituciones = [
         trigger.focus();
       }
     });
-  }
+  });
 </script>
 
 <style>
   .red-institucional {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 9999;
-    width: min(300px, calc(100vw - 30px));
+    position: relative;
+    width: 10.5rem;
+    flex: 0 0 auto;
+    z-index: 10;
     color: #172b4d;
     font-family: var(--font-sans, sans-serif);
   }
@@ -141,9 +147,12 @@ const instituciones = [
   }
 
   .red-institucional__menu {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    left: auto;
     display: grid;
     gap: 0.25rem;
-    margin-top: 0.4rem;
     padding: 0.4rem;
     border: 1px solid #d8e1ec;
     border-radius: 0.5rem;

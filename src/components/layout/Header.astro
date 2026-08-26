@@ -1,4 +1,5 @@
 ---
+import RedInstitucional from '../RedInstitucional.astro';
 import { proyectos } from '../../data/proyectos';
 
 const pathname = Astro.url.pathname;
@@ -160,7 +161,7 @@ const dropdowns: NavDropdown[] = isEnglish
 		];
 
 const newsLabel = isEnglish ? 'News' : 'Noticias';
-const newsHref = isEnglish ? '/en/news' : '/novedades';
+const newsHref = isEnglish ? '/en/news' : '/noticias';
 const contactLabel = isEnglish ? 'Contact' : 'Contacto';
 const homeHref = isEnglish ? '/en/' : '/';
 const contactHref = isEnglish ? '/en/#contacto' : '/#contacto';
@@ -228,6 +229,8 @@ const labText = isEnglish
 				<a href={switchLangHref} class="text-xs px-3 py-1.5 border border-slate-300 rounded-md hover:bg-slate-50 transition-colors">
 					{switchLangLabel}
 				</a>
+
+				<RedInstitucional id="desktop" />
 			</nav>
 
 			<button id="mobile-menu-open" class="md:hidden text-slate-700" aria-label={mobileMenuLabel} aria-controls="mobile-menu" aria-expanded="false">
@@ -284,6 +287,10 @@ const labText = isEnglish
 			<a href={newsHref} class="flex items-center min-h-11 py-3 text-sm font-medium text-slate-700 border-b border-slate-100">
 				{newsLabel}
 			</a>
+
+			<div class="mt-4 self-center">
+				<RedInstitucional id="mobile" />
+			</div>
 
 			<a
 				href={contactHref}

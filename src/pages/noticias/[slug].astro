@@ -1,0 +1,19 @@
+---
+export function getStaticPaths() {
+	return [
+		{ params: { slug: 'curso-fibra-optica' } },
+		{ params: { slug: 'estancia-iar' } },
+	];
+}
+
+const destinos: Record<string, string> = {
+	'curso-fibra-optica': '/novedades',
+	'estancia-iar': '/novedades/estancia-investigacion-iar',
+};
+const destino = destinos[Astro.params.slug ?? ''];
+if (destino) {
+	return Astro.redirect(destino);
+}
+---
+
+<p>La noticia solicitada no existe.</p>
