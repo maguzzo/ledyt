@@ -1,0 +1,87 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+
+<Layout title="Research Stay at IAR | LED&T">
+	<main class="bg-fondo">
+		<section class="relative overflow-hidden bg-fondo-oscuro text-white">
+			<div class="mx-auto grid max-w-7xl items-end gap-8 px-4 pb-12 pt-12 sm:px-6 md:pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pt-20">
+				<div class="relative z-10">
+					<p class="mb-5 font-mono text-sm uppercase tracking-[0.2em] text-acento-claro">Research · IAR · UNSJ</p>
+					<h1 class="max-w-3xl text-4xl font-bold leading-tight md:text-6xl">Research Stay at the Argentine Institute of Radioastronomy (IAR)</h1>
+					<p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">Science, technology, and cooperation for developing space capabilities in Argentina.</p>
+				</div>
+				<figure class="overflow-hidden rounded-lg border border-white/15 bg-slate-800 shadow-strong">
+					<img src="/images/noticias/super-antena.jpeg" alt="Main antenna of the Argentine Institute of Radioastronomy" class="h-full max-h-[560px] w-full object-cover" />
+					<figcaption class="px-4 py-3 text-sm text-slate-300">Argentine Institute of Radioastronomy, Buenos Aires.</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<article class="mx-auto max-w-4xl px-4 py-12 sm:px-6 md:py-20 lg:px-8">
+			<div class="mb-10 border-l-4 border-acento bg-acento-suave px-5 py-4 text-lg font-semibold leading-relaxed text-texto md:px-7 md:py-5">
+				🛰️ Science, technology, and cooperation for developing space capabilities in Argentina.
+			</div>
+
+			<div class="space-y-8 text-lg leading-relaxed text-texto-suave">
+				<p>Dr. Eng. Jeremías Gaia Amorós is conducting a two-month research stay at the Argentine Institute of Radioastronomy (IAR, CONICET–CIC–UNLP), as part of the collaboration between IAR and the National University of San Juan (UNSJ).</p>
+				<p>The research stay aims to advance the development of <strong class="text-texto">CHALÚ-X</strong>, a dual-band communications module for CubeSat-type satellites, developed as part of a joint project between both institutions.</p>
+
+				<div class="grid gap-8 py-4 md:grid-cols-1">
+					<div>
+						<h2 class="mb-3 text-2xl font-bold text-texto">Integration of space systems</h2>
+						<p>During this period, Dr. Eng. Gaia will work alongside the IAR team in developing and integrating the communication system between the satellite's onboard computer and the communications module, using a Zynq FPGA platform and space protocols.</p>
+					</div>
+					<img src="/images/noticias/equipo-trabajo-extendedEdit.jpeg" alt="IAR and UNSJ working team" class="order-first h-auto w-full rounded-lg object-contain shadow-card" loading="lazy" />
+				</div>
+
+				<p>The work also includes system validation with real hardware and the application of space systems development methodologies under specific standards, leveraging the knowledge and specialized infrastructure available at IAR.</p>
+
+				<div class="grid gap-8 py-4 md:grid-cols-2 md:items-center">
+					<img src="/images/noticias/laptop.png" alt="Instrumentation and measurements during system validation" class="w-full rounded-lg object-cover shadow-card md:order-first" loading="lazy" />
+					<div>
+						<h2 class="mb-3 text-2xl font-bold text-texto">Knowledge transformed into capability</h2>
+						<p>The research stay represents an opportunity to strengthen knowledge transfer and scientific-technological collaboration between IAR and UNSJ, generating capabilities and developments that will contribute to future space systems projects.</p>
+					</div>
+				</div>
+			</div>
+
+			<section class="mt-14 border-t border-borde pt-8" aria-labelledby="galeria-titulo">
+				<h2 id="galeria-titulo" class="mb-5 text-2xl font-bold text-texto">Experimental work</h2>
+				<div class="grid gap-4 sm:grid-cols-2">
+					<figure class="rounded-lg bg-fondo-alt p-3 shadow-card sm:col-span-2">
+						<button type="button" class="group block w-full cursor-zoom-in text-left" data-image-dialog-open aria-haspopup="dialog">
+							<img src="/images/noticias/laptop-componentes.jpeg" alt="Components of the CHALÚ-X communication system" class="mx-auto h-auto max-h-56 w-full object-contain transition-opacity group-hover:opacity-80" loading="lazy" />
+							<span class="mt-3 block text-center text-sm font-semibold text-acento">View full image</span>
+						</button>
+					</figure>
+				</div>
+			</section>
+
+			<dialog data-image-dialog class="m-auto max-h-[92vh] max-w-[calc(100%-2rem)] rounded-lg bg-fondo p-3 shadow-strong backdrop:bg-black/75">
+				<div class="relative">
+					<button type="button" class="absolute right-2 top-2 rounded-full bg-fondo px-3 py-1 text-xl leading-none text-texto shadow" data-image-dialog-close aria-label="Close image">&times;</button>
+					<img src="/images/noticias/laptop-componentes.jpeg" alt="Components of the CHALÚ-X communication system" class="max-h-[86vh] w-auto max-w-full object-contain" />
+				</div>
+			</dialog>
+
+			<script>
+				const imageDialog = document.querySelector('[data-image-dialog]');
+				const openImageDialog = document.querySelector('[data-image-dialog-open]');
+				const closeImageDialog = document.querySelector('[data-image-dialog-close]');
+
+				if (imageDialog instanceof HTMLDialogElement && openImageDialog instanceof HTMLButtonElement && closeImageDialog instanceof HTMLButtonElement) {
+					openImageDialog.addEventListener('click', () => imageDialog.showModal());
+					closeImageDialog.addEventListener('click', () => imageDialog.close());
+					imageDialog.addEventListener('click', (event) => {
+						if (event.target === imageDialog) imageDialog.close();
+					});
+				}
+			</script>
+
+			<div class="mt-10 flex flex-wrap gap-2" aria-label="Article tags">
+				{['IAR', 'CONICET', 'UNSJ', 'ArgentineScience', 'SpaceTechnology', 'CubeSat', 'Satellites', 'FPGA', 'Engineering', 'Research', 'TechnologicalDevelopment'].map((tag) => <span class="rounded-full border border-borde px-3 py-1 text-sm text-texto-tenue">#{tag}</span>)}
+			</div>
+		</article>
+	</main>
+</Layout>

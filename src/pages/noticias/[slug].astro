@@ -1,4 +1,8 @@
 ---
+// NOTE: Direct routing is now implemented in the news list.
+// Links now point directly to final destinations (/curso-FB and /noticias/estancia-investigacion-iar)
+// These redirects are maintained for backwards compatibility with old bookmarks/links
+
 export function getStaticPaths() {
 	return [
 		{ params: { slug: 'curso-fibra-optica' } },
@@ -7,8 +11,8 @@ export function getStaticPaths() {
 }
 
 const destinos: Record<string, string> = {
-	'curso-fibra-optica': '/novedades',
-	'estancia-iar': '/novedades/estancia-investigacion-iar',
+	'curso-fibra-optica': '/curso-FB',
+	'estancia-iar': '/noticias/estancia-investigacion-iar',
 };
 const destino = destinos[Astro.params.slug ?? ''];
 if (destino) {

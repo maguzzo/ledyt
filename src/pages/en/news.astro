@@ -3,31 +3,31 @@ import Layout from '../../layouts/Layout.astro';
 
 const noticias = [
 	{
-		titulo: 'Curso de extension de fibra optica',
-		categoria: 'Inscripciones abiertas',
-		extracto: 'Nueva propuesta de formacion practica en instalacion y mantenimiento de redes de fibra optica en la UNSJ.',
+		titulo: 'Optical Fiber Networks Extension Course',
+		categoria: 'Open registration',
+		extracto: 'New hands-on training program in optical fiber network installation and maintenance at UNSJ.',
 		imagen: '/images/noticias/flyer-fibra.jpeg',
-		alt: 'Flyer del curso de extension Redes de Fibra Optica',
-		href: '/curso-FB',
+		alt: 'Flyer for the Optical Fiber Networks extension course',
+		href: '/en/course-FB',
 	},
 	{
-		titulo: 'Estancia de investigacion en el Instituto Argentino de Radioastronomia (IAR)',
-		categoria: 'Investigacion · IAR · UNSJ',
-		extracto: 'Una colaboracion cientifico-tecnologica para avanzar en el desarrollo del modulo de comunicaciones CHALU-X para satelites CubeSat.',
+		titulo: 'Research Stay at the Argentine Institute of Radioastronomy (IAR)',
+		categoria: 'Research · IAR · UNSJ',
+		extracto: 'Scientific and technological collaboration advancing the development of the CHALÚ-X communication module for CubeSat satellites.',
 		imagen: '/images/noticias/noticia-super-antena.jpeg',
-		alt: 'Antena principal del Instituto Argentino de Radioastronomia',
-		href: '/noticias/estancia-investigacion-iar',
+		alt: 'Main antenna of the Argentine Institute of Radioastronomy',
+		href: '/en/news/iar-research-stay',
 	},
 ];
 ---
 
-<Layout title="Noticias | LED&T">
+<Layout title="News | LED&T">
 	<main class="min-h-screen bg-fondo">
 		<section class="border-b border-borde bg-fondo-alt">
 			<div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 md:py-20 lg:px-8">
-				<p class="mb-4 font-mono text-sm uppercase tracking-[0.2em] text-acento">LED&amp;T · Actualidad</p>
-				<h1 class="max-w-3xl text-4xl font-bold leading-tight text-texto md:text-6xl">Noticias</h1>
-				<p class="mt-5 max-w-2xl text-lg leading-relaxed text-texto-suave">Investigacion, formacion y proyectos que conectan al laboratorio con la comunidad.</p>
+				<p class="mb-4 font-mono text-sm uppercase tracking-[0.2em] text-acento">LED&amp;T · News</p>
+				<h1 class="max-w-3xl text-4xl font-bold leading-tight text-texto md:text-6xl">News</h1>
+				<p class="mt-5 max-w-2xl text-lg leading-relaxed text-texto-suave">Research, training, and projects connecting the laboratory with the community.</p>
 			</div>
 		</section>
 
@@ -42,7 +42,7 @@ const noticias = [
 							<p class="mb-3 font-mono text-xs uppercase tracking-widest text-acento">{noticia.categoria}</p>
 							<h2 class="text-2xl font-bold leading-tight text-texto group-hover:text-primario">{noticia.titulo}</h2>
 							<p class="mt-4 flex-1 leading-relaxed text-texto-suave">{noticia.extracto}</p>
-							<span class="mt-7 inline-flex items-center gap-2 font-semibold text-primario">Leer noticia <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">-&gt;</span></span>
+							<span class="mt-7 inline-flex items-center gap-2 font-semibold text-primario">Read article <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">-&gt;</span></span>
 						</div>
 					</a>
 				))}
