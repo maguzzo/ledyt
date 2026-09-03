@@ -9,6 +9,8 @@ const noticias = [
 		imagen: '/images/noticias/flyer-fibra.jpeg',
 		alt: 'Flyer del curso de extension Redes de Fibra Optica',
 		href: '/curso-FB',
+		agotada: true,
+		estado: 'Cupos agotados hasta el siguiente año',
 	},
 	{
 		titulo: 'Estancia de investigacion en el Instituto Argentino de Radioastronomia (IAR)',
@@ -34,15 +36,19 @@ const noticias = [
 		<section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
 			<div class="grid gap-7 md:grid-cols-2">
 				{noticias.map((noticia) => (
-					<a href={noticia.href} class="group flex h-full flex-col overflow-hidden rounded-lg border border-borde bg-fondo-elevado shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-card-hover focus-visible:-translate-y-1">
-						<div class="aspect-[16/9] overflow-hidden bg-fondo-alt">
+					<a href={noticia.href} class:list={[
+						'group relative flex h-full flex-col overflow-hidden rounded-lg border bg-fondo-elevado shadow-card transition duration-200 focus-visible:-translate-y-1',
+						noticia.agotada ? 'border-slate-300 bg-slate-100' : 'border-borde hover:-translate-y-1 hover:shadow-card-hover',
+					]}>
+						{noticia.agotada && <span class="absolute left-4 top-4 z-10 max-w-[calc(100%-2rem)] rounded-md bg-red-600 px-3 py-2 text-center text-xs font-bold leading-tight text-white shadow-md">{noticia.estado}</span>}
+						<div class:list={['aspect-[16/9] overflow-hidden bg-fondo-alt', noticia.agotada && 'grayscale opacity-75']}>
 							<img src={noticia.imagen} alt={noticia.alt} class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
 						</div>
-						<div class="flex flex-1 flex-col p-6 md:p-7">
-							<p class="mb-3 font-mono text-xs uppercase tracking-widest text-acento">{noticia.categoria}</p>
-							<h2 class="text-2xl font-bold leading-tight text-texto group-hover:text-primario">{noticia.titulo}</h2>
+						<div class:list={['flex flex-1 flex-col p-6 md:p-7', noticia.agotada && 'text-slate-500']}>
+							<p class:list={['mb-3 font-mono text-xs uppercase tracking-widest', noticia.agotada ? 'text-slate-500' : 'text-acento']}>{noticia.categoria}</p>
+							<h2 class:list={['text-2xl font-bold leading-tight', noticia.agotada ? 'text-slate-600' : 'text-texto group-hover:text-primario']}>{noticia.titulo}</h2>
 							<p class="mt-4 flex-1 leading-relaxed text-texto-suave">{noticia.extracto}</p>
-							<span class="mt-7 inline-flex items-center gap-2 font-semibold text-primario">Leer noticia <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">-&gt;</span></span>
+							<span class:list={['mt-7 inline-flex items-center gap-2 font-semibold', noticia.agotada ? 'text-slate-500' : 'text-primario']}>Leer noticia <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">-&gt;</span></span>
 						</div>
 					</a>
 				))}
