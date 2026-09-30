@@ -5,7 +5,6 @@ export function getStaticPaths() {
 	return [
 		{ params: { slug: 'chalu-x' } },
 		{ params: { slug: 'chaze-agro' } },
-		{ params: { slug: 'sat-pae-jachal' } },
 		{ params: { slug: 'bodega-40' } },
 		{ params: { slug: 'monitoreo-rio-san-juan' } },
 		{ params: { slug: 'cart' } },
@@ -378,144 +377,6 @@ const proyectos: Record<string, Proyecto> = {
 			}
 		]
 		},
-		'sat-pae-jachal': {
-			titulo: 'SAT-PAE Jáchal',
-			subtitulo: 'Sistema de Alerta Temprana para la Cuenca del Río Jáchal',
-			estado: 'En evaluación',
-			vigencia: {
-				inicio: null,
-				duracion: '36 meses (estimado)',
-				fin: null
-			},
-			descripcion: 'SAT-PAE Jáchal es una propuesta integral de alerta temprana ambiental e hídrica para la Cuenca del Río Jáchal, con 20 estaciones automáticas de monitoreo continuo. El sistema integra sondas multiparamétricas YSI EXO2, biosensores bbe para detección de contaminantes, telemetría satelital Starlink/Iridium, y una plataforma SCADA propia para visualización, alarmas y trazabilidad de datos en tiempo real. El proyecto es impulsado por un consorcio UNSJ-UCC-Arzobispado-Gobierno de San Juan y contempla una inversión de referencia de USD 11,94 millones.',
-			objetivo: 'Desplegar y validar un Sistema de Alerta Temprana (SAT) de escala de cuenca que permita detectar eventos críticos de calidad de agua y cantidad hídrica en forma anticipada, con evidencia técnica auditable para la toma de decisiones de organismos públicos, actores productivos y comunidades locales.',
-			desafiosTecnologicos: [
-				{
-					titulo: 'Red de 20 estaciones multiparamétricas',
-					descripcion: 'Diseñar e instalar una red distribuida de estaciones de monitoreo con sensado continuo de variables fisicoquímicas y biológicas, garantizando cobertura representativa en puntos críticos de la cuenca.'
-				},
-				{
-					titulo: 'Integración de sensores YSI EXO2 + bbe',
-					descripcion: 'Integrar sensores industriales de referencia (YSI EXO2 y biosensores bbe) en una arquitectura robusta, con protocolos de calibración periódica, mantenimiento y validación metrológica.'
-				},
-				{
-					titulo: 'Telemetría híbrida satelital Starlink/Iridium',
-					descripcion: 'Implementar un esquema de comunicaciones redundante para asegurar continuidad de datos en zonas remotas o de difícil acceso, con tolerancia a fallas y priorización de eventos críticos.'
-				},
-				{
-					titulo: 'Plataforma SCADA de desarrollo propio',
-					descripcion: 'Desarrollar una plataforma SCADA con adquisición, historización, georreferenciación y reglas de alarma para eventos de contaminación o desvíos hidrológicos, con paneles para distintos perfiles de usuario.'
-				},
-				{
-					titulo: 'Modelos de umbrales y alertas tempranas',
-					descripcion: 'Definir umbrales operativos y modelos de decisión basados en series temporales y criterios regulatorios, minimizando falsos positivos y asegurando alertas accionables.'
-				},
-				{
-					titulo: 'Gobernanza interinstitucional y sostenibilidad',
-					descripcion: 'Coordinar operación, mantenimiento y uso de datos entre universidades, gobierno y organizaciones territoriales para sostener el sistema a largo plazo.'
-				}
-			],
-			equipoTrabajo: [
-				{
-					nombre: 'Dr. Ing. Martín Alejandro Guzzo',
-					rol: 'Director Técnico',
-					unidad: 'LED&T – DEA, Facultad de Ingeniería, UNSJ',
-					dedicacion: 'Dirección y coordinación técnica'
-				},
-				{
-					nombre: 'Equipo LED&T – UNSJ',
-					rol: 'Ingeniería e Integración',
-					unidad: 'Facultad de Ingeniería, UNSJ',
-					dedicacion: 'Diseño electrónico, comunicaciones y SCADA'
-				},
-				{
-					nombre: 'Equipo UCC',
-					rol: 'Apoyo científico-técnico',
-					unidad: 'Universidad Católica de Cuyo',
-					dedicacion: 'Validación y articulación operativa'
-				},
-				{
-					nombre: 'Mesa interinstitucional provincial',
-					rol: 'Gobernanza y despliegue territorial',
-					unidad: 'Arzobispado + Gobierno de San Juan',
-					dedicacion: 'Acompañamiento institucional'
-				}
-			],
-			caracteristicas: [
-				{
-					aspecto: 'Cobertura',
-					valor: '20 estaciones automáticas distribuidas en la Cuenca del Río Jáchal'
-				},
-				{
-					aspecto: 'Sensores principales',
-					valor: 'YSI EXO2 multiparamétrica + biosensores bbe'
-				},
-				{
-					aspecto: 'Comunicaciones',
-					valor: 'Telemetría satelital híbrida Starlink/Iridium'
-				},
-				{
-					aspecto: 'Plataforma de control',
-					valor: 'SCADA propio con alarmas en tiempo real y trazabilidad histórica'
-				},
-				{
-					aspecto: 'Estado del proyecto',
-					valor: 'En evaluación'
-				},
-				{
-					aspecto: 'Inversión de referencia',
-					valor: 'USD 11,94 millones'
-				}
-			],
-			hitos: [
-				{
-					fase: 'Fase 1',
-					titulo: 'Ingeniería de sistema y diseño de red',
-					periodo: 'M1 - M6',
-					descripcion: 'Definición de arquitectura de monitoreo, selección de emplazamientos, ingeniería de comunicaciones y diseño funcional de la plataforma SCADA.'
-				},
-				{
-					fase: 'Fase 2',
-					titulo: 'Implementación piloto y calibración',
-					periodo: 'M7 - M14',
-					descripcion: 'Despliegue inicial de estaciones piloto, calibración de sensores, ajuste de telemetría y validación de captura continua en condiciones de campo.'
-				},
-				{
-					fase: 'Fase 3',
-					titulo: 'Despliegue ampliado y reglas de alerta',
-					periodo: 'M15 - M26',
-					descripcion: 'Escalado de la red hasta cobertura objetivo, consolidación de tableros SCADA y puesta en marcha de umbrales de alerta temprana por variable crítica.'
-				},
-				{
-					fase: 'Fase 4',
-					titulo: 'Validación operativa y transferencia',
-					periodo: 'M27 - M36',
-					descripcion: 'Validación integral del sistema en operación, protocolos de mantenimiento, capacitación de operadores y transferencia institucional para sostenibilidad.'
-				}
-			],
-			socios: [
-				{
-					nombre: 'UNSJ',
-					rol: 'Institución ejecutora principal',
-					aporte: 'Diseño tecnológico del sistema, integración de hardware/software y coordinación técnica del despliegue.'
-				},
-				{
-					nombre: 'UCC',
-					rol: 'Co-ejecutor',
-					aporte: 'Aporte técnico-científico para validación operativa y articulación académica.'
-				},
-				{
-					nombre: 'Arzobispado de San Juan',
-					rol: 'Socio institucional',
-					aporte: 'Articulación territorial y acompañamiento comunitario en la gobernanza del proyecto.'
-				},
-				{
-					nombre: 'Gobierno de San Juan',
-					rol: 'Socio gubernamental',
-					aporte: 'Coordinación interinstitucional, apoyo a despliegue territorial y uso operativo del sistema para gestión pública.'
-				}
-			]
-	},
 	'heron': {
 		titulo: 'HERON',
 		subtitulo: 'Observatorio de Radio Elevado Híbrido para Neutrinos',
@@ -1310,14 +1171,6 @@ const pageTitle = proyecto
 										<li><strong>Institución Ejecutora:</strong> LED&T - DEA, FI, UNSJ</li>
 										<li><strong>TRL Objetivo:</strong> TRL 6 (Validación en Entorno Relevante)</li>
 									</>
-										) : slugCanonico === 'sat-pae-jachal' ? (
-											<>
-												<li><strong>Tipo:</strong> Sistema de Alerta Temprana (SAT)</li>
-												<li><strong>Ámbito:</strong> Cuenca del Río Jáchal</li>
-												<li><strong>Infraestructura objetivo:</strong> 20 estaciones automáticas</li>
-												<li><strong>Inversión de referencia:</strong> USD 11,94 millones</li>
-												<li><strong>Estado:</strong> En evaluación</li>
-											</>
 										) : slugCanonico === 'heron' ? (
 									<>
 										<li><strong>Tipo:</strong> ERC Synergy Grant – Horizonte Europa</li>

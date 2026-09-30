@@ -68,30 +68,6 @@ export const proyectos: Proyecto[] = [
     destacado: true,
   },
   {
-    slug: 'sat-pae-jachal',
-    nombre: 'SAT-PAE Jáchal',
-    categoria: { es: 'MONITOREO HÍDRICO · ALERTA TEMPRANA', en: 'WATER MONITORING · EARLY WARNING' },
-    estado: 'evaluacion',
-    estadoLabel: { es: 'En evaluación', en: 'Under evaluation' },
-    resumen: {
-      es: '20 estaciones de alerta temprana para la Cuenca del Río Jáchal. Sondas YSI EXO2, biosensores bbe, telemetría Starlink/Iridium, SCADA propio. Inversión USD 11.94M.',
-      en: '20 early warning stations for the Jáchal River Basin. YSI EXO2 probes, bbe biosensors, Starlink/Iridium telemetry, proprietary SCADA. USD 11.94M investment.',
-    },
-    descripcion: {
-      es: 'Sistema de Alerta Temprana para la Cuenca del Río Jáchal. Comprende 20 estaciones de monitoreo continuo con sondas multiparamétricas YSI EXO2, biosensores bbe para detección de contaminantes, telemetría satelital Starlink/Iridium, y un sistema SCADA de desarrollo propio. El proyecto es ejecutado por un consorcio UNSJ-UCC-Arzobispado-Gobierno de San Juan.',
-      en: 'Early Warning System for the Jáchal River Basin. Includes 20 continuous monitoring stations with YSI EXO2 multiparameter probes, bbe biosensors for pollutant detection, Starlink/Iridium satellite telemetry, and a proprietary SCADA system. The project is executed by a consortium UNSJ-UCC-Arzobispado-Gobierno de San Juan.',
-    },
-    socios: {
-      es: ['UNSJ', 'UCC', 'Arzobispado de San Juan', 'Gobierno de San Juan'],
-      en: ['UNSJ', 'UCC', 'Archdiocese of San Juan', 'Government of San Juan'],
-    },
-    tecnologias: ['IoT', 'SCADA', 'Telemetría satelital', 'Sensores ambientales'],
-    docentes: ['martin-guzzo'],
-    becarios: [],
-    imagen: '/images/projects/rio-san-juan/gabinete-estacion.webp',
-    href: '/proyectos/sat-pae-jachal',
-  },
-  {
     slug: 'heron',
     nombre: 'HERON',
     nombreCorto: 'Hybrid Elevated Radio Observatory for Neutrinos',

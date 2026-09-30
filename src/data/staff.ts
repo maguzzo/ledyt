@@ -31,8 +31,8 @@ export const staff: Persona[] = [
     oficina: 'Oficina 3',
     email: 'm.guzzo@unsj.edu.ar',
     bio: {
-      es: 'Doctor en Ingeniería. Lleva adelante los proyectos estratégicos del laboratorio: director técnico de CHALÚ-X (módem satelital dual-band), supervisor del Área Electrónica y Electromecánica del SAT-PAE Jáchal, y Site Manager argentino del proyecto HERON (Hybrid Elevated Radio Observatory for Neutrinos, ERC, en gestión de convenios para 2026).',
-      en: 'PhD in Engineering. Leads the laboratory strategic projects: technical director of CHALÚ-X (dual-band satellite modem), supervisor of the Electronics and Electromechanical Area of SAT-PAE Jáchal, and Argentine Site Manager of the HERON project (Hybrid Elevated Radio Observatory for Neutrinos, ERC, agreements in negotiation for 2026).',
+      es: 'Doctor en Ingeniería. Lleva adelante los proyectos estratégicos del laboratorio: director técnico de CHALÚ-X (módem satelital dual-band) y Site Manager argentino del proyecto HERON (Hybrid Elevated Radio Observatory for Neutrinos, ERC, en gestión de convenios para 2026).',
+      en: 'PhD in Engineering. Leads the laboratory strategic projects: technical director of CHALÚ-X (dual-band satellite modem) and Argentine Site Manager of the HERON project (Hybrid Elevated Radio Observatory for Neutrinos, ERC, agreements in negotiation for 2026).',
     },
     foto: '/images/people/martin-guzzo.png',
   },
@@ -259,8 +259,8 @@ export const staff: Persona[] = [
       en: 'Director of the Félix Aguilar Astronomical Observatory (OAFA, UNSJ) · on leave from LED&T',
     },
     bio: {
-      es: 'Doctor Ingeniero con amplia trayectoria en radioastronomía y telecomunicaciones. Fue Project Manager del CART (China-Argentina Radio Telescope) designado por CONICET. Participó en proyectos de detección de interferencias de radiofrecuencia (RFI) en la Estación CESCO-El Leoncito y en el proyecto SAT-PAE Jáchal. Actualmente en licencia, ejerciendo la Dirección del Observatorio Astronómico Félix Aguilar (OAFA–UNSJ).',
-      en: 'Doctor Engineer with extensive experience in radio astronomy and telecommunications. Served as Project Manager of CART (China-Argentina Radio Telescope) appointed by CONICET. Participated in RFI detection projects at the CESCO-El Leoncito Station and the SAT-PAE Jáchal project. Currently on leave as Director of the Félix Aguilar Astronomical Observatory (OAFA–UNSJ).',
+      es: 'Doctor Ingeniero con amplia trayectoria en radioastronomía y telecomunicaciones. Fue Project Manager del CART (China-Argentina Radio Telescope) designado por CONICET. Participó en proyectos de detección de interferencias de radiofrecuencia (RFI) en la Estación CESCO-El Leoncito. Actualmente en licencia, ejerciendo la Dirección del Observatorio Astronómico Félix Aguilar (OAFA–UNSJ).',
+      en: 'Doctor Engineer with extensive experience in radio astronomy and telecommunications. Served as Project Manager of CART (China-Argentina Radio Telescope) appointed by CONICET. Participated in RFI detection projects at the CESCO-El Leoncito Station. Currently on leave as Director of the Félix Aguilar Astronomical Observatory (OAFA–UNSJ).',
     },
     foto: '/images/people/marcelo-segura.png',
   },

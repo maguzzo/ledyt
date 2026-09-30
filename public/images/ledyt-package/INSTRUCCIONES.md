@@ -15,7 +15,6 @@ ledyt-package/
 │   │   ├── heron/                ← Logo + 3 fotos del equipo
 │   │   ├── rio-san-juan/         ← 6 fotos del proyecto histórico
 │   │   ├── chaze-agro/           (vacía, futuro)
-│   │   └── sat-pae/              (vacía, futuro)
 │   ├── lab/                      ← 7 fotos del laboratorio
 │   └── capabilities/             ← 5 fotos de hardware
 └── src/pages/
@@ -62,7 +61,7 @@ Deberías ver:
 - ✅ Hero con la **ilustración del arquero Huarpe**.
 - ✅ Franja oscura con **HERON** y su logo.
 - ✅ Sección "Quiénes somos" con **foto del curso de fibra óptica**.
-- ✅ 4 cards de proyectos: **CHALÚ-X (activo), CHAZE-Agro (en evaluación), SAT-PAE Jáchal (en evaluación), Backend CART (finalizado)**.
+- ✅ 3 cards de proyectos: **CHALÚ-X (activo), CHAZE-Agro (en evaluación), Backend CART (finalizado)**.
 - ✅ 8 capacidades técnicas con íconos.
 - ✅ 4 oportunidades en sección oscura.
 - ✅ Footer con contactos del DEA + tu email + 4 internos correctos.
@@ -76,14 +75,14 @@ En el navegador: **F12 → Ctrl+Shift+M → "iPhone 12 Pro"**. Refrescá.
 Si todo se ve bien:
 ```
 git add .
-git commit -m "feat: home final con imágenes reales y proyectos actualizados (CHALÚ-X, CHAZE-Agro, SAT-PAE, HERON, CART)"
+git commit -m "feat: home final con imágenes reales y proyectos actualizados (CHALÚ-X, CHAZE-Agro, HERON, CART)"
 ```
 
 ---
 
 ## 🎯 Lo que ya está resuelto
 
-- **Proyectos correctos**: CHALÚ-X aprobado · CHAZE-Agro y SAT-PAE en evaluación · HERON destacado en franja · Backend CART como finalizado.
+- **Proyectos correctos**: CHALÚ-X aprobado · CHAZE-Agro en evaluación · HERON destacado en franja · Backend CART como finalizado.
 - **HERON**: el texto aclara que vos sos Site Manager argentino, no el LED&T institucionalmente. Convenios en gestión, firma 2026.
 - **CHALÚ-X**: con la ilustración del arquero + crédito tuyo + significado cultural ("Chalú = flecha en alentiac").
 - **Datos del DEA**: email `sec_dea@unsj.edu.ar`, los 4 internos (4380/4381/4383/4386), tu email personal en sección "Director".
